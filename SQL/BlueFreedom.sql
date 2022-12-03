@@ -77,7 +77,7 @@ select * from osoba;
 insert into prijateljstvo(sifra,osoba1,osoba2,prijatelji)
 values
 (null,1,2,True),
-(null,1,3,True),
+(null,3,1,False),
 (null,3,2,True);
 
-select * from prijateljstvo where osoba1 = 1 or osoba2 = 1;
+select * from prijateljstvo where (osoba1 = 1 or osoba2 = 1) and prijatelji = 1;
