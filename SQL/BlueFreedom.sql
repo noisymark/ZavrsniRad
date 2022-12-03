@@ -11,20 +11,20 @@ create table objava(
     vrijemeizrade datetime not null,
     ipadresa int(12) not null,
     slika varchar(100),
-    svidamise int,
-    komentar int,
     osoba int
 );
 
 create table svidamise(
     sifra int not null primary key auto_increment,
     vrijemesvidanja datetime not null,
+    objava int,
     osoba int
 );
 
 create table komentar(
     sifra int not null primary key auto_increment,
     vrijemekomentiranja datetime not null,
+    objava int,
     osoba int
 );
 
@@ -43,9 +43,41 @@ create table osoba(
     administrator boolean not null
 );
 
-alter table objava add foreign key (svidamise) references svidamise(sifra);
-alter table objava add foreign key (komentar) references komentar(sifra);
+
 alter table objava add foreign key (osoba) references osoba(sifra);
 
-alter table svidamise add foreign key (osoba) references osoba(sifra);
+alter table komentar add foreign key (objava) references objava(sifra);
 alter table komentar add foreign key (osoba) references osoba(sifra);
+
+alter table svidamise add foreign key (objava) references objava(sifra);
+alter table svidamise add foreign key (osoba) references osoba(sifra);
+
+create table prijateljstvo(
+	sifra int not null primary key auto_increment,
+	osoba1 int,
+	osoba2 int,
+	prijatelji boolean
+);
+
+alter table prijateljstvo add foreign key (osoba1) references osoba(sifra);
+alter table prijateljstvo add foreign key (osoba2) references osoba(sifra);
+
+select * from osoba;
+
+insert into osoba(sifra,ime,prezime,datumrodenja,email,lozinka,administrator)
+values
+(null,'Marko','Pavlović','2001-02-09','markopavlovic316@gmail.com','AA22BB33',True),
+(null,'Rebeka','Ivanković','2002-04-08','rebeka.ivankovic33@gmail.com','CC44DD55',False),
+(null,'Valentin','Mijatović','2000-02-07','valentin.mijau22@gmail.com','FFFF0000',False);
+
+select * from prijateljstvo;
+
+select * from osoba;
+
+insert into prijateljstvo(sifra,osoba1,osoba2,prijatelji)
+values
+(null,1,2,True),
+(null,1,3,True),
+(null,3,2,True);
+
+select * from prijateljstvo where osoba1 = 1 or osoba2 = 1;
