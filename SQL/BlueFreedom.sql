@@ -80,4 +80,6 @@ values
 (null,3,1,False),
 (null,3,2,True);
 
+# Ovako ce se prikazivati lista svih prijatelja osobe koja je prijavljena na mrezu
+
 select * from prijateljstvo where (osoba1 = 1 or osoba2 = 1) and prijatelji = 1;
