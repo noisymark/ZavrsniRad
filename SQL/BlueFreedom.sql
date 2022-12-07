@@ -28,6 +28,12 @@ create table komentar(
     osoba int
 );
 
+create table svidamise_komentar(
+    sifra int not null primary key auto_increment,
+    vrijemesvidanja datetime,
+    osoba int
+);
+
 create table osoba(
     sifra int not null primary key auto_increment,
     ime varchar(10) not null,
@@ -51,6 +57,8 @@ alter table komentar add foreign key (osoba) references osoba(sifra);
 
 alter table svidamise add foreign key (objava) references objava(sifra);
 alter table svidamise add foreign key (osoba) references osoba(sifra);
+
+alter table svidamise_komentar add foreign key (osoba) references osoba(sifra);
 
 create table prijateljstvo(
 	sifra int not null primary key auto_increment,
