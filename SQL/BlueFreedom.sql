@@ -1,8 +1,14 @@
 # /Applications/XAMPP/xamppfiles/bin/./mysql -uroot --default_character_set=utf8 < "/Users/marko/Documents/ZavrsniRad/ZavrsniRad/SQL/BlueFreedom.sql"
+# THIS IS A COMMAND SPECIFIC FOR MY MACBOOK WHERE I CODE ON, PLEASE CHANGE THE COMMAND ACCORDINGLY TO YOUR OS AND WORK PATH
+
+
+# ADDING "AUTOMATIC UPDATE" FUNCTION SO WE CAN EASILY OVERWRITE THE OLD DATABASE IF IT DOES EXIST
 
 drop database if exists BlueFreedom;
 create database BlueFreedom;
 use BlueFreedom;
+
+# CREATING TABLES
 
 create table objava(
     sifra int not null primary key auto_increment,
@@ -53,6 +59,14 @@ create table osoba(
     stanje boolean not null
 );
 
+create table prijateljstvo(
+	sifra int not null primary key auto_increment,
+	osoba1 int,
+	osoba2 int,
+	prijatelji boolean
+);
+
+# ADDING ENTITY RELATIONSHIPS
 
 alter table objava add foreign key (osoba) references osoba(sifra);
 
@@ -66,15 +80,10 @@ alter table svidamise add foreign key (osoba) references osoba(sifra);
 
 alter table svidamise_komentar add foreign key (osoba) references osoba(sifra);
 
-create table prijateljstvo(
-	sifra int not null primary key auto_increment,
-	osoba1 int,
-	osoba2 int,
-	prijatelji boolean
-);
-
 alter table prijateljstvo add foreign key (osoba1) references osoba(sifra);
 alter table prijateljstvo add foreign key (osoba2) references osoba(sifra);
+
+# SAMPLE INSERT INTO osoba
 
 insert into osoba(sifra,ime,prezime,datumrodenja,email,lozinka,administrator,stanje)
 values
@@ -82,15 +91,19 @@ values
 (null,'Rebeka','Ivanković','2002-04-08','rebeka.ivankovic33@gmail.com','CC44DD55',False,True),
 (null,'Valentin','Mijatović','2000-02-07','valentin.mijau22@gmail.com','FFFF0000',False,True);
 
+# SAMPLE INSERT INTO prijateljstvo
+
 insert into prijateljstvo(sifra,osoba1,osoba2,prijatelji)
 values
 (null,1,2,True),
 (null,3,1,False),
 (null,3,2,True);
 
-# Ovako ce se prikazivati lista svih prijatelja osobe koja je prijavljena na mrezu
+# THIS IS A COMMAND TO SHOW "FRIEND LIST" OF THE PERSON WITH THE ID(SIFRA) THAT IS 1 (IN THIS EXAMPLE ME, MARKO)
 
 # select * from prijateljstvo where (osoba1 = 1 or osoba2 = 1) and prijatelji = 1;
+
+# SAMPLE INSERT INTO objava
 
 insert into objava(sifra,naslov,upis,vrijemeizrade,ipadresa,slika,osoba)
 values
@@ -98,11 +111,15 @@ values
 (null,'Hello','This is my first post on the BlueFreedom social network.','2022-12-02 12:42:11','192.168.2.5','/Users/2/postimg/001.png',2),
 (null,'Hello','This is my first post on the BlueFreedom social network.','2022-12-04 12:33:33','192.168.3.4','/Users/1/postimg/001.png',1);
 
+# SAMPLE INSERT INTO komentar
+
 insert into komentar (sifra,vrijemekomentiranja,opis,objava,osoba)
 values
 (null,'2022-12-07 14:00:00','Welcome to the community',1,1),
 (null,'2022-12-08 13:00:00','Have fun',2,3),
 (null,'2022-12-08 15:00:00','I''m buying bitcoin on btccheap.spam',3,2);
+
+# SAMPLE INSERT INTO svidamise
 
 insert into svidamise (sifra,vrijemesvidanja,objava,osoba)
 values
@@ -115,6 +132,8 @@ values
 (null,'2022-12-08 18:29:00',3,1),
 (null,'2022-12-08 18:29:00',3,2),
 (null,'2022-12-08 18:29:00',3,3);
+
+# SAMPLE INSERT INTO svidamise_komentar 
 
 insert into svidamise_komentar (sifra,vrijemesvidanja,svidanje,osoba,komentar)
 values
