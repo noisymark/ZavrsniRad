@@ -6,10 +6,10 @@ use BlueFreedom;
 
 create table objava(
     sifra int not null primary key auto_increment,
-    naziv varchar(50) not null,
-    opis text not null,
+    naslov varchar(50) not null,
+    upis varchar(250) not null,
     vrijemeizrade datetime not null,
-    ipadresa int(12) not null,
+    ipadresa varchar(20) not null,
     slika varchar(100),
     osoba int
 );
@@ -24,6 +24,7 @@ create table svidamise(
 create table komentar(
     sifra int not null primary key auto_increment,
     vrijemekomentiranja datetime not null,
+    opis varchar(250),
     objava int,
     osoba int
 );
@@ -31,7 +32,9 @@ create table komentar(
 create table svidamise_komentar(
     sifra int not null primary key auto_increment,
     vrijemesvidanja datetime,
-    osoba int
+    svidanje boolean not null,
+    osoba int,
+    komentar int
 );
 
 create table osoba(
@@ -46,7 +49,8 @@ create table osoba(
     lozinka varchar(20) not null,
     brojtel int(15),
     slika varchar(100),
-    administrator boolean not null
+    administrator boolean not null,
+    stanje boolean not null
 );
 
 
@@ -54,6 +58,8 @@ alter table objava add foreign key (osoba) references osoba(sifra);
 
 alter table komentar add foreign key (objava) references objava(sifra);
 alter table komentar add foreign key (osoba) references osoba(sifra);
+
+alter table svidamise_komentar add foreign key (komentar) references komentar(sifra);
 
 alter table svidamise add foreign key (objava) references objava(sifra);
 alter table svidamise add foreign key (osoba) references osoba(sifra);
@@ -70,17 +76,11 @@ create table prijateljstvo(
 alter table prijateljstvo add foreign key (osoba1) references osoba(sifra);
 alter table prijateljstvo add foreign key (osoba2) references osoba(sifra);
 
-select * from osoba;
-
-insert into osoba(sifra,ime,prezime,datumrodenja,email,lozinka,administrator)
+insert into osoba(sifra,ime,prezime,datumrodenja,email,lozinka,administrator,stanje)
 values
-(null,'Marko','Pavlović','2001-02-09','markopavlovic316@gmail.com','AA22BB33',True),
-(null,'Rebeka','Ivanković','2002-04-08','rebeka.ivankovic33@gmail.com','CC44DD55',False),
-(null,'Valentin','Mijatović','2000-02-07','valentin.mijau22@gmail.com','FFFF0000',False);
-
-select * from prijateljstvo;
-
-select * from osoba;
+(null,'Marko','Pavlović','2001-02-09','markopavlovic316@gmail.com','AA22BB33',True,True),
+(null,'Rebeka','Ivanković','2002-04-08','rebeka.ivankovic33@gmail.com','CC44DD55',False,True),
+(null,'Valentin','Mijatović','2000-02-07','valentin.mijau22@gmail.com','FFFF0000',False,True);
 
 insert into prijateljstvo(sifra,osoba1,osoba2,prijatelji)
 values
@@ -90,4 +90,34 @@ values
 
 # Ovako ce se prikazivati lista svih prijatelja osobe koja je prijavljena na mrezu
 
-select * from prijateljstvo where (osoba1 = 1 or osoba2 = 1) and prijatelji = 1;
+# select * from prijateljstvo where (osoba1 = 1 or osoba2 = 1) and prijatelji = 1;
+
+insert into objava(sifra,naslov,upis,vrijemeizrade,ipadresa,slika,osoba)
+values
+(null,'Hello','This is my first post on the BlueFreedom social network.','2022-12-01 18:45:22','192.168.1.1','/Users/3/postimg/001.png',3),
+(null,'Hello','This is my first post on the BlueFreedom social network.','2022-12-02 12:42:11','192.168.2.5','/Users/2/postimg/001.png',2),
+(null,'Hello','This is my first post on the BlueFreedom social network.','2022-12-04 12:33:33','192.168.3.4','/Users/1/postimg/001.png',1);
+
+insert into komentar (sifra,vrijemekomentiranja,opis,objava,osoba)
+values
+(null,'2022-12-07 14:00:00','Welcome to the community',1,1),
+(null,'2022-12-08 13:00:00','Have fun',2,3),
+(null,'2022-12-08 15:00:00','I''m buying bitcoin on btccheap.spam',3,2);
+
+insert into svidamise (sifra,vrijemesvidanja,objava,osoba)
+values
+(null,'2022-12-08 18:29:00',1,1),
+(null,'2022-12-08 18:29:00',1,2),
+(null,'2022-12-08 18:29:00',1,3),
+(null,'2022-12-08 18:29:00',2,1),
+(null,'2022-12-08 18:29:00',2,2),
+(null,'2022-12-08 18:29:00',2,3),
+(null,'2022-12-08 18:29:00',3,1),
+(null,'2022-12-08 18:29:00',3,2),
+(null,'2022-12-08 18:29:00',3,3);
+
+insert into svidamise_komentar (sifra,vrijemesvidanja,svidanje,osoba,komentar)
+values
+(null,'2022-12-08 21:00:00',1,1,1),
+(null,'2022-12-08 21:00:00',1,3,2),
+(null,'2022-12-08 21:00:00',1,2,3);
