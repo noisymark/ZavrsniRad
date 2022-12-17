@@ -1,5 +1,6 @@
 # /Applications/XAMPP/xamppfiles/bin/./mysql -uroot --default_character_set=utf8 < "/Users/marko/Documents/ZavrsniRad/ZavrsniRad/SQL/BlueFreedom.sql"
 # THIS IS A COMMAND SPECIFIC FOR MY MACBOOK WHERE I CODE ON, PLEASE CHANGE THE COMMAND ACCORDINGLY TO YOUR OS AND WORK PATH
+# c:\xampp\mysql\bin\mysql -uroot --default_character_set=utf8 < "C:\Users\P\Documents\ZavrsniRad\SQL\BlueFreedom.sql"
 
 
 # ADDING "AUTOMATIC UPDATE" FUNCTION SO WE CAN EASILY OVERWRITE THE OLD DATABASE IF IT DOES EXIST
