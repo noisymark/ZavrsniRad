@@ -1,0 +1,20 @@
+body{
+    background-color: black;
+}
+
+#vecitext{
+    font-size: 2rem;
+    color: #ff00ff;
+    text-align: center;
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+
+.lepo{
+    font-size: 1rem;
+    color: #5757ff;
+    text-align: center;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    font-size: 1.5rem;
+}
