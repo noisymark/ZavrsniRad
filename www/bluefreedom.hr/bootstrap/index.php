@@ -28,10 +28,10 @@
       </div>
       <div class="auth__form_actions">
         <button id="logintext" class="btn btn-primary btn-lg btn-block">
-          LOGIN
+        <i id="fingerprinticon" class="fa-solid fa-fingerprint"></i>LOGIN
         </button>
-        <div class="mt-2">
-          <a id="fgtpw" href="#" class="small text-uppercase">
+        <div class="mt-2" id="fgtpw">
+          <a style="text-decoration: none; color:black;" href="home.php" class="small text-uppercase">
             Forgot password?
           </a>
         </div>
@@ -40,6 +40,7 @@
   </div>
 </div>
     </div>
+    <?php include_once "components/footer.php"?>
 </body>
 <?php include_once "components/scripts.php" ?>
 </html>
