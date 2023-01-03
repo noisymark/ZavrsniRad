@@ -1,15 +1,14 @@
-
 <!doctype html>
 <html class="no-js" lang="en" dir="ltr">
   <?php include "components/header.php"?>
   <?php include "components/styles.php"?>
     
 <body>
-
-    <div class="grid-container">
+    <?php include "components/navbar.php"?>
+<div class="grid-container">
       <div class="grid-x align-center grid-padding-y">
         <div class="large-4 medium-8 small-12 cell">
-            <?php include "components/login.php"?>
+            <?php include "components/newpost.php"?>
         </div>
       </div>
     </div>

@@ -66,3 +66,17 @@ a#replystyle:hover{
     color: white;
     border: 2px solid white;
 }
+
+div#fgtpw{
+    transition: 0.1s ease-out;
+}
+
+div#fgtpw:hover{
+    transform: scale(1.1);
+    text-decoration: underline;
+}
+
+div#fgtpw:focus{
+    transform: scale(1.1);
+    text-decoration: underline;
+}
