@@ -8,10 +8,10 @@
     <div class="collapse navbar-collapse " id="navbarSupportedContent">
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active text-dark" aria-current="page" href="#"><i id="navbaricon" class="fa-solid fa-house"></i>Home</a>
+          <a class="nav-link active text-dark" aria-current="page" href="home.php"><i id="navbaricon" class="fa-solid fa-house"></i>Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-dark" href="#"><i id="navbaricon" class="fa-solid fa-people-group"></i>Friends</a>
+          <a class="nav-link text-dark" href="user.php"><i id="navbaricon" class="fa-solid fa-people-group"></i>Friends</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link text-dark" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -19,8 +19,8 @@
           </a>
           <ul class="dropdown-menu bg-primary text-dark" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item" href="#">My posts</a></li>
-            <li><a class="dropdown-item" href="#">My profile</a></li>
-            <li><a class="dropdown-item" href="#">Edit my profile</a></li>
+            <li><a class="dropdown-item" href="me.php">My profile</a></li>
+            <li><a class="dropdown-item" href="editprofile.php">Edit my profile</a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">

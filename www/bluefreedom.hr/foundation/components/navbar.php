@@ -12,7 +12,7 @@
   <div class="top-bar-right">
   <ul class="dropdown menu" data-dropdown-menu>
         <li><a href="#"><i id="navbaricon" class="fa-solid fa-house"></i>Home</a></li>
-      <li><a href="#"><i id="navbaricon" class="fa-solid fa-people-group"></i>Friends</a></li>
+      <li><a href="user.php"><i id="navbaricon" class="fa-solid fa-people-group"></i>Friends</a></li>
       <li>
         <a href="#"><i id="navbaricon" class="fa-solid fa-user"></i>Me</a>
         <ul class="menu vertical">

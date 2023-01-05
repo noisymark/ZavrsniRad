@@ -1,0 +1,12 @@
+html{transition: all 1s ease-out !important;}
+.form-control:focus{box-shadow: none;border-color: black;}
+.profile-button{background-color: black;box-shadow: none;border: none}
+.profile-button:hover{background-color: grey}
+.profile-button:focus{background-color: grey;box-shadow: none}
+.profile-button:active{background-color: grey;box-shadow: none}
+.labels{font-size: 11px}
+#userphoto{height: 100px; width: 100px; border-radius: 50%;}
+.col-md-3{background-color: rgba(0, 100, 255, 0.5);color: white;}
+.col-md-5{background-color: rgba(0, 100, 255, 0.5);color:white;}
+
+.row{transition: all 1s ease-out !important;}
