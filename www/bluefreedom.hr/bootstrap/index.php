@@ -1,3 +1,4 @@
+<?php $email = isset($_GET['email']) ? $_GET['email'] : (isset($_COOKIE['email']) ? $_COOKIE['email'] : ''); ?>
 <!DOCTYPE html>
 <html lang="en">
     <?php include_once "components/header.php" ?>
@@ -12,17 +13,17 @@
     </div>
   </div>
   <div class="auth__body">
-    <form class="auth__form" autocomplete="off">
+    <form action="authorisation.php" class="auth__form" autocomplete="off" method="POST">
       <div class="auth__form_body">
         <h3 class="auth__form_title">Sign in</h3>
         <div>
           <div class="form-group">
-            <label class="text-uppercase small">Email :</label>
-            <input type="email" class="form-control" placeholder="Enter email">
+            <label for="email" class="text-uppercase small">Email :</label>
+            <input name="email" id="email" type="email" class="form-control" placeholder="Enter email" value="<?=$email?>">
           </div>
           <div class="form-group">
-            <label id="pw" class="text-uppercase small">Password :</label>
-            <input type="password" class="form-control" placeholder="Password">
+            <label for="password" class="text-uppercase small">Password :</label>
+            <input name="password" id="password" type="password" class="form-control" placeholder="Password">
           </div>
         </div>
       </div>
@@ -31,7 +32,7 @@
         <i id="fingerprinticon" class="fa-solid fa-fingerprint"></i>LOGIN
         </button>
         <div class="mt-2" id="fgtpw">
-          <a style="text-decoration: none; color:black;" href="home.php" class="small text-uppercase">
+          <a style="text-decoration: none; color:black;" href="#" class="small text-uppercase">
             Forgot password?
           </a>
         </div>

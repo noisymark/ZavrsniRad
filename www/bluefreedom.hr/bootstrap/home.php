@@ -1,3 +1,9 @@
+<?php
+
+session_start();
+if(!$_SESSION['auth']){header('location: authorisation.php');}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
