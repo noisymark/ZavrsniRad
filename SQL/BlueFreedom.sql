@@ -6,7 +6,7 @@
 # ADDING "AUTOMATIC UPDATE" FUNCTION SO WE CAN EASILY OVERWRITE THE OLD DATABASE IF IT DOES EXIST
 
 drop database if exists BlueFreedom;
-create database BlueFreedom;
+create database BlueFreedom default charset utf8mb4;
 use BlueFreedom;
 
 # CREATING TABLES
@@ -90,6 +90,7 @@ insert into osoba(sifra,ime,prezime,datumrodenja,email,lozinka,administrator,sta
 values
 (null,'Marko','Pavlović','2001-02-09','markopavlovic316@gmail.com','AA22BB33',True,True),
 (null,'Rebeka','Ivanković','2002-04-08','rebeka.ivankovic33@gmail.com','CC44DD55',False,True),
+(null,'Test','Test','2000-01-01','test@test.hr','test',False,True),
 (null,'Valentin','Mijatović','2000-02-07','valentin.mijau22@gmail.com','FFFF0000',False,True);
 
 # SAMPLE INSERT INTO prijateljstvo
