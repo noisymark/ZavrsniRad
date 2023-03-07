@@ -11,6 +11,28 @@ use BlueFreedom;
 
 # CREATING TABLES
 
+create table operater(
+    sifra int not null primary key auto_increment,
+    ime varchar(50) not null,
+    prezime varchar(50) not null,
+    email varchar(50) not null,
+    lozinka char(61) not null,
+    uloga varchar(20) not null
+);
+
+insert into operater (ime,prezime,email,lozinka,uloga)
+values ('Edunova','Operater','oper@edunova.hr',
+'$2y$10$m8IvoBWyKZSqv149xoB//eEd/nPB56JGlRYM0Vann7X2cPUMKvXc2',
+'oper'
+);
+
+insert into operater (ime,prezime,email,lozinka,uloga)
+values ('Admin','Operater','admin@edunova.hr',
+'$2y$10$m8IvoBWyKZSqv149xoB//eEd/nPB56JGlRYM0Vann7X2cPUMKvXc2',
+'admin'
+);
+
+
 create table objava(
     sifra int not null primary key auto_increment,
     naslov varchar(50) not null,
