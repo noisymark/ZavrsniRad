@@ -13,7 +13,8 @@ class OperaterController extends AdminController
         }
 
         $this->view->render($this->viewPath . 'index',[
-            'info'=>$operaters
+            'info'=>$operaters,
+            'css'=>'users.css'
         ]);
     }
 }

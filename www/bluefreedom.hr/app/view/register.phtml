@@ -1,0 +1,65 @@
+<?php
+if(!isset($message)){$message='';}
+if(!isset($email)){$email='';}
+?>
+<link rel="stylesheet" href="<?=App::config('url')?>public/css/login.css">
+<div class="container">
+    <div class="auth">
+  <div class="auth__header">
+    <div class="auth__logo">
+      <a href="<?=App::config('url')?>"><img height="90" src="<?=App::config('url')?>public/components/icons/png.png" alt=""></a>
+    </div>
+  </div>
+  <div class="auth__body">
+    <form action="<?=App::config('url')?>register/index" class="auth__form" autocomplete="off" method="POST">
+      <div class="auth__form_body">
+        <h3 class="auth__form_title">Sign up</h3>
+        <div>
+            <div class="row">
+        <div class="col-4">
+        <div class="form-group">
+            <label for="fname" class="text-uppercase small">First name :</label>
+            <input name="fname" id="fname" type="text" class="form-control" placeholder="John">
+          </div>
+          <div class="form-group">
+            <label for="lname" class="text-uppercase small">Last Name :</label>
+            <input name="lname" id="lname" type="text" class="form-control" placeholder="Doe">
+          </div>
+        </div>
+        <div class="col-4">
+        <div class="form-group">
+          <label for="dob" class="text-uppercase small">Date of birth :</label>
+          <input name="dob" id="dob" type="date" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="email" class="text-uppercase small">Email :</label>
+          <input name="email" id="email" type="email" class="form-control" placeholder="john@doe.com" value="<?=$email?>">
+        </div>
+        </div>
+          <div class="col-4">
+          <div class="form-group">
+            <label for="password" class="text-uppercase small">Password :</label>
+            <input name="password" id="password" type="password" placeholder="*****" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="confirmpw" class="text-uppercase small">Confirm password :</label>
+            <input name="confirmpw" id="confirmpw" type="password" placeholder="*****" class="form-control">
+          </div>
+          </div>
+        </div>
+        </div>
+    </div>
+    <div class="text-danger pt-2 text-center h5 text-uppercase">
+      <span><?=$message?></span>
+    </div>
+      <div class="auth__form_actions">
+        <button type="submit" id="logintext" class="btn btn-primary btn-lg btn-block">
+        <i id="fingerprinticon" class="fa-solid fa-fingerprint"></i>Register
+        </button>
+        <div class="mt-2" id="fgtpw">
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+    </div>

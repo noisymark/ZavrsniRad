@@ -37,7 +37,7 @@ body{
 }
 .auth__form {
   min-width: 280px;
-  max-width: 340px;
+  max-width: 740px;
   margin: auto;
   margin-top: -40px;
   padding: 0 10px;

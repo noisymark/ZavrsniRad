@@ -15,6 +15,11 @@ class IndexController extends Controller
         ]);
     }
 
+    public function register()
+    {
+        $this->view->render('register');
+    }
+
     public function logout()
     {
         unset($_SESSION['auth']);

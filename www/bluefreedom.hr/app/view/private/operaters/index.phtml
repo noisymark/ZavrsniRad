@@ -1,24 +1,34 @@
-<a href="new">Add new operater</a>
-
-<table>
-    <thead>
+<div class="container p-2">
+    <div class="row">
+        <div class="col-12 col-lg-12">
+            <a href="<?=App::config('url')?>operater/new" class="bg-success btn btn-lg d-grid">Add new operater</a>
+            <table class="table table-dark">
+    <thead class="text-center font-weight-bold">
         <tr>
             <th>Name</th>
             <th>E-mail</th>
-            <th>Uloga</th>
-            <th>Akcija</th>
+            <th>Role</th>
+            <th>Action</th>
         </tr>
     </thead>
-    <tbody>
-        <?php foreach($info as $i):?>
+    <tbody class="text-center">
+    <?php foreach($info as $i):?>
+        <?php if($i->uloga==='oper'):?>
             <tr>
                 <td><?=$i->ime?> <?=$i->prezime?></td>
                 <td><?=$i->email?></td>
                 <td><?=$i->uloga?></td>
                 <td>
-                    <a href="change?id=<?=$i->sifra?>">Change</a>
+                <a href="update?id=<?=$i->sifra?>"><i class="fa fa-pencil"></i></a>    
+                <a href="delete?id=<?=$i->sifra?>"><i class="fa fa-trash"></i></a>
                 </td>
             </tr>
+            <?php else: ?>
+            <?php continue;?>
+        <?php endif; ?>
         <?php endforeach; ?>
     </tbody>
 </table>
+        </div>
+    </div>
+</div>

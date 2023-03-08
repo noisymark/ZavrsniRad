@@ -1,3 +1,27 @@
 .fa{
     font-size: 25px;
+    margin-right: 5px;
+    margin-left: 5px;
+    color:white;
+}
+
+.fa:hover{
+    color:black;
+}
+
+.fa-check{
+    color:green;
+}
+
+.fa-x{
+    color:red;
+}
+
+td:hover{
+    text-decoration: underline;
+}
+
+td:last-child:hover{
+    text-decoration: none;
+    color:black;
 }
