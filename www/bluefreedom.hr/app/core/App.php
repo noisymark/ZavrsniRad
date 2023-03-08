@@ -15,6 +15,7 @@ class App
         {
             $controller=ucfirst($parts[0].'Controller');
         }
+
         $method='';
         if(!isset($parts[1]) || $parts[1]==='')
         {
@@ -24,31 +25,33 @@ class App
         {
             $method=$parts[1];
         }
-        if(!(class_exists($controller) && method_exists($controller,$method)))
+
+        if(class_exists($controller) && method_exists($controller,$method))
         {
-            echo 'NON EXISTANCE OF ' . $controller . '-&gt;' . $method;
-            return;
+            $instance = new $controller();
+            $instance->$method();
         }
-        $instance=new $controller();
-        $instance->$method();
+        else
+        {
+            echo 'NON EXISTANCE OF ' . $controller . '-&gt' . $method;
+        }
     }
-
-    public static function configuration($key)
+    public static function config($key)
     {
-        $configFile=BP_APP.'config.php';
-        if(!(file_exists($configFile)))
-        {
-            return 'Config file does not exist or the path is not valid!';
+        $configFile = BP_APP . 'config.php';
+
+        if(!file_exists($configFile)){
+            return 'Configuration file does not exist';
         }
 
-        $configuration=require $configFile;
+        $config = require $configFile;
 
-        if(!isset($configuration[$key]))
-        {
-            return 'Key ' . $key . 'is not set up in configuration file';
+        if(!isset($config[$key])){
+            return 'Key ' . $key . ' is not set up in configuration file';
         }
 
-        return $configuration[$key];
+        return $config[$key];
+
     }
 
     public static function auth()
@@ -56,14 +59,24 @@ class App
         return isset($_SESSION['auth']);
     }
 
-    public static function operator()
+    public static function operater()
     {
         return $_SESSION['auth']->ime . ' ' . $_SESSION['auth']->prezime;
     }
 
     public static function admin()
     {
-        return $_SESSION['auth']->role==='admin';
+        return $_SESSION['auth']->uloga==='admin';
+    }
+
+    public static function oper()
+    {
+        return $_SESSION['auth']->uloga==='oper';
+    }
+
+    public static function dev()
+    {
+        return App::config('dev') ;
     }
 }
 

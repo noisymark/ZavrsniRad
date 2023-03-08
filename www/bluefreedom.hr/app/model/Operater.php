@@ -5,19 +5,24 @@ class Operater
     public static function read()
     {
         $connection=DB::getInstance();
-        $query= $connection->prepare('select * from operater');
+        $query=$connection->prepare('
+        select * from operater
+        ');
         $query->execute();
         return $query->fetchAll();
     }
 
     public static function authorise($email,$password)
     {
-        $connection = DB::getInstance();
-        $query=$connection->prepare('select * from operater where email=:email');
+        $connection=DB::getInstance();
+        $query=$connection->prepare('
+        select * from operater where email=:email
+        ');
         $query->execute(['email'=>$email]);
+
         $operater = $query->fetch();
 
-        if($operater===null)
+        if($operater==null)
         {
             return null;
         }
@@ -28,7 +33,6 @@ class Operater
         }
 
         unset($operater->lozinka);
-
         return $operater;
     }
 }

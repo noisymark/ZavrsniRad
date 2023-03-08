@@ -1,3 +1,6 @@
 <div class="footer-end mt-auto">
 <hr>&copy; <?php echo date('Y'); ?> BlueFreedom <br> <hr>
+<?php if(App::dev()): ?>
+<span style="color: red"> Radite na DEV instanci</span>
+<?php endif;?>
 </div>

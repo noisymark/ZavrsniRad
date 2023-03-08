@@ -11,7 +11,7 @@ class View
 
     public function render($phtmlPage,$parameters=[])
     {
-        $viewFile=BP_APP.'view'.DIRECTORY_SEPARATOR.$phtmlPage.'.phtml';
+        $viewFile = BP_APP . 'view' . DIRECTORY_SEPARATOR . $phtmlPage . '.phtml';
         ob_start();
         extract($parameters);
         if(file_exists($viewFile))
@@ -20,16 +20,11 @@ class View
         }
         else
         {
-            include_once BP_APP.'view'.DIRECTORY_SEPARATOR.'error404.phtml';
+            include_once BP_APP . 'view' . DIRECTORY_SEPARATOR . 'errorPage.phtml';
         }
-        $contents=ob_get_clean();
-        include_once BP_APP . 'view' . DIRECTORY_SEPARATOR . $this->template . '.phtml';
-    }
 
-    public function api($parameters)
-    {
-        header('Content-Type: application/json; charset=utf-8');
-        echo json_decode($parameters);
+        $contents = ob_get_clean();
+        include_once BP_APP . 'view' . DIRECTORY_SEPARATOR .  $this->template . '.phtml';
     }
 }
 

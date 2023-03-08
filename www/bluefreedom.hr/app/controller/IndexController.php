@@ -10,16 +10,8 @@ class IndexController extends Controller
     public function login()
     {
         $this->view->render('login',[
-            $message='',
-            $email=''
-        ]);
-    }
-
-    public function register()
-    {
-        $this->view->render('register',[
-            $message='',
-            $email=''
+            'message'=>'',
+            'email'=>''
         ]);
     }
 
@@ -27,20 +19,7 @@ class IndexController extends Controller
     {
         unset($_SESSION['auth']);
         session_destroy();
-        header('location:'.App::configuration('url'));
-    }
-
-    public function api()
-    {
-        $this->view->api([
-            'info'=>[
-                'id'=>2,
-                'person'=>[
-                    'name'=>'Marko',
-                    'surname'=>'Marulić'
-                ]
-                ]
-        ]);
+        header('location:'.App::config('url'));
     }
 }
 

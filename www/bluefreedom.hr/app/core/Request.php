@@ -13,6 +13,7 @@ class Request
         {
             $route=$_SERVER['REQUEST_URI'];
         }
+
         return $route;
     }
 }

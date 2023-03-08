@@ -7,14 +7,14 @@ class OperaterController extends AdminController
     public function index()
     {
         $operaters=Operater::read();
-            foreach($operaters as $o)
-            {
-                unset($o->password);
-            }
+        foreach ($operaters as $o)
+        {
+            unset($o->lozinka);
+        }
 
-            $this->view->render($this->viewPath.'index',[
-                'info'=>$operaters
-            ]);
+        $this->view->render($this->viewPath . 'index',[
+            'info'=>$operaters
+        ]);
     }
 }
 

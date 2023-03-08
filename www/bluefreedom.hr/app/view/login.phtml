@@ -1,13 +1,14 @@
-<link rel="stylesheet" href="<?=App::configuration('url')?>public/css/login.css">
+<?php $email = isset($_GET['email']) ? $_GET['email'] : (isset($_COOKIE['email']) ? $_COOKIE['email'] : ''); ?>
+<link rel="stylesheet" href="<?=App::config('url')?>public/css/login.css">
 <div class="container">
     <div class="auth">
   <div class="auth__header">
     <div class="auth__logo">
-      <img height="90" src="<?=App::configuration('url')?>public/components/icons/png.png" alt="">
+      <a href="<?=App::config('url')?>"><img height="90" src="<?=App::config('url')?>public/components/icons/png.png" alt=""></a>
     </div>
   </div>
   <div class="auth__body">
-    <form action="authorisation.php" class="auth__form" autocomplete="off" method="POST">
+    <form action="<?=App::config('url');?>login/authorisation" class="auth__form" autocomplete="off" method="POST">
       <div class="auth__form_body">
         <h3 class="auth__form_title">Sign in</h3>
         <div>
@@ -20,7 +21,10 @@
             <input name="password" id="password" type="password" class="form-control" placeholder="Password">
           </div>
         </div>
-      </div>
+    </div>
+    <div class="text-danger pt-2 text-center h5 text-uppercase">
+      <span><?=$message?></span>
+    </div>
       <div class="auth__form_actions">
         <button id="logintext" class="btn btn-primary btn-lg btn-block">
         <i id="fingerprinticon" class="fa-solid fa-fingerprint"></i>LOGIN
