@@ -2,11 +2,12 @@
 <div class="container">
     <div class="row">
         <div class="col-12 col-lg-12">
-            <a href="users/new" class="bg-success btn btn-lg d-grid">Add new user</a>
+            <a href="<?=App::config('url')?>users/new" class="bg-success btn btn-lg d-grid">Add new user</a>
             <table class="table table-dark">
     <thead class="text-center font-weight-bold">
         <tr>
             <th>Name</th>
+            <th>Phone</th>
             <th>E-mail</th>
             <th>DOB</th>
             <th>Active</th>
@@ -18,6 +19,7 @@
         <?php foreach($info as $red): ?>
             <tr>
                 <td><?=$red->ime?> <?=$red->prezime?></td>
+                <td><?=$red->brojtel?></td>
                 <td><?=$red->email?></td>
                 <td><?=$red->datumrodenja?></td>
                 <td><i class="fa fa-solid fa-<?=$red->stanje?>"></i></td>

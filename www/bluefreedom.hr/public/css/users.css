@@ -5,10 +5,6 @@
     color:white;
 }
 
-.fa:hover{
-    color:black;
-}
-
 .fa-check{
     color:green;
 }
@@ -24,4 +20,8 @@ td:hover{
 td:last-child:hover{
     text-decoration: none;
     color:black;
+}
+
+.fa-pencil:hover, .fa-trash:hover{
+    color:red;
 }
