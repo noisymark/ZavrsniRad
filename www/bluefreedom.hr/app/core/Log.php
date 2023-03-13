@@ -6,7 +6,7 @@ class Log
     public static function info($what)
     {
         echo '<pre>';
-        print_r($what);
+        var_dump($what);
         echo '</pre>';
     }
 

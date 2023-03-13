@@ -6,6 +6,7 @@
             <table class="table table-dark">
     <thead class="text-center font-weight-bold">
         <tr>
+            <th>ID</th>
             <th>Name</th>
             <th>Phone</th>
             <th>E-mail</th>
@@ -18,6 +19,7 @@
     <tbody class="text-center">
         <?php foreach($info as $red): ?>
             <tr>
+                <td><?=$red->sifra?></td>
                 <td><?=$red->ime?> <?=$red->prezime?></td>
                 <td><?=$red->brojtel?></td>
                 <td><?=$red->email?></td>

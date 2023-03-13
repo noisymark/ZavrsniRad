@@ -1,9 +1,9 @@
-
+<?php Log::info($info->sifra);?>
 <link rel="stylesheet" href="<?=App::config('url')?>public/css/login.css">
 <div class="container">
     <div class="auth">
   <div class="auth__body">
-    <form action="<?=App::config('url')?>users/new" class="auth__form" autocomplete="off" method="POST">
+    <form action="<?=App::config('url')?>users/update" class="auth__form" autocomplete="off" method="POST">
       <div class="auth__form_body">
         <div>
             <div class="row">
@@ -45,7 +45,7 @@
     </div>
       <div class="auth__form_actions">
         <button type="submit" id="logintext" class="btn btn-primary btn-lg btn-block">
-        <i id="fingerprinticon" class="fa-solid fa-pencil"></i>CREATE
+        <i id="fingerprinticon" class="fa-solid fa-check"></i>UPDATE
         </button>
         <div class="mt-2" id="fgtpw">
         </div>

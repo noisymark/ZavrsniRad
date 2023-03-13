@@ -18,10 +18,10 @@ class Users
     {
         $connection=DB::getInstance();
         $query=$connection->prepare('
-        select * from osoba where sifra=:sifra
+        select * from osoba where sifra=:id
         ');
         $query->execute([
-            'sifra'=>$id
+            'id'=>$id
         ]);
         return $query->fetch();
     }
@@ -38,6 +38,27 @@ class Users
         catch(Exception $e)
         {
             echo $e->getMessage();
+        }
+    }
+
+    public static function update($parameters)
+    {
+        try{
+        $connection=DB::getInstance();
+        $query=$connection->prepare('
+        update osoba set
+        ime=:fname,
+        prezime=:lname,
+        datumrodenja=:dob,
+        email=:email,
+        lozinka=:password
+        where sifra=:id
+        ');
+        $query->execute($parameters);
+        }
+        catch(Exception $ex)
+        {
+            echo $ex->getMessage();
         }
     }
 

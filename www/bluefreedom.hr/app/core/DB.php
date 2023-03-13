@@ -6,7 +6,7 @@ class DB extends PDO
 
     private function __construct()
     {
-        extract (App::config('database'));
+        extract(App::config('database'));
         parent::__construct($dsn,$user,$password);
         $this->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE,PDO::FETCH_OBJ);
     }

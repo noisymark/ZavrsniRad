@@ -64,6 +64,51 @@ class UsersController extends AuthorisationController
         ]);
     }
 
+    public function update($id='')
+    {
+        if($_SERVER['REQUEST_METHOD']==='GET')
+        {
+            $id=$_GET['id'];
+            $id=(int)$id;
+            if(strlen(trim($id))===0)
+            {
+                header('location:'.App::config('url').'index/logout');
+                return;
+            }
+
+
+            if($id===0)
+            {
+                header('location:'.App::config('url').'index/logout');
+                return;
+            }
+
+            $this->e=Users::readOne($id);
+
+            if($this->e=null)
+            {
+                header('location:'.App::config('url').'index/logout');
+                return;
+            }
+
+            $this->view->render($this->viewPath . 'update',[
+                'info'=>$this->e,
+                'message'=>'Change data by your will'
+            ]);
+            return;
+        }
+
+        $id=$this->e->sifra;
+        $this->prepareForDB();
+        Users::update((array)$this->e);
+        $this->view->render($this->viewPath . 'update',[
+            'info'=>$this->e,
+            'message'=>'Changes saved successfully'
+        ]);
+
+
+    }
+
     private function callView($parameters)
     {
         $this->view->render($this->viewPath.'new',$parameters);
