@@ -43,7 +43,7 @@ class Users
 
     public static function update($parameters)
     {
-        Log::info($parameters);
+        //Log::info($parameters);
         try{
         $connection=DB::getInstance();
         $query=$connection->prepare('
@@ -63,6 +63,17 @@ class Users
         {
             echo $ex->getMessage();
         }
+    }
+
+    public static function delete($id)
+    {
+        $connection=DB::getInstance();
+        $query=$connection->prepare('
+        delete from osoba where sifra=:id
+        ');
+        $query->execute([
+            'id'=>$id
+        ]);
     }
 
     public static function sameEmailInDatabase($s)

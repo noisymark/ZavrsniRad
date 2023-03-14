@@ -28,7 +28,7 @@
                 <td><i class="fa fa-solid fa-<?=$red->administrator?>"></i></td>
                 <td>
                 <a href="update/<?=$red->sifra?>"><i class="fa fa-pencil"></i></a>    
-                <a href="delete/<?=$red->sifra?>"><i class="fa fa-trash"></i></a>
+                <a onclick="return confirm('Are you sure you want to delete user <?=$red->ime?> <?=$red->prezime?>?');" href="delete/<?=$red->sifra?>"><i class="fa fa-trash"></i></a>
                 </td>
             </tr>
         <?php endforeach;?>

@@ -90,7 +90,7 @@ class UsersController extends AuthorisationController
             }
 
             $this->view->render($this->viewPath . 'update',[
-                'info'=>$this->e,
+                'e'=>$this->e,
                 'message'=>'Change data by your will'
             ]);
             return;
@@ -100,7 +100,7 @@ class UsersController extends AuthorisationController
         if(!($this->controlChange()))
         {
             $this->view->render($this->viewPath . 'update',[
-                'info'=>$this->e,
+                'e'=>$this->e,
                 'message'=>$this->message
             ]);
             return;
@@ -111,13 +111,26 @@ class UsersController extends AuthorisationController
         Users::update((array)$this->e);
         $this->e=(object)$this->e;
         $this->view->render($this->viewPath . 'update',[
-            'info'=>$this->e,
+            'e'=>$this->e,
             'message'=>'Changes saved successfully'
         ]);
 
         return;
 
 
+    }
+
+    public function delete($id=0)
+    {
+        $id=(int)$id;
+        if($id===0)
+        {
+            header('location:'.App::config('url').'index/logout');
+            return;
+        }
+
+        Users::delete($id);
+        header('location:'.App::config('url').'users/index');
     }
 
     private function controlChange()

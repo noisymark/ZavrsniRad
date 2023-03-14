@@ -1,5 +1,11 @@
 <?php
-$info->dt = DateTime::createFromFormat("Y-m-d H:i:s",$info->datumrodenja)->format("Y-m-d");
+if(isset($e->datumrodenja)){$e->datumrodenja = DateTime::createFromFormat("Y-m-d H:i:s",$e->datumrodenja)->format("Y-m-d");}
+else{$e->datumrodenja=DateTime::createFromFormat("Y-m-d H:i:s",$e->dob)->format("Y-m-d");}
+if(!isset($e->ime)) {$e->ime=$e->fname;}
+if(!isset($e->prezime)) {$e->prezime=$e->lname;}
+if(!isset($e->lozinka)) {$e->lozinka=$e->password;}
+if(!isset($e->stanje)) {$e->stanje=$e->status;}
+if(!isset($e->administrator)) {$e->administrator=$e->admin;}
 ?>
 <link rel="stylesheet" href="<?=App::config('url')?>public/css/login.css">
 <div class="container">
@@ -12,48 +18,48 @@ $info->dt = DateTime::createFromFormat("Y-m-d H:i:s",$info->datumrodenja)->forma
         <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4">
         <div class="form-group">
             <label for="fname" class="text-uppercase small">First name :</label>
-            <input name="fname" id="fname" type="text" class="form-control" placeholder="John" value="<?=$info->ime?>">
+            <input name="fname" id="fname" type="text" class="form-control" placeholder="John" value="<?=$e->ime?>">
           </div>
           <div class="form-group">
             <label for="lname" class="text-uppercase small">Last Name :</label>
-            <input name="lname" id="lname" type="text" class="form-control" placeholder="Doe" value="<?=$info->prezime?>">
+            <input name="lname" id="lname" type="text" class="form-control" placeholder="Doe" value="<?=$e->prezime?>">
           </div>
         </div>
         <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4">
         <div class="form-group">
           <label for="dob" class="text-uppercase small">Date of birth :</label>
-          <input name="dob" id="dob" type="date" class="form-control" value="<?=$info->dt?>">
+          <input name="dob" id="dob" type="date" class="form-control" value="<?=$e->datumrodenja?>">
         </div>
         <div class="form-group">
           <label for="email" class="text-uppercase small">Email :</label>
-          <input name="email" id="email" type="email" class="form-control" placeholder="john@doe.com" value="<?=$info->email?>">
+          <input name="email" id="email" type="email" class="form-control" placeholder="john@doe.com" value="<?=$e->email?>">
         </div>
         </div>
           <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4">
           <div class="form-group">
             <label for="password" class="text-uppercase small">Password :</label>
-            <input name="password" id="password" type="password" placeholder="*****" class="form-control" value="<?=$info->lozinka?>">
+            <input name="password" id="password" type="password" placeholder="*****" class="form-control" value="<?=$e->lozinka?>">
           </div>
           <div class="form-group">
             <p>Active</p>
             <input type="radio" name="status" id="yes" value="true"
-            <?php if($info->stanje): ?>
+            <?php if($e->stanje): ?>
             checked="checked">
             <?php endif; ?>
             <label for="yes">YES</label>
             <input type="radio" name="status" id="no" value="false"
-            <?php if(!$info->stanje): ?>
+            <?php if(!$e->stanje): ?>
             checked="checked">
             <?php endif; ?>
             <label for="no">NO</label>
             <p>Admin</p>
             <input type="radio" name="admin" id="yes" value="true"
-            <?php if($info->administrator): ?>
+            <?php if($e->administrator): ?>
             checked="checked">
             <?php endif; ?>
             <label for="yes">YES</label>
             <input type="radio" name="admin" id="no" value="false"
-            <?php if(!$info->administrator): ?>
+            <?php if(!$e->administrator): ?>
             checked="checked">
             <?php endif; ?>
             <label for="no">NO</label>
