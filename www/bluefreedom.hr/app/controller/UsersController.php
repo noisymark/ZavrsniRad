@@ -68,15 +68,13 @@ class UsersController extends AuthorisationController
     {
         if($_SERVER['REQUEST_METHOD']==='GET')
         {
-            $id=$_GET['id'];
-            $id=(int)$id;
             if(strlen(trim($id))===0)
             {
                 header('location:'.App::config('url').'index/logout');
                 return;
             }
 
-
+            $id=(int)$id;
             if($id===0)
             {
                 header('location:'.App::config('url').'index/logout');
@@ -85,7 +83,7 @@ class UsersController extends AuthorisationController
 
             $this->e=Users::readOne($id);
 
-            if($this->e=null)
+            if($this->e==null)
             {
                 header('location:'.App::config('url').'index/logout');
                 return;
@@ -98,7 +96,17 @@ class UsersController extends AuthorisationController
             return;
         }
 
-        $id=$this->e->sifra;
+        $this->prepareForView();
+        if(!($this->controlChange()))
+        {
+            $this->view->render($this->viewPath . 'update',[
+                'e'=>$this->e,
+                'message'=>$this->message
+            ]);
+            return;
+        }
+
+        $this->e->sifra=$id;
         $this->prepareForDB();
         Users::update((array)$this->e);
         $this->view->render($this->viewPath . 'update',[
@@ -106,7 +114,23 @@ class UsersController extends AuthorisationController
             'message'=>'Changes saved successfully'
         ]);
 
+        return;
 
+
+    }
+
+    private function controlChange()
+    {
+        // DATE FORMATTER I OSTALO  
+
+        return true;
+    }
+
+    private function prepareForView()
+    {
+        $this->e = (object)$_POST;
+        $this->e->status = $this->e->status==='true' ? 1 : 0;
+        $this->e->admin = $this->e->admin==='true' ? 1 : 0;
     }
 
     private function callView($parameters)

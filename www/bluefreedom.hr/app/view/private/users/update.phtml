@@ -1,4 +1,4 @@
-<?php Log::info($info->sifra);?>
+
 <link rel="stylesheet" href="<?=App::config('url')?>public/css/login.css">
 <div class="container">
     <div class="auth">
@@ -10,31 +10,51 @@
         <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4">
         <div class="form-group">
             <label for="fname" class="text-uppercase small">First name :</label>
-            <input name="fname" id="fname" type="text" class="form-control" placeholder="John">
+            <input name="fname" id="fname" type="text" class="form-control" placeholder="John" value="<?=$info->ime?>">
           </div>
           <div class="form-group">
             <label for="lname" class="text-uppercase small">Last Name :</label>
-            <input name="lname" id="lname" type="text" class="form-control" placeholder="Doe">
+            <input name="lname" id="lname" type="text" class="form-control" placeholder="Doe" value="<?=$info->prezime?>">
           </div>
         </div>
         <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4">
         <div class="form-group">
           <label for="dob" class="text-uppercase small">Date of birth :</label>
-          <input name="dob" id="dob" type="date" class="form-control">
+          <input name="dob" id="dob" type="date" class="form-control" value="<?php echo DateTime::createFromFormat("Y-m-d H:i:s",$info->datumrodenja)->format("Y-m-d");?>">
         </div>
         <div class="form-group">
           <label for="email" class="text-uppercase small">Email :</label>
-          <input name="email" id="email" type="email" class="form-control" placeholder="john@doe.com" value="<?=$email?>">
+          <input name="email" id="email" type="email" class="form-control" placeholder="john@doe.com" value="<?=$info->email?>">
         </div>
         </div>
           <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4">
           <div class="form-group">
             <label for="password" class="text-uppercase small">Password :</label>
-            <input name="password" id="password" type="password" placeholder="*****" class="form-control">
+            <input name="password" id="password" type="password" placeholder="*****" class="form-control" value="<?=$info->lozinka?>">
           </div>
           <div class="form-group">
-            <label for="confirmpw" class="text-uppercase small">Confirm password :</label>
-            <input name="confirmpw" id="confirmpw" type="password" placeholder="*****" class="form-control">
+            <p>Active</p>
+            <input type="radio" name="status" id="yes" value="true"
+            <?php if($info->stanje): ?>
+            checked="checked">
+            <?php endif; ?>
+            <label for="yes">YES</label>
+            <input type="radio" name="status" id="no" value="false"
+            <?php if(!$info->stanje): ?>
+            checked="checked">
+            <?php endif; ?>
+            <label for="no">NO</label>
+            <p>Admin</p>
+            <input type="radio" name="admin" id="yes" value="true"
+            <?php if($info->administrator): ?>
+            checked="checked">
+            <?php endif; ?>
+            <label for="yes">YES</label>
+            <input type="radio" name="admin" id="no" value="false"
+            <?php if(!$info->administrator): ?>
+            checked="checked">
+            <?php endif; ?>
+            <label for="no">NO</label>
           </div>
           </div>
         </div>
@@ -44,6 +64,9 @@
       <span><?=$message?></span>
     </div>
       <div class="auth__form_actions">
+      <a href="<?=App::config('url')?>users/index" id="logintext" class="btn btn-danger btn-lg btn-block">
+        <i id="fingerprinticon" class="fa-solid fa-x"></i>CANCEL
+            </a>
         <button type="submit" id="logintext" class="btn btn-primary btn-lg btn-block">
         <i id="fingerprinticon" class="fa-solid fa-check"></i>UPDATE
         </button>

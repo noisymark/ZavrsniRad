@@ -26,14 +26,29 @@ class App
             $method=$parts[1];
         }
 
-        if(class_exists($controller) && method_exists($controller,$method))
+        $parameter='';
+        if(!isset($parts[2]) || $parts[2]==='')
         {
-            $instance = new $controller();
-            $instance->$method();
+            $parameter='';
         }
         else
         {
+            $parameter=$parts[2];
+        }
+
+        if(!(class_exists($controller) && method_exists($controller,$method)))
+        {
             echo 'NON EXISTANCE OF ' . $controller . '-&gt' . $method;
+        }
+
+        $instance = new $controller();
+
+        if(strlen($parameter)>0){
+            $instance->$method($parameter);
+        }
+        else
+        {
+            $instance->$method();
         }
     }
     public static function config($key)

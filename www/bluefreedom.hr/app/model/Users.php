@@ -51,8 +51,10 @@ class Users
         prezime=:lname,
         datumrodenja=:dob,
         email=:email,
-        lozinka=:password
-        where sifra=:id
+        lozinka=:password,
+        stanje=:status,
+        administrator=:admin
+        where sifra=:sifra;
         ');
         $query->execute($parameters);
         }
