@@ -100,7 +100,7 @@ class UsersController extends AuthorisationController
         if(!($this->controlChange()))
         {
             $this->view->render($this->viewPath . 'update',[
-                'e'=>$this->e,
+                'info'=>$this->e,
                 'message'=>$this->message
             ]);
             return;
@@ -109,6 +109,7 @@ class UsersController extends AuthorisationController
         $this->e->sifra=$id;
         $this->prepareForDB();
         Users::update((array)$this->e);
+        $this->e=(object)$this->e;
         $this->view->render($this->viewPath . 'update',[
             'info'=>$this->e,
             'message'=>'Changes saved successfully'
@@ -145,7 +146,7 @@ class UsersController extends AuthorisationController
 
     private function prepareForDB()
     {
-        // OVDJE ĆE IČI DATEFORMATTER KOJI NE MOGU POSTAVITI
+        $this->e->dob = date('Y-m-d H:i:s', strtotime($this->e->dob));
     }
 
     private function controlNew()

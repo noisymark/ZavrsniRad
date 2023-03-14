@@ -43,6 +43,7 @@ class Users
 
     public static function update($parameters)
     {
+        Log::info($parameters);
         try{
         $connection=DB::getInstance();
         $query=$connection->prepare('
