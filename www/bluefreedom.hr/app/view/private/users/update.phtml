@@ -6,6 +6,8 @@ if(!isset($e->prezime)) {$e->prezime=$e->lname;}
 if(!isset($e->lozinka)) {$e->lozinka=$e->password;}
 if(!isset($e->stanje)) {$e->stanje=$e->status;}
 if(!isset($e->administrator)) {$e->administrator=$e->admin;}
+Log::info($e);
+Log::info($_POST);
 ?>
 <link rel="stylesheet" href="<?=App::config('url')?>public/css/login.css">
 <div class="container">

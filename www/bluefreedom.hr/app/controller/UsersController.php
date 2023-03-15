@@ -97,7 +97,7 @@ class UsersController extends AuthorisationController
         }
 
         $this->prepareForView();
-        if(!($this->controlChange()))
+        if(!$this->controlChange())
         {
             $this->view->render($this->viewPath . 'update',[
                 'e'=>$this->e,
@@ -109,15 +109,10 @@ class UsersController extends AuthorisationController
         $this->e->sifra=$id;
         $this->prepareForDB();
         Users::update((array)$this->e);
-        $this->e=(object)$this->e;
         $this->view->render($this->viewPath . 'update',[
             'e'=>$this->e,
             'message'=>'Changes saved successfully'
         ]);
-
-        return;
-
-
     }
 
     public function delete($id=0)
@@ -135,8 +130,106 @@ class UsersController extends AuthorisationController
 
     private function controlChange()
     {
-        // DATE FORMATTER I OSTALO  
+        return $this->controlUpdateName() && $this->controlUpdateEmail() && $this->controlUpdateDob() && $this->controlUpdatePassword() && $this->controlUpdateActiveAdmin();
+    }
 
+    private function controlUpdateActiveAdmin()
+    {
+        $admin = $this->e->admin;
+        $status = $this->e->status;
+
+        if(!($admin===true || $admin===false))
+        {
+            $this->message='User admin option you chose does not exist!';
+            return false;
+        }
+        if(!($status===true || $status===false))
+        {
+            $this->message='User status option you chose does not exist!';
+            return false;
+        }
+
+        return true;
+    }
+
+    private function controlUpdatePassword()
+    {
+        $pw = $this->e->password;
+
+        if(strlen(trim($pw))===0)
+        {
+            $this->message='Password cannot be empty!';
+            return false;
+        }
+        if(strlen(trim($pw))>50)
+        {
+            $this->message='Password cannot be longer than 50 chars!';
+            return false;
+        }
+        if(strlen(trim($pw))<8)
+        {
+            $this->message='Password cannot be shorter than 8 chars!';
+            return false;
+        }
+
+        return true;
+    }
+
+    private function controlUpdateDob()
+    {
+        $dob = $this->e->dob;
+        if(strlen(trim($dob)===0))
+        {
+            $this->message='Date of birth cannot be empty';
+            return false;
+        }
+        if((int)$dob===0)
+        {
+            $this->message='Date of birth cannot be empty';
+            return false;
+        }
+        return true;
+    }
+
+    private function controlUpdateEmail()
+    {
+        $x=$this->e->email;
+        if(strlen(trim($x))===0){
+            $this->message='E-mail cannot be empty';
+            return false;
+        }
+
+        if(strlen(trim($x))>50){
+            $this->message='E-mail cannot be longer than 50 chars';
+            return false;
+        }
+
+        return true;
+    }
+
+    private function controlUpdateName()
+    {
+        $s=$this->e->fname;
+        $sd=$this->e->lname;
+
+        if(strlen(trim($s))===0){
+            $this->message='First name cannot be empty';
+            return false;
+        }
+
+        if(strlen(trim($sd))===0){
+            $this->message='Last name cannot be empty';
+            return false;
+        }
+
+        if(strlen(trim($s))>50){
+            $this->message='First name cannot be more than 50 chars';
+            return false;
+        }
+        if(strlen(trim($sd))>50){
+            $this->message='Last name cannot be more than 50 chars';
+            return false;
+        }
         return true;
     }
 
@@ -164,7 +257,23 @@ class UsersController extends AuthorisationController
 
     private function controlNew()
     {
-        return $this->controlName() && $this->controlEmail() && $this->controlPassword();
+        return $this->controlName() && $this->controlEmail() && $this->controlDOB() && $this->controlPassword();
+    }
+
+    private function controlDOB()
+    {
+        $dob = $this->e->dob;
+        if(strlen(trim($dob)===0))
+        {
+            $this->message='Date of birth cannot be empty';
+            return false;
+        }
+        if((int)$dob===0)
+        {
+            $this->message='Date of birth cannot be empty';
+            return false;
+        }
+        return true;
     }
 
     private function controlPassword()
@@ -193,6 +302,16 @@ class UsersController extends AuthorisationController
             $this->message='Confirm password cannot be longer than 50 chars!';
             return false;
         }
+        if(strlen(trim($pw))<8)
+        {
+            $this->message='Password cannot be shorter than 8 chars!';
+            return false;
+        }
+        if(strlen(trim($pww))<8)
+        {
+            $this->message='Password cannot be shorter than 8 chars!';
+            return false;
+        }
 
         if(!($pw===$pww))
         {
@@ -209,21 +328,21 @@ class UsersController extends AuthorisationController
         $sd=$this->e->lname;
 
         if(strlen(trim($s))===0){
-            $this->message='Ime je obavezno';
+            $this->message='First name cannot be empty';
             return false;
         }
 
         if(strlen(trim($sd))===0){
-            $this->message='Prezime je obavezno';
+            $this->message='Last name cannot be empty';
             return false;
         }
 
         if(strlen(trim($s))>50){
-            $this->message='Ime ne može biti više od 50 znakova';
+            $this->message='First name cannot be more than 50 chars';
             return false;
         }
         if(strlen(trim($sd))>50){
-            $this->message='Prezime ne može biti više od 50 znakova';
+            $this->message='Last name cannot be more than 50 chars';
             return false;
         }
         return true;
@@ -233,17 +352,17 @@ class UsersController extends AuthorisationController
     {
         $x=$this->e->email;
         if(strlen(trim($x))===0){
-            $this->message='E-mail je obavezan';
+            $this->message='E-mail cannot be empty';
             return false;
         }
 
         if(strlen(trim($x))>50){
-            $this->message='E-mail ne može biti više od 50 znakova';
+            $this->message='E-mail cannot be longer than 50 chars';
             return false;
         }
 
         if(Users::sameEmailInDatabase($x)){
-            $this->message='Isti naziv postoji u bazi';
+            $this->message='This e-mail is already registered!';
             return false; 
         }
 
