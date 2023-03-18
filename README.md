@@ -11,3 +11,4 @@ UPDATE 3: Versions of my final work are in Bootstrap. Foundation and custom temp
 
 UPDATE 4: Best looking frameworks so far are Bootstrap and custom template so I will be continuing on them because Foundation is (I think) not for me.
 
+UPDATE 5: Final work is done with MVC principle which includes CRUD (Create, Read, Update & Delete) options.
