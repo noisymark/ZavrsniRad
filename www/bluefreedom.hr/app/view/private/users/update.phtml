@@ -5,13 +5,14 @@ if(!isset($e->prezime)) {$e->prezime=$e->lname;}
 if(!isset($e->lozinka)) {$e->lozinka=$e->password;}
 if(!isset($e->stanje)) {$e->stanje=$e->status;}
 if(!isset($e->administrator)) {$e->administrator=$e->admin;}
+if(!isset($e->phnum)) {$e->phnum='';}
 if(!isset($e->brojtel)) {$e->brojtel=$e->phnum;}
 ?>
 <link rel="stylesheet" href="<?=App::config('url')?>public/css/login.css">
 <div class="container">
     <div class="auth">
   <div class="auth__body">
-    <form action="" class="auth__form" autocomplete="off" method="POST">
+    <form autocomplete="off" action="" class="auth__form" autocomplete="off" method="POST">
       <div class="auth__form_body">
         <div>
             <div class="row">

@@ -9,6 +9,10 @@ class IndexController extends Controller
 
     public function login()
     {
+        if(App::auth())
+        {
+            header('location:'.App::config('url'));
+        }
         $this->view->render('login',[
             'message'=>'',
             'email'=>''

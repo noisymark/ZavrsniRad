@@ -1,11 +1,11 @@
 <div class="footer-end mt-auto">
-<hr>&copy; <?php echo date('Y'); ?> BlueFreedom <br> <hr>
+&copy; <?php echo date('Y'); ?> BlueFreedom
 <?php if(App::dev()): ?>
 <span style="color: red"> Radite na DEV instanci</span>
 <?php endif;?>
 <?php if(App::auth()):?>
     <?php if (isset($_SESSION['auth']->uloga)):?>
-    <h4 class="bg-primary text-center p-2">LOGGED IN AS: <?php echo $_SESSION['auth']->uloga?></h4>
+    <h4 class="d-inline-flex m-auto bg-primary text-center p-2">LOGGED IN AS: <?php echo $_SESSION['auth']->uloga?></h4>
     <?php endif; ?>
 <?php endif; ?>
 </div>

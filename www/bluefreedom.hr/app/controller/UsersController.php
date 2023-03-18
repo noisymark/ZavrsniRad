@@ -54,7 +54,7 @@ class UsersController extends AuthorisationController
             return;
         }
         //$this->prepareForDB();
-        unset($this->e->confirmpw);
+        //unset($this->e->confirmpw);
         Users::create((array)$this->e);
         $this->callView([
             'e'=>$this->startingInfo(),
@@ -97,6 +97,7 @@ class UsersController extends AuthorisationController
         }
 
         $this->prepareForView();
+        $this->e->sifra=$id;
         if(!$this->controlChange())
         {
             $this->view->render($this->viewPath . 'update',[
@@ -106,7 +107,6 @@ class UsersController extends AuthorisationController
             return;
         }
 
-        $this->e->sifra=$id;
         $this->prepareForDB();
         Users::update((array)$this->e);
         $this->e->dob=DateTime::createFromFormat("Y-m-d h:i:s",$this->e->dob)->format("Y-m-d");
@@ -131,7 +131,7 @@ class UsersController extends AuthorisationController
 
     private function controlChange()
     {
-        return $this->controlUpdateName() && $this->controlUpdateEmail() && $this->controlUpdatePhone() && $this->controlUpdateDob() && $this->controlUpdatePassword() && $this->controlUpdateActiveAdmin();
+        return $this->controlUpdateName() && $this->controlUpdateEmail() && $this->controlSameEmail($this->e->sifra) && $this->controlUpdatePhone() && $this->controlUpdateDob() && $this->controlUpdatePassword() && $this->controlUpdateActiveAdmin();
     }
 
     private function controlUpdateActiveAdmin()
@@ -274,7 +274,17 @@ class UsersController extends AuthorisationController
 
     private function controlNew()
     {
-        return $this->controlName() && $this->controlEmail() && $this->controlDOB() && $this->controlPassword();
+        return $this->controlName() && $this->controlEmail() && $this->controlSameEmail() && $this->controlDOB() && $this->controlPassword() ;
+    }
+
+    private function controlSameEmail($id='')
+    {
+        if(Users::sameEmailInDatabase($this->e->email,$id))
+        {
+            $this->message='Same email already exists';
+            return false;
+        }
+        return true;
     }
 
     private function controlDOB()

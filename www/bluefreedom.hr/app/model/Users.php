@@ -28,6 +28,7 @@ class Users
 
     public static function create($parameters)
     {
+        unset($parameters['confirmpw']);
         try
         {$connection=DB::getInstance();
         $query=$connection->prepare('
@@ -77,16 +78,31 @@ class Users
         ]);
     }
 
-    public static function sameEmailInDatabase($s)
+    public static function sameEmailInDatabase($s,$id='')
     {
         $connection=DB::getInstance();
+        if($id!=='')
+        {
+            $query=$connection->prepare('
+        select count(sifra) from osoba
+        where email=:email
+        and sifra!=:sifra
+        ');
+        $query->execute([
+            'email'=>$s,
+            'sifra'=>$id
+        ]);
+        }
+        else
+        {
         $query=$connection->prepare('
-        select sifra from osoba
+        select count(sifra) from osoba
         where email=:email
         ');
         $query->execute([
             'email'=>$s
         ]);
+        }
         $sifra=$query->fetchColumn();
         return $sifra>0;
     }
