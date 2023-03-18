@@ -6,7 +6,6 @@ class UsersController extends AuthorisationController
 
     private $e;
     private $nf;
-    private $df;
     private $message='';
 
     public function __construct()
@@ -14,7 +13,6 @@ class UsersController extends AuthorisationController
         parent::__construct();
         $this->nf = new NumberFormatter('hr-HR',NumberFormatter::DECIMAL);
         $this->nf->setPattern('###-###-0000');
-        //$this->df = new IntlDateFormatter('hr-HR',IntlDateFormatter::FULL,0,null,null,'MM/dd/yyyy');
     }
 
     public function index()
@@ -89,6 +87,8 @@ class UsersController extends AuthorisationController
                 return;
             }
 
+            $this->e->datumrodenja = DateTime::createFromFormat("Y-m-d H:i:s",$this->e->datumrodenja)->format("Y-m-d");
+
             $this->view->render($this->viewPath . 'update',[
                 'e'=>$this->e,
                 'message'=>'Change data by your will'
@@ -109,6 +109,7 @@ class UsersController extends AuthorisationController
         $this->e->sifra=$id;
         $this->prepareForDB();
         Users::update((array)$this->e);
+        $this->e->dob=DateTime::createFromFormat("Y-m-d h:i:s",$this->e->dob)->format("Y-m-d");
         $this->view->render($this->viewPath . 'update',[
             'e'=>$this->e,
             'message'=>'Changes saved successfully'
@@ -130,7 +131,7 @@ class UsersController extends AuthorisationController
 
     private function controlChange()
     {
-        return $this->controlUpdateName() && $this->controlUpdateEmail() && $this->controlUpdateDob() && $this->controlUpdatePassword() && $this->controlUpdateActiveAdmin();
+        return $this->controlUpdateName() && $this->controlUpdateEmail() && $this->controlUpdatePhone() && $this->controlUpdateDob() && $this->controlUpdatePassword() && $this->controlUpdateActiveAdmin();
     }
 
     private function controlUpdateActiveAdmin()
@@ -138,14 +139,14 @@ class UsersController extends AuthorisationController
         $admin = $this->e->admin;
         $status = $this->e->status;
 
-        if(!($admin===true || $admin===false))
+        if(!($admin===1 || $admin===0))
         {
-            $this->message='User admin option you chose does not exist!';
+            $this->message='Admin option you chose does not exist!';
             return false;
         }
-        if(!($status===true || $status===false))
+        if(!($status===1 || $status===0))
         {
-            $this->message='User status option you chose does not exist!';
+            $this->message='Status option you chose does not exist!';
             return false;
         }
 
@@ -201,6 +202,22 @@ class UsersController extends AuthorisationController
 
         if(strlen(trim($x))>50){
             $this->message='E-mail cannot be longer than 50 chars';
+            return false;
+        }
+
+        return true;
+    }
+    private function controlUpdatePhone()
+    {
+        $y=$this->e->phnum;
+        if(strlen(trim($y))==0)
+        {
+            $this->e->phnum=0;
+            return true;
+        }
+        $y=(int)$y;
+        if(strlen(trim($y))>10){
+            $this->message='Phone number cannot be longer than 10 digits';
             return false;
         }
 

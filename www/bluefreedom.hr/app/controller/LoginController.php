@@ -33,7 +33,7 @@ class LoginController extends Controller
         }
 
         $_SESSION['auth']=$operater;
-        $_COOKIE['email']=$_POST['email'];
+        setcookie('email',$_POST['email']);
         header('location:'.App::config('url') . 'controlpanel/index');
 
     }

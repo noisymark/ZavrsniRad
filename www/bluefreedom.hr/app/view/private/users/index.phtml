@@ -3,37 +3,44 @@
     <div class="row">
         <div class="col-12 col-lg-12">
             <a href="<?=App::config('url')?>users/new" class="bg-success btn btn-lg d-grid">Add new user</a>
-            <table class="table table-dark">
-    <thead class="text-center font-weight-bold">
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Phone</th>
-            <th>E-mail</th>
-            <th>DOB</th>
-            <th>Active</th>
-            <th>Administrator</th>
-            <th>Edit</th>
-        </tr>
-    </thead>
-    <tbody class="text-center">
-        <?php foreach($info as $red): ?>
-            <tr>
-                <td><?=$red->sifra?></td>
-                <td><?=$red->ime?> <?=$red->prezime?></td>
-                <td><?=$red->brojtel?></td>
-                <td><?=$red->email?></td>
-                <td><?=$red->datumrodenja?></td>
-                <td><i class="fa fa-solid fa-<?=$red->stanje?>"></i></td>
-                <td><i class="fa fa-solid fa-<?=$red->administrator?>"></i></td>
-                <td>
-                <a href="update/<?=$red->sifra?>"><i class="fa fa-pencil"></i></a>    
-                <a onclick="return confirm('Are you sure you want to delete user <?=$red->ime?> <?=$red->prezime?>?');" href="delete/<?=$red->sifra?>"><i class="fa fa-trash"></i></a>
-                </td>
-            </tr>
-        <?php endforeach;?>
-    </tbody>
-</table>
         </div>
+        <?php foreach($info as $red) : ?>
+        <div class="col-md-4 text-center border border-1 border-primary rounded rounded-6 bg-light">
+            <div class="callout bg-light">
+                <img class="mt-2 rounded-circle border border-3 border-primary" src="https://picsum.photos/400?random=<?=$red->sifra?>" alt="" height="100" width="100">
+                <h3><?=$red->ime?> <?=$red->prezime?></h3>
+                <?php if(!($red->brojtel=='' || $red->brojtel<=0)): ?>
+                <h5 class="d-inline-flex"><i class="d-inline-flex me-3 fa-solid fa-phone"></i> <?=$red->brojtel?></h5>
+                <br>
+                <?php endif; ?>
+                <h5 class="d-inline-flex"><i class="d-inline-flex me-3 fa-solid fa-envelope"></i> <?=$red->email?></h5>
+                <br>
+                <h5><i class="d-inline-flex me-3 fa-solid fa-cake-candles"></i> <?=$red->datumrodenja?></h5>
+                <br>
+                <p class="px-2 float-start">ACTIVE: <i class="fa fa-solid fa-<?=$red->stanje?>"></i></p>
+                <p class="px-2 float-end">ADMIN: <i class="fa fa-solid fa-<?=$red->administrator?>"></i></p>
+                <a class="px-2" href="update/<?=$red->sifra?>"><i class="fa-solid fa-pencil fa-2x"></i></a>    
+                <a class="px-2" onclick="return confirm('Are you sure you want to delete user <?=$red->ime?> <?=$red->prezime?>?');" href="delete/<?=$red->sifra?>"><i class="fa-solid fa-trash fa-2x"></i></a>
+            </div>
+        </div>
+        <?php endforeach ; ?>
     </div>
 </div>
+<?php /*
+ <?php foreach($info as $red): ?>
+    <tr>
+        <td><?=$red->sifra?></td>
+        <td><?=$red->ime?> <?=$red->prezime?></td>
+        <td><?=$red->brojtel?></td>
+        <td><?=$red->email?></td>
+        <td><?=$red->datumrodenja?></td>
+        <td><i class="fa fa-solid fa-<?=$red->stanje?>"></i></td>
+        <td><i class="fa fa-solid fa-<?=$red->administrator?>"></i></td>
+        <td>
+            <a href="update/<?=$red->sifra?>"><i class="fa fa-pencil"></i></a>    
+            <a onclick="return confirm('Are you sure you want to delete user <?=$red->ime?> <?=$red->prezime?>?');" href="delete/<?=$red->sifra?>"><i class="fa fa-trash"></i></a>
+        </td>
+    </tr>
+    <?php endforeach;?>
+
+    <?php */?>

@@ -1,4 +1,6 @@
-<?php $email = isset($_GET['email']) ? $_GET['email'] : (isset($_COOKIE['email']) ? $_COOKIE['email'] : ''); ?>
+<?php $email = isset($_POST['email']) ? $_POST['email'] : (isset($_COOKIE['email']) ? $_COOKIE['email'] : '');
+if(!isset($_POST['email'])){$_POST['email']='';}
+ ?>
 <link rel="stylesheet" href="<?=App::config('url')?>public/css/login.css">
 <div class="container">
     <div class="auth">
@@ -14,7 +16,7 @@
         <div>
           <div class="form-group">
             <label for="email" class="text-uppercase small">Email :</label>
-            <input name="email" id="email" type="email" class="form-control" placeholder="Enter email" value="<?=$email?>">
+            <input name="email" id="email" type="email" class="form-control" placeholder="Enter email" value="<?=$_POST['email']?>">
           </div>
           <div class="form-group">
             <label for="password" class="text-uppercase small">Password :</label>

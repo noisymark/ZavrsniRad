@@ -54,7 +54,8 @@ class Users
         email=:email,
         lozinka=:password,
         stanje=:status,
-        administrator=:admin
+        administrator=:admin,
+        brojtel=:phnum
         where sifra=:sifra;
         ');
         $query->execute($parameters);

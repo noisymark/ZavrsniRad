@@ -1,13 +1,11 @@
 <?php
-if(isset($e->datumrodenja)){$e->datumrodenja = DateTime::createFromFormat("Y-m-d H:i:s",$e->datumrodenja)->format("Y-m-d");}
-else{$e->datumrodenja=DateTime::createFromFormat("Y-m-d H:i:s",$e->dob)->format("Y-m-d");}
+if(!isset($e->datumrodenja)){$e->datumrodenja=$e->dob;}
 if(!isset($e->ime)) {$e->ime=$e->fname;}
 if(!isset($e->prezime)) {$e->prezime=$e->lname;}
 if(!isset($e->lozinka)) {$e->lozinka=$e->password;}
 if(!isset($e->stanje)) {$e->stanje=$e->status;}
 if(!isset($e->administrator)) {$e->administrator=$e->admin;}
-Log::info($e);
-Log::info($_POST);
+if(!isset($e->brojtel)) {$e->brojtel=$e->phnum;}
 ?>
 <link rel="stylesheet" href="<?=App::config('url')?>public/css/login.css">
 <div class="container">
@@ -36,6 +34,10 @@ Log::info($_POST);
           <label for="email" class="text-uppercase small">Email :</label>
           <input name="email" id="email" type="email" class="form-control" placeholder="john@doe.com" value="<?=$e->email?>">
         </div>
+        <div class="form-group">
+          <label for="phnum" class="text-uppercase small">Phone number :</label>
+          <input name="phnum" id="phnum" type="tel" class="form-control" placeholder="+385 XXXXXXX" value="<?=$e->brojtel?>">
+        </div>
         </div>
           <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4">
           <div class="form-group">
@@ -43,28 +45,32 @@ Log::info($_POST);
             <input name="password" id="password" type="password" placeholder="*****" class="form-control" value="<?=$e->lozinka?>">
           </div>
           <div class="form-group">
-            <p>Active</p>
-            <input type="radio" name="status" id="yes" value="true"
-            <?php if($e->stanje): ?>
-            checked="checked">
-            <?php endif; ?>
-            <label for="yes">YES</label>
-            <input type="radio" name="status" id="no" value="false"
-            <?php if(!$e->stanje): ?>
-            checked="checked">
-            <?php endif; ?>
-            <label for="no">NO</label>
-            <p>Admin</p>
-            <input type="radio" name="admin" id="yes" value="true"
-            <?php if($e->administrator): ?>
-            checked="checked">
-            <?php endif; ?>
-            <label for="yes">YES</label>
-            <input type="radio" name="admin" id="no" value="false"
-            <?php if(!$e->administrator): ?>
-            checked="checked">
-            <?php endif; ?>
-            <label for="no">NO</label>
+            <div class="form-control text-center">
+              <p>Active</p>
+              <input type="radio" name="status" id="yes" value="true"
+              <?php if($e->stanje): ?>
+              checked="checked">
+              <?php endif; ?>
+              <label for="yes">YES</label>
+              <input type="radio" name="status" id="no" value="false"
+              <?php if(!$e->stanje): ?>
+              checked="checked">
+              <?php endif; ?>
+              <label for="no">NO</label>
+            </div>
+            <div class="form-control text-center">
+              <p>Admin</p>
+              <input type="radio" name="admin" id="yes" value="true"
+              <?php if($e->administrator): ?>
+              checked="checked">
+              <?php endif; ?>
+              <label for="yes">YES</label>
+              <input type="radio" name="admin" id="no" value="false"
+              <?php if(!$e->administrator): ?>
+              checked="checked">
+              <?php endif; ?>
+              <label for="no">NO</label>
+            </div>
           </div>
           </div>
         </div>
