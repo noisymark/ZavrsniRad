@@ -1,35 +1,32 @@
 
 <div class="container mt-4">
     <div class="row">
-    <div class="col-md-4 text-center border border-1 border-primary rounded rounded-6 bg-light">
-            <div style="cursor: pointer;" onclick="window.location='<?php echo (App::config('url') . 'users/new')?>'" class="callout bg-light">
+    <div class="col-md-6 col-lg-4 text-center m-auto">
+            <div style="cursor: pointer;" onclick="window.location='<?php echo (App::config('url') . 'users/new')?>'"
+                class="callout p-4 m-2 border border-1 border-primary rounded rounded-6 bg-light bg-gradient shadow">
                 <i height="100px" width="100px" class="m-4 bg-primary text-white p-3 rounded rounded-circle fa-solid fa-plus fa-2x"></i>
-                <h3>Add new user</h3>
-                <h5 class="d-inline-flex"><i class="d-inline-flex me-3 fa-solid fa-phone"></i> PhoneNumber</h5>
-                <br>
-                <h5 class="d-inline-flex"><i class="d-inline-flex me-3 fa-solid fa-envelope"></i> Email</h5>
-                <br>
-                <h5><i class="d-inline-flex me-3 fa-solid fa-cake-candles"></i> DOB</h5>
-                <br>   
+                <h3>Add new user</h3>  
                 </div>
             </div>
         <?php foreach($info as $red) : ?>
-        <div class="col-md-4 text-center border border-1 border-primary rounded rounded-6 bg-light">
-            <div class="callout bg-light">
+        <div class="col-md-6 col-lg-4 text-center">
+            <div class="callout p-4 m-2 border border-1 border-primary rounded rounded-6 bg-light bg-gradient shadow">
                 <img class="mt-2 rounded-circle border border-3 border-primary" src="https://picsum.photos/400?random=<?=$red->sifra?>" alt="" height="100" width="100">
                 <h3><?=$red->ime?> <?=$red->prezime?></h3>
                 <?php if(!($red->brojtel=='' || $red->brojtel<=0)): ?>
                 <h5 class="d-inline-flex"><i class="d-inline-flex me-3 fa-solid fa-phone"></i> <?=$red->brojtel?></h5>
                 <br>
                 <?php endif; ?>
-                <h5 class="d-inline-flex"><i class="d-inline-flex me-3 fa-solid fa-envelope"></i> <?=$red->email?></h5>
+                <h5 class="d-inline-block text-break"><i class="d-inline-flex me-3 fa-solid fa-envelope"></i> <?=$red->email?></h5>
                 <br>
-                <h5><i class="d-inline-flex me-3 fa-solid fa-cake-candles"></i> <?=$red->datumrodenja?></h5>
+                <h5><i class="d-inline-block me-3 fa-solid fa-cake-candles"></i> <?=$red->datumrodenja?></h5>
                 <br>
                 <p class="px-2 float-start">ACTIVE: <i class="fa fa-solid fa-<?=$red->stanje?>"></i></p>
                 <p class="px-2 float-end">ADMIN: <i class="fa fa-solid fa-<?=$red->administrator?>"></i></p>
-                <a class="px-2" href="update/<?=$red->sifra?>"><i class="fa-solid fa-pencil fa-2x"></i></a>    
-                <a class="px-2" onclick="return confirm('Are you sure you want to delete user <?=$red->ime?> <?=$red->prezime?>?');" href="delete/<?=$red->sifra?>"><i class="fa-solid fa-trash fa-2x"></i></a>
+                <div class="d-inline-flex">
+                    <a class="px-2" href="update/<?=$red->sifra?>"><i class="border border-primary border-2 bg-body rounded-circle p-3 fa-solid fa-pencil"></i></a>    
+                    <a class="px-2" onclick="return confirm('Are you sure you want to delete user <?=$red->ime?> <?=$red->prezime?>?');" href="delete/<?=$red->sifra?>"><i class="border border-primary border-2 bg-body rounded-circle p-3 fa-solid fa-trash"></i></a>
+                </div>
             </div>
         </div>
         <?php endforeach ; ?>

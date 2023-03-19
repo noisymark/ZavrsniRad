@@ -5,7 +5,7 @@
 <?php endif;?>
 <?php if(App::auth()):?>
     <?php if (isset($_SESSION['auth']->uloga)):?>
-    <h4 class="d-inline-flex m-auto bg-primary text-center p-2">LOGGED IN AS: <?php echo $_SESSION['auth']->uloga?></h4>
+    <h5 class="d-inline-flex m-auto bg-primary text-center p-2">LOGGED IN AS: <?php echo $_SESSION['auth']->uloga?></h5>
     <?php endif; ?>
 <?php endif; ?>
 </div>

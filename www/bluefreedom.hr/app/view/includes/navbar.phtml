@@ -2,21 +2,21 @@
 <?php if(App::auth()): ?>
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
   <div class="container-fluid">
-    <a class="navbar-brand text-dark" href="<?=App::config('url')?>"><img style="margin-right: 3%;"class="d-inline-block align-text-top" src="<?=App::config('url')?>public/components/icons/png.png" height="30" width="30">BlueFreedom</a>
+    <a class="navbar-brand text-dark shadow-sm px-4 " href="<?=App::config('url')?>"><img style="margin-right: 3%;"class="d-inline-block align-text-top" src="<?=App::config('url')?>public/components/icons/png.png" height="30" width="30">BlueFreedom</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse " id="navbarSupportedContent">
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
             <?php if(App::admin()): ?>
-                <li class="nav-item dropdown shadow">
+                <li class="nav-item dropdown shadow-sm mx-3">
                     <a class="nav-link text-dark" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i id="navbaricon" class="fa-solid fa-screwdriver-wrench"></i>Advanced</a>
                     <ul class="dropdown-menu bg-primary text-dark border-end" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="<?=App::config('url')?>operater/index"><i id="navbaricon" class="fa-solid fa-users"></i>Operaters</a>
                             </ul>
                         </li>
             <?php else: ?>
-                            <li class="nav-item dropdown shadow">
+                            <li class="nav-item dropdown shadow-sm">
                                 <a class="nav-link text-dark" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i id="navbaricon" class="fa-solid fa-wrench"></i>Tools</a>
                                 <ul class="dropdown-menu bg-primary text-dark border-end" aria-labelledby="navbarDropdown">
                                     <li><a class="dropdown-item" href="<?=App::config('url')?>users/index"><i id="navbaricon" class="fa-solid fa-users"></i>Users</a></li>
@@ -26,13 +26,13 @@
                             </li>
             <?php endif; ?>
                             <? // OVDJE ĆE IĆI SVE OD OBIČNO PRIJAVLJENIH KORISNIKA ... NAKON OVIH IF-OVA?>
-                            <li class="nav-item shadow">
+                            <li class="nav-item shadow-sm">
                               <a class="nav-link text-dark" href="home.php"><i id="navbaricon" class="fa-solid fa-house"></i>Home</a>
                             </li>
-                            <li class="nav-item shadow">
+                            <li class="nav-item shadow-sm">
                               <a class="nav-link text-dark" href="user.php"><i id="navbaricon" class="fa-solid fa-people-group"></i>Friends</a>
                             </li>
-                            <li class="nav-item dropdown shadow">
+                            <li class="nav-item dropdown shadow-sm">
                               <a class="nav-link text-dark" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                               <i id="navbaricon" class="fa-solid fa-user"></i>Me
                               </a>
@@ -42,16 +42,16 @@
                                 <li><a class="dropdown-item" href="editprofile.php">Edit my profile</a></li>
                               </ul>
                             </li>
-                            <li class="nav-item dropdown shadow">
+                            <li class="nav-item dropdown shadow-sm">
                               <a class="nav-link text-dark" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                               <i id="navbaricon" class="fa-solid fa-gear"></i>Settings
                               </a>
-                              <ul class="dropdown-menu bg-primary text-dark border-end shadow" aria-labelledby="navbarDropdown">
+                              <ul class="dropdown-menu bg-primary text-dark border-end shadow-sm" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="#">Page theme</a></li>
                                 <li><a class="dropdown-item" href="#">Report an error</a></li>
                               </ul>
                             </li>
-                            <li class="nav-item shadow">
+                            <li class="nav-item shadow-sm">
                                 <a class="nav-link text-dark" href="<?=App::config('url')?>index/logout"><i id="navbaricon" class="fa-solid fa-power-off"></i>Log out</a>
                             </li>
                         </ul>

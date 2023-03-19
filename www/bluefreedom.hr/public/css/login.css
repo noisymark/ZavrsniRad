@@ -6,8 +6,7 @@ body{
     transition: all 1s ease-out !important;
 }
 .auth__header {
-  padding: 13vh 1rem calc(11vh + 35px);
-  padding-top: 7%;
+  padding: 3vh 1rem calc(3vh + 35px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -33,7 +32,7 @@ body{
   overflow: hidden;
 }
 .auth__body {
-  padding-bottom: 0.5%;
+  padding-top: 0.5%;
 }
 .auth__form {
   min-width: 280px;

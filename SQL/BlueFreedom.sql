@@ -131,9 +131,9 @@ values
 
 insert into objava(sifra,naslov,upis,vrijemeizrade,ipadresa,slika,osoba)
 values
-(null,'Hello','This is my first post on the BlueFreedom social network.','2022-12-01 18:45:22','192.168.1.1','/Users/3/postimg/001.png',3),
-(null,'Hello','This is my first post on the BlueFreedom social network.','2022-12-02 12:42:11','192.168.2.5','/Users/2/postimg/001.png',2),
-(null,'Hello','This is my first post on the BlueFreedom social network.','2022-12-04 12:33:33','192.168.3.4','/Users/1/postimg/001.png',1);
+(null,'Hello','This is Test Test user.','2022-12-01 18:45:22','192.168.1.1','/Users/3/postimg/001.png',3),
+(null,'Hello','This is user Rebeka.','2022-12-02 12:42:11','192.168.2.5','/Users/2/postimg/001.png',2),
+(null,'Hello','This is user Marko.','2022-12-04 12:33:33','192.168.3.4','/Users/1/postimg/001.png',1);
 
 # SAMPLE INSERT INTO komentar
 
