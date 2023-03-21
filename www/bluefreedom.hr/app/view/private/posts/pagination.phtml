@@ -1,0 +1,38 @@
+<nav class="col-12 mx-auto pt-4" aria-label="...">
+          <ul class="justify-content-center pagination">
+            <!-- PREVIOUS BUTTON -->
+            <li class="page-item
+            <?php if($page===1): ?>
+            disabled
+            <?php endif; ?>
+            ">
+              <a class="page-link" href="<?=App::config('url')?>users/index?search=<?=$search?>&page=<?=$page-1?>"
+              <?php if($page===1): ?>
+                tabindex="-1"
+              aria-disabled="true"
+              <?php endif; ?>
+              >Previous</a>
+            </li>
+            <!-- END PREVIOUS BUTTON -->
+
+        
+            <li class="page-item active"><a class="page-link" href="<?=App::config('url')?>index/users?search=<?=$search?>&page=<?=$page?>"><?=$page?></a></li>
+
+            
+            <!-- NEXT BUTTON -->
+            <li class="page-item
+            <?php if($page>=$lastPage): ?>
+            disabled
+            <?php endif; ?>
+            ">
+              <a class="page-link" href="<?=App::config('url')?>users/index?search=<?=$search?>&page=<?=$page+1?>"
+              <?php if($page>=$lastPage): ?>
+                tabindex="-1"
+              aria-disabled="true"
+              <?php endif; ?>
+              >Next</a>
+            </li>
+            <!-- END NEXT BUTTON -->
+
+          </ul>
+        </nav>

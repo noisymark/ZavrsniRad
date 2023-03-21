@@ -38,7 +38,7 @@ create table objava(
     naslov varchar(50) not null,
     upis varchar(250) not null,
     vrijemeizrade datetime not null,
-    ipadresa varchar(20) not null,
+    ipadresa varchar(20),
     slika varchar(100),
     osoba int
 );

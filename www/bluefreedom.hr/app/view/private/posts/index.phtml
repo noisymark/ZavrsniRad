@@ -1,6 +1,9 @@
 
 <div class="container mt-4">
     <div class="row">
+    <?php include 'searchbar.phtml'?>
+    <?php include 'pagination.phtml'?>
+
     <div class="col-md-6 col-lg-4 text-center m-auto">
             <div style="cursor: pointer;" onclick="window.location='<?php echo (App::config('url') . 'posts/new')?>'"
                 class="callout p-4 m-2 border border-1 border-primary rounded rounded-6 bg-light bg-gradient shadow">
@@ -11,18 +14,22 @@
 <?php foreach($info as $red) : ?>
         <div class="col-md-6 col-lg-4 text-center ">
             <div class="callout p-4 m-2 border border-1 border-primary rounded rounded-6 bg-light bg-gradient shadow">
-                <h3>Title: <?=$red->naslov?></h3>
+                <h3>Title: <?=$red->naslovobjave?></h3>
                 <hr class="w-75 mx-auto">
-                <h5 class="break-word">Description: <?=$red->upis?></h5>
-                <h5>Post ID: <?=$red->sifraobjave?></h5>
-                <h5>User ID: <?=$red->sifrakorisnika?></h5>
+                <h5 class="break-word">Description: <?=$red->upisobjave?></h5>
+                <div class="d-inline-flex">
+                    <h5 class="mx-3">Post ID: <?=$red->sifraobjave?></h5>
+                    <h5 class="mx-3">User ID: <?=$red->sifrakorisnika?></h5>
+                </div>
                 <h5>User: <?=$red->imekorisnika?> <?=$red->prezimekorisnika?></h5>
                 <div class="mt-4">
                     <a class="px-2" href="update/<?=$red->sifraobjave?>"><i class="border border-primary border-2 bg-body rounded-circle p-3 fa-solid fa-pencil"></i></a>    
-                    <a class="px-2" onclick="return confirm('Are you sure you want to delete post <?=$red->naslov?>?');" href="delete/<?=$red->sifraobjave?>"><i class="border border-primary border-2 bg-body rounded-circle p-3 fa-solid fa-trash"></i></a>
+                    <a class="px-2" onclick="return confirm('Are you sure you want to delete post <?=$red->naslovobjave?>?');" href="delete/<?=$red->sifraobjave?>"><i class="border border-primary border-2 bg-body rounded-circle p-3 fa-solid fa-trash"></i></a>
                 </div>
             </div>
         </div>
         <?php endforeach ; ?>
+
+        <?php include 'pagination.phtml'?>
     </div>
 </div>
