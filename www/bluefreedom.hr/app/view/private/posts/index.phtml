@@ -4,7 +4,7 @@
     <div class="col-md-6 col-lg-4 text-center m-auto">
             <div style="cursor: pointer;" onclick="window.location='<?php echo (App::config('url') . 'posts/new')?>'"
                 class="callout p-4 m-2 border border-1 border-primary rounded rounded-6 bg-light bg-gradient shadow">
-                <i height="100px" width="100px" class="m-4 bg-primary text-white p-3 rounded rounded-circle fa-solid fa-plus fa-2x"></i>
+                <i height="100px" width="100px" class="m-4 bg-primary text-white p-3 rounded rounded-circle fa-solid fa-plus"></i>
                 <h3>Add new post</h3>  
             </div>
     </div>
@@ -18,8 +18,8 @@
                 <h5>User ID: <?=$red->sifrakorisnika?></h5>
                 <h5>User: <?=$red->imekorisnika?> <?=$red->prezimekorisnika?></h5>
                 <div class="mt-4">
-                    <a class="px-2" href="update/<?=$red->sifraobjave?>"><i class="border border-primary border-2 bg-body rounded-circle p-3 fa-solid fa-pencil fa-2x"></i></a>    
-                    <a class="px-2" onclick="return confirm('Are you sure you want to delete post <?=$red->naslov?>?');" href="delete/<?=$red->sifraobjave?>"><i class="border border-primary border-2 bg-body rounded-circle p-3 fa-solid fa-trash fa-2x"></i></a>
+                    <a class="px-2" href="update/<?=$red->sifraobjave?>"><i class="border border-primary border-2 bg-body rounded-circle p-3 fa-solid fa-pencil"></i></a>    
+                    <a class="px-2" onclick="return confirm('Are you sure you want to delete post <?=$red->naslov?>?');" href="delete/<?=$red->sifraobjave?>"><i class="border border-primary border-2 bg-body rounded-circle p-3 fa-solid fa-trash"></i></a>
                 </div>
             </div>
         </div>

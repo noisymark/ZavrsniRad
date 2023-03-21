@@ -68,12 +68,9 @@ create table svidamise_komentar(
 
 create table osoba(
     sifra int not null primary key auto_increment,
-    ime varchar(10) not null,
+    ime varchar(25) not null,
     prezime varchar(25) not null,
     datumrodenja datetime,
-    radnomjesto varchar(50),
-    skolovanje varchar(50),
-    mjesto varchar(25),
     email varchar(50) not null,
     lozinka varchar(20) not null,
     brojtel int(15),

@@ -7,6 +7,7 @@ if($dev){
         'dev'=>$dev,
         'url'=>'https://bluefreedom.hr/',
         'appName'=>'BlueFreedom',
+        'resultsPerPage'=>10,
         'database'=>[
             'dsn'=>'mysql:host=localhost;dbname=BlueFreedom;charset=utf8mb4',
             'user'=>'root',
@@ -18,6 +19,7 @@ if($dev){
         'dev'=>$dev,
         'url'=>'https://polaznik27.edunova.hr/',
         'appName'=>'BlueFreedom',
+        'resultsPerPage'=>10,
         'database'=>[
             'dsn'=>'mysql:host=localhost;dbname=selena_BlueFreedom;charset=utf8mb4',
             'user'=>'selena_admin',

@@ -1,57 +1,58 @@
 <!--BEGIN NAVBAR-->
 <?php if(App::auth()): ?>
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
+<nav class="navbar navbar-expand-lg navbar-dark bg-light sticky-top">
   <div class="container-fluid">
-    <a class="navbar-brand text-dark shadow-sm px-4 " href="<?=App::config('url')?>"><img style="margin-right: 3%;"class="d-inline-block align-text-top" src="<?=App::config('url')?>public/components/icons/png.png" height="30" width="30">BlueFreedom</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+    <a class="navbar-brand text-dark shadow px-4 bg-primary bg-gradient rounded rounded-3" href="<?=App::config('url')?>"><img style="margin-right: 3%;"class="d-inline-block align-text-top" src="<?=App::config('url')?>public/components/icons/png.png" height="30" width="30">BlueFreedom</a>
+    <button class="navbar-toggler bg-primary bg-gradient shadow rounded-circle m-1 p-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon text-primary"></span>
     </button>
     <div class="collapse navbar-collapse " id="navbarSupportedContent">
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
             <?php if(App::admin()): ?>
-                <li class="nav-item dropdown shadow-sm mx-3">
+                <li class="nav-item dropdown shadow mx-3">
                     <a class="nav-link text-dark" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i id="navbaricon" class="fa-solid fa-screwdriver-wrench"></i>Advanced</a>
-                    <ul class="dropdown-menu bg-primary text-dark border-end" aria-labelledby="navbarDropdown">
+                    <ul class="dropdown-menu bg-transparent text-dark border-0" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="<?=App::config('url')?>operater/index"><i id="navbaricon" class="fa-solid fa-users"></i>Operaters</a>
                             </ul>
                         </li>
-            <?php else: ?>
-                            <li class="nav-item dropdown shadow-sm">
+            <?php elseif (App::auth()): ?>
+                            <li class="nav-item dropdown shadow bg-primary rounded rounded-3 bg-gradient mx-2">
                                 <a class="nav-link text-dark" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i id="navbaricon" class="fa-solid fa-wrench"></i>Tools</a>
-                                <ul class="dropdown-menu bg-primary text-dark border-end" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item" href="<?=App::config('url')?>users/index"><i id="navbaricon" class="fa-solid fa-users"></i>Users</a></li>
-                                    <li><a class="dropdown-item" href="<?=App::config('url')?>posts/index"><i id="navbaricon" class="fa-solid fa-note-sticky"></i>Posts</a></li>
-                                    <li><a class="dropdown-item" href="<?=App::config('url')?>comments/index"><i id="navbaricon" class="fa-solid fa-comment"></i>Comments</a></li>
+                                <ul class="dropdown-menu bg-transparent border-0 text-dark" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item shadow bg-white rounded rounded-3 bg-gradient m-2 p-2" href="<?=App::config('url')?>users/index"><i id="navbaricon" class="fa-solid fa-users"></i>Users</a></li>
+                                    <li><a class="dropdown-item shadow bg-white rounded rounded-3 bg-gradient m-2 p-2" href="<?=App::config('url')?>posts/index"><i id="navbaricon" class="fa-solid fa-note-sticky"></i>Posts</a></li>
+                                    <li><a class="dropdown-item shadow bg-white rounded rounded-3 bg-gradient m-2 p-2" href="<?=App::config('url')?>comments/index"><i id="navbaricon" class="fa-solid fa-comment"></i>Comments</a></li>
                                 </ul>
                             </li>
-            <?php endif; ?>
+            <?php else: ?>
                             <? // OVDJE ĆE IĆI SVE OD OBIČNO PRIJAVLJENIH KORISNIKA ... NAKON OVIH IF-OVA?>
-                            <li class="nav-item shadow-sm">
+                            <li class="nav-item shadow bg-primary rounded rounded-3 bg-gradient mx-2">
                               <a class="nav-link text-dark" href="home.php"><i id="navbaricon" class="fa-solid fa-house"></i>Home</a>
                             </li>
-                            <li class="nav-item shadow-sm">
+                            <li class="nav-item  shadow bg-primary rounded rounded-3 bg-gradient mx-2">
                               <a class="nav-link text-dark" href="user.php"><i id="navbaricon" class="fa-solid fa-people-group"></i>Friends</a>
                             </li>
-                            <li class="nav-item dropdown shadow-sm">
+                            <li class="nav-item dropdown shadow bg-primary rounded rounded-3 bg-gradient mx-2">
                               <a class="nav-link text-dark" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                               <i id="navbaricon" class="fa-solid fa-user"></i>Me
                               </a>
-                              <ul class="dropdown-menu bg-primary text-dark" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#">My posts</a></li>
-                                <li><a class="dropdown-item" href="me.php">My profile</a></li>
-                                <li><a class="dropdown-item" href="editprofile.php">Edit my profile</a></li>
+                              <ul class="dropdown-menu bg-transparent text-dark border-0" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item shadow bg-white rounded rounded-3 bg-gradient m-2 p-2" href="#">My posts</a></li>
+                                <li><a class="dropdown-item shadow bg-white rounded rounded-3 bg-gradient m-2 p-2" href="me.php">My profile</a></li>
+                                <li><a class="dropdown-item shadow bg-white rounded rounded-3 bg-gradient m-2 p-2" href="editprofile.php">Edit my profile</a></li>
                               </ul>
                             </li>
-                            <li class="nav-item dropdown shadow-sm">
+                            <li class="nav-item dropdown shadow bg-primary rounded rounded-3 bg-gradient mx-2">
                               <a class="nav-link text-dark" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                               <i id="navbaricon" class="fa-solid fa-gear"></i>Settings
                               </a>
-                              <ul class="dropdown-menu bg-primary text-dark border-end shadow-sm" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#">Page theme</a></li>
-                                <li><a class="dropdown-item" href="#">Report an error</a></li>
+                              <ul class="dropdown-menu bg-transparent rounded rounded-3 bg-gradient mx-2 border-0" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item shadow bg-white rounded rounded-3 bg-gradient m-2 p-2" href="#">Page theme</a></li>
+                                <li><a class="dropdown-item shadow bg-white rounded rounded-3 bg-gradient m-2 p-2" href="#">Report an error</a></li>
                               </ul>
                             </li>
-                            <li class="nav-item shadow-sm">
+              <?php endif; ?>
+                            <li class="nav-item shadow bg-primary rounded rounded-3 bg-gradient mx-2">
                                 <a class="nav-link text-dark" href="<?=App::config('url')?>index/logout"><i id="navbaricon" class="fa-solid fa-power-off"></i>Log out</a>
                             </li>
                         </ul>

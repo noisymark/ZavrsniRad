@@ -2,16 +2,40 @@
 
 class Users
 {
-    public static function read()
+    public static function read($search='',$page=1)
     {
+        $search='%' . $search . '%';
+        $resultsPerPage=App::config('resultsPerPage');
+        $start=($page*$resultsPerPage)-$resultsPerPage;
         $connection=DB::getInstance();
         $query=$connection->prepare('
         select * from osoba
+        where concat(ime, \' \' , prezime, \' \', email)
+        like :search
         order by ime asc
+        limit :start, :resultsPerPage
         ');
 
+        $query->bindValue('start',$start,PDO::PARAM_INT);
+        $query->bindValue('resultsPerPage',$resultsPerPage,PDO::PARAM_INT);
+        $query->bindParam('search',$search);
         $query->execute();
         return $query->fetchAll();
+    }
+
+    public static function totalUsers($search='')
+    {
+        $search='%' . $search . '%';
+        $connection=DB::getInstance();
+        $query=$connection->prepare('
+        select count(*) from osoba
+        where concat(ime, \' \' , prezime, \' \', email)
+        like :search
+        ');
+        $query->execute([
+            'search'=>$search
+        ]);
+        return $query->fetchColumn();
     }
 
     public static function readOne($id)

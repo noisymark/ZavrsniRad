@@ -17,7 +17,33 @@ class UsersController extends AuthorisationController
 
     public function index()
     {
-        $users = Users::read();
+
+        if(isset($_GET['search']))
+        {
+            $search=trim($_GET['search']);
+        }
+        else
+        {
+            $search='';
+        }
+
+        if(isset($_GET['page']))
+        {
+            $page=(int)trim($_GET['page']);
+            if($page<1)
+            {
+                $page=1;
+            }
+        }
+        else
+        {
+            $page=1;
+        }
+
+        $totalUsers=Users::totalUsers($search);
+        $lastPage=(int)ceil($totalUsers/App::config('resultsPerPage'));
+
+        $users=Users::read($search,$page);
 
         foreach($users as $u)
         {
@@ -29,7 +55,10 @@ class UsersController extends AuthorisationController
 
         $this->view->render($this->viewPath . 'index',[
             'info'=>$users,
-            'css'=>'users.css'
+            'css'=>'users.css',
+            'search'=>$search,
+            'page'=>$page,
+            'lastPage'=>$lastPage
         ]);
 
     }

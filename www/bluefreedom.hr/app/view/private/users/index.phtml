@@ -1,3 +1,20 @@
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-6 mx-auto mt-4">
+            <form action="" method="get">
+            <div class="input-group">
+                <input name="search" class="form-control border-right-0 border p-2" type="search" placeholder="Part of first name, last name or e-mail" id="search" value="<?=$search?>">
+                <span class="input-group-append">
+                    <button class="btn btn-outline-primary bg-white border-left-0 border p-2 ms-n3" type="submit">
+                        <i class="fa fa-search text-primary"></i>
+                    </button>
+                </span>
+            </div>
+            </form>
+        </div>
+        <?php include 'pagination.phtml'?>
+    </div>
+</div>
 
 <div class="container mt-4">
     <div class="row">
@@ -30,23 +47,6 @@
             </div>
         </div>
         <?php endforeach ; ?>
+        <?php include 'pagination.phtml'?>
     </div>
 </div>
-<?php /*
- <?php foreach($info as $red): ?>
-    <tr>
-        <td><?=$red->sifra?></td>
-        <td><?=$red->ime?> <?=$red->prezime?></td>
-        <td><?=$red->brojtel?></td>
-        <td><?=$red->email?></td>
-        <td><?=$red->datumrodenja?></td>
-        <td><i class="fa fa-solid fa-<?=$red->stanje?>"></i></td>
-        <td><i class="fa fa-solid fa-<?=$red->administrator?>"></i></td>
-        <td>
-            <a href="update/<?=$red->sifra?>"><i class="fa fa-pencil"></i></a>    
-            <a onclick="return confirm('Are you sure you want to delete user <?=$red->ime?> <?=$red->prezime?>?');" href="delete/<?=$red->sifra?>"><i class="fa fa-trash"></i></a>
-        </td>
-    </tr>
-    <?php endforeach;?>
-
-    <?php */?>
