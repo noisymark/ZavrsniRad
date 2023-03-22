@@ -18,7 +18,7 @@ class Posts
         b.upis as upisobjave
         from osoba a
         inner join objava b on b.osoba = a.sifra
-        where concat(b.naslov, " " , b.upis, " ", b.sifra)
+        where concat(b.naslov, \' \' , b.upis, \' \', b.sifra)
         like :search
         order by
         a.ime,
@@ -53,6 +53,38 @@ class Posts
         ]);
         return $query->fetchColumn();
     }
+
+    public static function delete($sifra)
+    {
+        $connection = DB::getInstance();
+        $query = $connection->prepare('
+            delete
+            from objava a
+            inner join komentar b
+            on b.objava = a.sifra
+            where sifra=:sifra
+        ');
+        $query->execute([
+            'sifra'=>$sifra
+        ]);
+        $query->execute();
+    }
+
+//
+//// LIKES SELECTOR
+//
+//select 
+//concat(c.ime, ' ', c.prezime) as liker,
+//b.sifra as likeID
+//from objava a
+//inner join svidamise b 
+//on b.objava = a.sifra 
+//inner join osoba c
+//on b.osoba = c.sifra 
+//inner join osoba d 
+//on a.osoba = d.sifra 
+//where a.sifra = :sifra
+
 }
 
 ?>

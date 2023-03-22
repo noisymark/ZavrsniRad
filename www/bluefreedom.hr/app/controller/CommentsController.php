@@ -1,8 +1,8 @@
 <?php
 
-class PostsController extends AuthorisationController
+class CommentsController extends AuthorisationController
 {
-    private $viewPath='private' . DIRECTORY_SEPARATOR . 'posts' . DIRECTORY_SEPARATOR;
+    private $viewPath='private' . DIRECTORY_SEPARATOR . 'comments' . DIRECTORY_SEPARATOR;
     private $e;
     private $message;
 
@@ -36,13 +36,13 @@ class PostsController extends AuthorisationController
             $page=1;
         }
 
-        $totalPosts=Posts::totalPosts($search);
-        $lastPage=(int)ceil($totalPosts/App::config('resultsPerPage'));
+        $totalComments=Comments::totalComments($search);
+        $lastPage=(int)ceil($totalComments/App::config('resultsPerPage'));
         
-        $posts=Posts::read($search,$page);
+        $comments=Comments::read($search,$page);
 
         $this->view->render($this->viewPath . 'index',[
-            'info'=>$posts,
+            'info'=>$comments,
             'search'=>$search,
             'page'=>$page,
             'lastPage'=>$lastPage
@@ -56,7 +56,7 @@ class PostsController extends AuthorisationController
             header('location: ' . App::config('url') . 'index/odjava');
             return;
         }
-        Posts::delete($sifra);
+        //Comments::delete($sifra);
         header('location: ' . App::config('url') . 'posts/index');
     }
 }

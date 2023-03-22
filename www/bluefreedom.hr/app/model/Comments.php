@@ -1,0 +1,58 @@
+<?php
+
+class Comments
+{
+    public static function read($search='',$page=1)
+    {
+        $search='%' . $search . '%';
+        $resultsPerPage=App::config('resultsPerPage');
+        $start=($page*$resultsPerPage)-$resultsPerPage;
+        $connection=DB::getInstance();
+        $query = $connection->prepare('
+        select 
+        CONCAT(e.ime, \' \', e.prezime) as commenter,
+        b.sifra as commentID,
+        b.opis as comment
+        from objava a
+        inner join komentar b
+        on b.objava = a.sifra  
+        inner join osoba d 
+        on a.osoba = d.sifra
+        inner join osoba e 
+        on b.osoba = e.sifra 
+        where concat(e.ime, \' \' , e.prezime, \' \', b.opis, \' \', b.sifra)
+        like :search
+        order by
+        e.ime,
+        e.prezime,
+        b.sifra,
+        b.opis
+        limit :start, :resultsPerPage
+        ');
+        $query->bindValue('start',$start,PDO::PARAM_INT);
+        $query->bindValue('resultsPerPage',$resultsPerPage,PDO::PARAM_INT);
+        $query->bindParam('search',$search);
+        $query->execute();
+        return $query->fetchAll();
+    }
+
+    public static function totalComments($search='')
+    {
+        $search = '%' . $search . '%';
+        $connection=DB::getInstance();
+        $query=$connection->prepare('
+        select 
+        count(*)
+        from komentar a
+        inner join osoba b
+        on a.osoba = b.sifra
+        where concat(b.ime, \' \', b.prezime, \' \', a.opis, \' \', a.sifra)
+        like :search
+        ');
+        $query->execute([
+            'search'=>$search
+        ]);
+
+        return $query->fetchColumn();
+    }
+}
