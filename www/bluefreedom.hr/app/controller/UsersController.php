@@ -55,7 +55,6 @@ class UsersController extends AuthorisationController
 
         $this->view->render($this->viewPath . 'index',[
             'info'=>$users,
-            'css'=>'users.css',
             'search'=>$search,
             'page'=>$page,
             'lastPage'=>$lastPage

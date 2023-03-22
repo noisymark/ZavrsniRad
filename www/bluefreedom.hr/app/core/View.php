@@ -11,6 +11,12 @@ class View
 
     public function render($phtmlPage,$parameters=[])
     {
+        $cssFile= BP. 'public' . DIRECTORY_SEPARATOR . 'css' . DIRECTORY_SEPARATOR . $phtmlPage . '.css';
+        if(file_exists($cssFile))
+        {
+            $css=str_replace('\\','/',$phtmlPage).'.css';
+        }
+
         $viewFile = BP_APP . 'view' . DIRECTORY_SEPARATOR . $phtmlPage . '.phtml';
         ob_start();
         extract($parameters);
