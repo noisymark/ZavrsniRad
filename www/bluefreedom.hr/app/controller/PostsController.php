@@ -41,6 +41,14 @@ class PostsController extends AuthorisationController
         
         $posts=Posts::read($search,$page);
 
+        foreach($posts as $p)
+        {
+            if($p->sifrakorisnika=='' || $p->sifrakorisnika==null)
+            {
+                Posts::delete($p->sifraobjave);
+            }
+        }
+
         $this->view->render($this->viewPath . 'index',[
             'info'=>$posts,
             'search'=>$search,

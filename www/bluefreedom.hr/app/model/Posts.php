@@ -58,10 +58,8 @@ class Posts
     {
         $connection = DB::getInstance();
         $query = $connection->prepare('
-            delete
-            from objava a
-            inner join komentar b
-            on b.objava = a.sifra
+            delete *
+            from objava
             where sifra=:sifra
         ');
         $query->execute([

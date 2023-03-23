@@ -4,6 +4,14 @@ class IndexController extends Controller
 {
     public function index()
     {
+        if(App::oper() || App::admin())
+        {
+            header('location: '.App::config('url').'controlPanel/index');
+        }
+        else if(App::auth())
+        {
+            header('location: '.App::config('url').'user/index');
+        }
         $this->view->render('index');
     }
 

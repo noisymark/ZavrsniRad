@@ -51,7 +51,7 @@ class LoginController extends Controller
         {
         $_SESSION['auth']=$operater;
         setcookie('email',$_POST['email']);
-        header('location:'.App::config('url') . 'controlpanel/index');
+        header('location:'.App::config('url') . 'controlPanel/index');
         }
 
     }
