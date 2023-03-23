@@ -52,6 +52,7 @@ class Users
 
     public static function create($parameters)
     {
+        $parameters['password']=password_hash($parameters['password'],PASSWORD_BCRYPT);
         unset($parameters['confirmpw']);
         try
         {$connection=DB::getInstance();

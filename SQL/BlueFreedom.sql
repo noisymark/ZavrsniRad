@@ -16,7 +16,7 @@ create table operater(
     ime varchar(50) not null,
     prezime varchar(50) not null,
     email varchar(50) not null,
-    lozinka char(61) not null,
+    lozinka char(60) not null,
     uloga varchar(20) not null
 );
 
@@ -72,7 +72,7 @@ create table osoba(
     prezime varchar(25) not null,
     datumrodenja datetime,
     email varchar(50) not null,
-    lozinka varchar(20) not null,
+    lozinka varchar(60) not null,
     brojtel int(15),
     slika varchar(100),
     administrator boolean not null,

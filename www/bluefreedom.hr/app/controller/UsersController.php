@@ -159,7 +159,7 @@ class UsersController extends AuthorisationController
 
     private function controlChange()
     {
-        return $this->controlUpdateName() && $this->controlUpdateEmail() && $this->controlSameEmail($this->e->sifra) && $this->controlUpdatePhone() && $this->controlUpdateDob() && $this->controlUpdatePassword() && $this->controlUpdateActiveAdmin();
+        return $this->controlUpdateName() && $this->controlUpdateEmail() && $this->controlSameEmail($this->e->sifra) && $this->controlUpdatePhone() && $this->controlUpdateDob() && $this->controlUpdateActiveAdmin();
     }
 
     private function controlUpdateActiveAdmin()
