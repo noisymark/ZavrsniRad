@@ -78,7 +78,6 @@ class Users
         prezime=:lname,
         datumrodenja=:dob,
         email=:email,
-        lozinka=:password,
         stanje=:status,
         administrator=:admin,
         brojtel=:phnum
@@ -90,6 +89,24 @@ class Users
         {
             echo $ex->getMessage();
         }
+    }
+
+    public static function updatePassword($parameters)
+    {
+        $parameters['password']=password_hash($parameters['password'],PASSWORD_BCRYPT);
+        try{
+            $connection=DB::getInstance();
+            $query=$connection->prepare('
+            update osoba set
+            lozinka=:password
+            where sifra=:sifra
+            ');
+            $query->execute($parameters);
+            }
+            catch(Exception $ex)
+            {
+                echo $ex->getMessage();
+            }
     }
 
     public static function delete($id)

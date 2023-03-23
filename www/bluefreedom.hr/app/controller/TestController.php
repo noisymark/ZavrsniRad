@@ -21,6 +21,10 @@ class TestController
     {
         echo password_hash('edunova',PASSWORD_BCRYPT);
     }
+    public function password2()
+    {
+        echo password_hash('testuser',PASSWORD_BCRYPT);
+    }
 }
 
 ?>

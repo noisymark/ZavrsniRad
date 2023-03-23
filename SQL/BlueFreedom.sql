@@ -107,10 +107,10 @@ alter table prijateljstvo add foreign key (osoba2) references osoba(sifra);
 
 insert into osoba(sifra,ime,prezime,datumrodenja,email,lozinka,administrator,stanje)
 values
-(null,'Marko','Pavlović','2001-02-09','markopavlovic316@gmail.com','AA22BB33',True,True),
-(null,'Rebeka','Ivanković','2002-04-08','rebeka.ivankovic33@gmail.com','CC44DD55',False,True),
-(null,'Test','Test','2000-01-01','test@test.hr','test',False,True),
-(null,'Valentin','Mijatović','2000-02-07','valentin.mijau22@gmail.com','FFFF0000',False,True);
+(null,'Marko','Pavlović','2001-02-09','markopavlovic316@gmail.com','$2y$10$raIEitAaxTkfaZT4ZGONqOTXlx/bmtT/Du6XOc0TcNRU1rW93bYJO',True,True),
+(null,'Rebeka','Ivanković','2002-04-08','rebeka.ivankovic33@gmail.com','$2y$10$raIEitAaxTkfaZT4ZGONqOTXlx/bmtT/Du6XOc0TcNRU1rW93bYJO',False,True),
+(null,'Test','Test','2000-01-01','test@test.hr','$2y$10$raIEitAaxTkfaZT4ZGONqOTXlx/bmtT/Du6XOc0TcNRU1rW93bYJO',False,True),
+(null,'Valentin','Mijatović','2000-02-07','valentin.mijau22@gmail.com','$2y$10$raIEitAaxTkfaZT4ZGONqOTXlx/bmtT/Du6XOc0TcNRU1rW93bYJO',False,True);
 
 # SAMPLE INSERT INTO prijateljstvo
 

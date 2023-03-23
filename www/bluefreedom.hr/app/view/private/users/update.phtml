@@ -8,7 +8,6 @@ if(!isset($e->administrator)) {$e->administrator=$e->admin;}
 if(!isset($e->phnum)) {$e->phnum='';}
 if(!isset($e->brojtel)) {$e->brojtel=$e->phnum;}
 ?>
-<link rel="stylesheet" href="<?=App::config('url')?>public/css/login.css">
 <div class="container">
     <div class="auth">
   <div class="auth__body">
@@ -40,10 +39,9 @@ if(!isset($e->brojtel)) {$e->brojtel=$e->phnum;}
           <input name="phnum" id="phnum" type="tel" class="form-control" placeholder="+385 XXXXXXX" value="<?=$e->brojtel?>">
         </div>
         </div>
-          <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4">
+          <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4 text-center">
           <div class="form-group">
-            <label for="password" class="text-uppercase small">Password :</label>
-            <input name="password" id="password" type="password" placeholder="*****" class="form-control" value="<?=$e->lozinka?>">
+            <a href="<?=App::config('url')?>users/changepassword/<?=$e->sifra?>" class="btn btn-lg btn-primary mt-2 mb-2 col-12">CHANGE PASSWORD</a>
           </div>
           <div class="form-group">
             <div class="form-control text-center">
@@ -77,10 +75,10 @@ if(!isset($e->brojtel)) {$e->brojtel=$e->phnum;}
         </div>
         </div>
     </div>
-    <div class="text-danger pt-2 text-center h5 text-uppercase">
+    <div class="text-danger mt-4 text-center h5 text-uppercase">
       <span><?=$message?></span>
     </div>
-      <div class="auth__form_actions">
+      <div class="auth__form_actions pb-4">
       <a href="<?=App::config('url')?>users/index" id="logintext" class="btn btn-danger btn-lg btn-block">
         <i id="fingerprinticon" class="fa-solid fa-x"></i>CANCEL
             </a>

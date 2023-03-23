@@ -15,7 +15,7 @@
                         <li><a class="dropdown-item" href="<?=App::config('url')?>operater/index"><i id="navbaricon" class="fa-solid fa-users"></i>Operaters</a>
                             </ul>
                         </li>
-            <?php elseif (App::auth()): ?>
+            <?php elseif (App::oper()): ?>
                             <li class="nav-item dropdown shadow bg-primary rounded rounded-3 bg-gradient mx-2">
                                 <a class="nav-link text-dark" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i id="navbaricon" class="fa-solid fa-wrench"></i>Tools</a>
                                 <ul class="dropdown-menu bg-transparent border-0 text-dark" aria-labelledby="navbarDropdown">
@@ -24,22 +24,22 @@
                                     <li><a class="dropdown-item shadow bg-white rounded rounded-3 bg-gradient m-2 p-2" href="<?=App::config('url')?>comments/index"><i id="navbaricon" class="fa-solid fa-comment"></i>Comments</a></li>
                                 </ul>
                             </li>
-            <?php else: ?>
+            <?php else : ?>
                             <? // OVDJE ĆE IĆI SVE OD OBIČNO PRIJAVLJENIH KORISNIKA ... NAKON OVIH IF-OVA?>
                             <li class="nav-item shadow bg-primary rounded rounded-3 bg-gradient mx-2">
-                              <a class="nav-link text-dark" href="home.php"><i id="navbaricon" class="fa-solid fa-house"></i>Home</a>
+                              <a class="nav-link text-dark" href="<?=App::config('url')?>"><i id="navbaricon" class="fa-solid fa-house"></i>Home</a>
                             </li>
                             <li class="nav-item  shadow bg-primary rounded rounded-3 bg-gradient mx-2">
-                              <a class="nav-link text-dark" href="user.php"><i id="navbaricon" class="fa-solid fa-people-group"></i>Friends</a>
+                              <a class="nav-link text-dark" href="<?=App::config('url')?>"><i id="navbaricon" class="fa-solid fa-people-group"></i>Friends</a>
                             </li>
                             <li class="nav-item dropdown shadow bg-primary rounded rounded-3 bg-gradient mx-2">
                               <a class="nav-link text-dark" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                               <i id="navbaricon" class="fa-solid fa-user"></i>Me
                               </a>
                               <ul class="dropdown-menu bg-transparent text-dark border-0" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item shadow bg-white rounded rounded-3 bg-gradient m-2 p-2" href="#">My posts</a></li>
-                                <li><a class="dropdown-item shadow bg-white rounded rounded-3 bg-gradient m-2 p-2" href="me.php">My profile</a></li>
-                                <li><a class="dropdown-item shadow bg-white rounded rounded-3 bg-gradient m-2 p-2" href="editprofile.php">Edit my profile</a></li>
+                                <li><a class="dropdown-item shadow bg-white rounded rounded-3 bg-gradient m-2 p-2" href="<?=App::config('url')?>">My posts</a></li>
+                                <li><a class="dropdown-item shadow bg-white rounded rounded-3 bg-gradient m-2 p-2" href="<?=App::config('url')?>">My profile</a></li>
+                                <li><a class="dropdown-item shadow bg-white rounded rounded-3 bg-gradient m-2 p-2" href="<?=App::config('url')?>">Edit my profile</a></li>
                               </ul>
                             </li>
                             <li class="nav-item dropdown shadow bg-primary rounded rounded-3 bg-gradient mx-2">
@@ -47,8 +47,8 @@
                               <i id="navbaricon" class="fa-solid fa-gear"></i>Settings
                               </a>
                               <ul class="dropdown-menu bg-transparent rounded rounded-3 bg-gradient mx-2 border-0" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item shadow bg-white rounded rounded-3 bg-gradient m-2 p-2" href="#">Page theme</a></li>
-                                <li><a class="dropdown-item shadow bg-white rounded rounded-3 bg-gradient m-2 p-2" href="#">Report an error</a></li>
+                                <li><a class="dropdown-item shadow bg-white rounded rounded-3 bg-gradient m-2 p-2" href="<?=App::config('url')?>">Page theme</a></li>
+                                <li><a class="dropdown-item shadow bg-white rounded rounded-3 bg-gradient m-2 p-2" href="<?=App::config('url')?>">Report an error</a></li>
                               </ul>
                             </li>
               <?php endif; ?>

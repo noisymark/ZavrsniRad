@@ -2,7 +2,6 @@
 if(!isset($email)) {$email='';}
 if(!isset($e->confirmpw)) {$e->confirmpw='';}
 ?>
-<link rel="stylesheet" href="<?=App::config('url')?>public/css/login.css">
 <div class="container">
     <div class="auth">
   <div class="auth__body">
@@ -53,8 +52,6 @@ if(!isset($e->confirmpw)) {$e->confirmpw='';}
         <button type="submit" id="logintext" class="mx-2 btn btn-primary btn-lg btn-block">
         <i id="fingerprinticon" class="fa-solid fa-pencil"></i>CREATE
         </button>
-        <div class="mt-2" id="fgtpw">
-        </div>
       </div>
     </form>
   </div>

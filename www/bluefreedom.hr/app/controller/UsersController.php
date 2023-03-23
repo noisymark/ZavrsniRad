@@ -90,6 +90,59 @@ class UsersController extends AuthorisationController
         ]);
     }
 
+    public function changepassword($id='')
+    {
+        if($_SERVER['REQUEST_METHOD']==='GET')
+        {
+            if(strlen(trim($id))===0)
+            {
+                header('location:'.App::config('url').'index/logout');
+                return;
+            }
+
+            $id=(int)$id;
+            if($id===0)
+            {
+                header('location:'.App::config('url').'index/logout');
+                return;
+            }
+            $this->e=Users::readOne($id);
+            unset($this->e->lozinka);
+            $this->e->stanje = $this->e->stanje ? 'check':'x';
+            $this->e->administrator = $this->e->administrator ? 'check':'x';
+            $this->e->datumrodenja = date('d.m.Y',strtotime($this->e->datumrodenja));
+            
+            $this->view->render($this->viewPath . 'changePassword',[
+                'e'=>$this->e,
+                'message'=>'Change password to a new one'
+            ]);
+        }
+        else
+        {
+            $this->e=(object)$_POST;
+            if(!$this->checkChangePassword())
+            {
+                $this->e=Users::readOne($id);
+                $this->e->stanje = $this->e->stanje ? 'check':'x';
+                $this->e->administrator = $this->e->administrator ? 'check':'x';
+                $this->e->datumrodenja = date('d.m.Y',strtotime($this->e->datumrodenja));
+                $this->view->render($this->viewPath . 'changePassword',[
+                    'e'=>$this->e,
+                    'message'=>$this->message
+                ]);
+                return;
+            }
+            $this->e->sifra=$id;
+            $this->e=(array)$this->e;
+            Users::updatePassword($this->e);
+            $this->e=Users::readOne($id);
+            $this->view->render($this->viewPath . 'changePassword',[
+                'e'=>$this->e,
+                'message'=>'Password updated successfully!'
+            ]);
+        }
+    }
+
     public function update($id='')
     {
         if($_SERVER['REQUEST_METHOD']==='GET')
@@ -181,7 +234,7 @@ class UsersController extends AuthorisationController
         return true;
     }
 
-    private function controlUpdatePassword()
+    private function checkChangePassword()
     {
         $pw = $this->e->password;
 
@@ -190,9 +243,9 @@ class UsersController extends AuthorisationController
             $this->message='Password cannot be empty!';
             return false;
         }
-        if(strlen(trim($pw))>50)
+        if(strlen(trim($pw))>15)
         {
-            $this->message='Password cannot be longer than 50 chars!';
+            $this->message='Password cannot be longer than 15 chars!';
             return false;
         }
         if(strlen(trim($pw))<8)

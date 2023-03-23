@@ -1,7 +1,7 @@
 <div class="footer-end mt-auto">
 &copy; <?php echo date('Y'); ?> BlueFreedom
 <?php if(App::dev()): ?>
-<span style="color: red"> Radite na DEV instanci</span>
+<span style="color: red">LOCAL (DEV) INSTANCE</span>
 <?php endif;?>
 <?php if(App::auth()):?>
     <?php if (isset($_SESSION['auth']->uloga)):?>

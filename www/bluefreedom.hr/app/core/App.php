@@ -38,9 +38,9 @@ class App
 
         if(!(class_exists($controller) && method_exists($controller,$method)))
         {
-            //echo 'NON EXISTANCE OF ' . $controller . '-&gt' . $method;
-            $v = new View();
-            $v->render('notFound');
+            echo 'NON EXISTANCE OF ' . $controller . '-&gt' . $method;
+            //$v = new View();
+            //$v->render('notFound');
         }
 
         $instance = new $controller();

@@ -1,7 +1,6 @@
 <?php $email = isset($_POST['email']) ? $_POST['email'] : (isset($_COOKIE['email']) ? $_COOKIE['email'] : '');
 if(!isset($_POST['email'])){$_POST['email']='';}
  ?>
-<link rel="stylesheet" href="<?=App::config('url')?>public/css/login.css">
 <div class="container">
     <div class="auth">
   <div class="auth__header">
