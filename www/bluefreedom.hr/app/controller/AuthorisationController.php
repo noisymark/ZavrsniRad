@@ -5,12 +5,9 @@ abstract class AuthorisationController extends Controller
     public function __construct()
     {
         parent::__construct();
-        if(!App::auth())
+        if(!(App::admin() || App::oper()))
         {
-            $this->view->render('login',[
-                'message'=>'Please login first',
-                'email'=>''
-            ]);
+            header('location: '.App::config('url').'index/logout');
         }
     }
 }

@@ -11,49 +11,30 @@
               <div class="col">
                 
               <!-- POST TEMPLATE BEGIN -->
-              <div class="d-flex flex-start">
-                  <img class="rounded-circle shadow-1-strong me-3"
-                    src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(10).webp" alt="avatar" width="65"
+              <?php foreach($info as $row): ?>
+              <div class="d-flex flex-start my-3 border border-1 border-primary p-4 rounded rounded-3 shadow">
+                <div>
+                  <img class="d-flexbox rounded-circle shadow-1-strong mx-4 text-center"
+                    src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(10).webp" alt="<?=$row->postauthor?>" width="65"
                     height="65" />
+                </div>
                   <div class="flex-grow-1 flex-shrink-1">
                     <div>
                       <div class="d-flex justify-content-between align-items-center">
-                        <p class="mb-1 d-inline-block align-text-center">
-                          Maria Smantha
+                        <p class="mb-1 d-inline-block align-text-center h4">
+                         <?=$row->posttitle?>
                         </p>
-                        <a id="replystyle" href="#!"><i class="fas fa-reply fa-xs"></i><span class="small"> reply</span></a>
                       </div>
                       <p class="small mb-0">
-                        It is a long established fact that a reader will be distracted by
-                        the readable content of a page.
+                        <?=$row->postdescription?>
                       </p>
                     </div>
-                    
-                    <!-- COMMENT TEMPLATE BEGIN -->
-                    <div class="d-flex flex-start mt-4">
-                      <a class="me-3" href="#">
-                        <img class="rounded-circle shadow-1-strong"
-                          src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(11).webp" alt="avatar"
-                          width="65" height="65" />
-                      </a>
-                      <div class="flex-grow-1 flex-shrink-1">
-                        <div>
-                          <div class="d-flex justify-content-between align-items-center">
-                            <p class="mb-1 d-inline-block align-text-center">
-                              Simona Disa
-                            </p>
-                          </div>
-                          <p class="small mb-0">
-                            letters, as opposed to using 'Content here, content here',
-                            making it look like readable English.
-                          </p>
-                        </div>
-                      </div>
+                    <div class="d-grid m-2">
+                      <a href="<?=App::config('url')?>post/index/<?=$row->postid?>" class="btn btn-primary shadow">VIEW POST</a>
                     </div>
-                    <!-- COMMENT TEMPLATE END -->
-                    
                       </div>
                       </div>
+                      <?php endforeach; ?>
                 <!-- POST TEMPLATE END -->
               </div>
             </div>

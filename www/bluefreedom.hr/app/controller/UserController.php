@@ -1,5 +1,5 @@
 <?php
-class UserController extends AuthorisationController
+class UserController extends UserAuthorisationController
 {
     private $viewPath = 'public' . DIRECTORY_SEPARATOR . 'user' . DIRECTORY_SEPARATOR;
 
@@ -15,6 +15,9 @@ class UserController extends AuthorisationController
     }
     public function index()
     {
-        $this->view->render($this->viewPath . 'index');
+        $info = Post::read();
+        $this->view->render($this->viewPath . 'index',[
+            'info'=>$info
+        ]);
     }
 }
