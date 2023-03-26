@@ -14,9 +14,13 @@
                   <?=$info[0]->posttitle?> 
                 </h6>
                 <p class="small ms-4 bg-primary text-white p-2 m-auto">by: <?=$info[0]->postauthor?></p>
+                <?php if($info[0]->authorid == $_SESSION['auth']->sifra):?>
+                          <a href="<?=App::config('url')?>post/edit/<?=$info[0]->postid?>" class="ms-3 btn btn-square btn-primary text-white m-1"><i class="fa-solid fa-pen"></i></a>
+                          <a onclick="return confirm('Are you sure you want to delete this post?');" href="<?=App::config('url')?>post/delete/<?=$info[0]->postid?>" class="ms-1 btn btn-square btn-primary text-white m-1"><i class="fa-solid fa-trash"></i></a>
+                          <?php endif;?>
                 </div>
                 <p class="text-muted small mb-0">
-                  Shared publicly - <?=$info[0]->postcreated?>
+                  Posted - <?=date('d.m.Y.',strtotime($info[0]->postcreated))?>
                 </p>
               </div>
             </div>
@@ -38,7 +42,7 @@
             </div>
           </div>
           <form action="<?=App::config('url')?>post/comment/<?=$info[0]->postid?>" method="post">
-          <div id="comment" class="card-footer py-3 border-0" style="background-color: #f8f9fa;">
+          <div id="comment" class="card-footer py-3 border-0 bg-white bg-gradient ">
             <div class="d-flex flex-start w-100">
               <img class="rounded-circle shadow-1-strong me-3"
                 src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(19).webp" alt="avatar" width="40"
@@ -48,7 +52,7 @@
                   style="background: #fff;" placeholder="Message"></textarea>
               </div>
             </div>
-            <div class="float-end mt-2 pt-1">
+            <div class="float-end mt-2 pt-1 bg-white bg-gradient">
               <button type="submit" class="btn btn-primary btn-sm shadow">
                 Post comment
               </button>
@@ -59,7 +63,7 @@
           </div>
           </form>
         <?php foreach($comments as $comm): ?>
-          <div class="card-footer py-3 border-0" style="background-color: #f8f9fa;">
+          <div class="card-footer py-3 border-0 bg-white bg-gradient ">
             <div class="d-flex flex-start w-100">
               <img class="rounded-circle shadow-1-strong me-3"
                 src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(19).webp" alt="avatar" width="40"

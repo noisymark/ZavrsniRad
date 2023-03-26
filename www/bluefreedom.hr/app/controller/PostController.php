@@ -53,8 +53,47 @@ class PostController extends UserAuthorisationController
         }
         else
         {
+            $info=Post::readOne($id);
+            if($info[0]->authorid!==$_SESSION['auth']->sifra)
+            {
+                header('location: '.App::config('url').'index/logout');
+                return;
+            }
         Post::delete($id);
         header('location: '.App::config('url').'user/index');
+        }
+    }
+
+    public function edit($id)
+    {
+        $id=(int)$id;
+        if($_SERVER['REQUEST_METHOD']==='GET')
+        {
+            if($id===0)
+        {
+            header('location: '.App::config('url').'index/logout');
+            return;
+        }
+        else
+        {
+            $info=Post::readOne($id);
+            if($info[0]->authorid!==$_SESSION['auth']->sifra)
+            {
+                header('location: '.App::config('url').'index/logout');
+                return;
+            }
+
+            $this->view->render($this->viewPath.'edit',[
+                'info'=>$info
+            ]);
+        }
+        }
+        else
+        {
+            $this->e=(object)$_POST;
+            $this->e->id=$id;
+            $lastId=Post::update((array)$this->e);
+            header('location: '.App::config('url').'post/index/'.$lastId);
         }
     }
 }

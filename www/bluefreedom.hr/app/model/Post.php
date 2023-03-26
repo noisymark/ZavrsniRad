@@ -81,6 +81,19 @@ class Post
         return $connection->lastInsertId();
     }
 
+    public static function update($parameters)
+    {
+        $connection=DB::getInstance();
+        $query=$connection->prepare('
+        update objava
+        set naslov=:title,
+        upis=:description
+        where sifra=:id
+        ');
+        $query->execute($parameters);
+        return $parameters['id'];
+    }
+
 //
 //// LIKES SELECTOR
 //
