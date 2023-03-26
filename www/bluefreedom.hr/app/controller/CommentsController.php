@@ -56,8 +56,8 @@ class CommentsController extends AuthorisationController
             header('location: ' . App::config('url') . 'index/odjava');
             return;
         }
-        //Comments::delete($sifra);
-        header('location: ' . App::config('url') . 'posts/index');
+        Comments::delete($sifra);
+        header('location: ' . App::config('url') . 'comments/index');
     }
 }
 

@@ -116,8 +116,14 @@ values
 insert into komentar (sifra,vrijemekomentiranja,opis,objava,osoba)
 values
 (null,'2022-12-07 14:00:00','Welcome to the community',1,1),
+(null,'2022-12-07 14:00:00','Welcome to the community',1,2),
+(null,'2022-12-07 14:00:00','Welcome to the community',1,3),
 (null,'2022-12-08 13:00:00','Have fun',2,3),
-(null,'2022-12-08 15:00:00','I''m buying bitcoin on btccheap.spam',3,2);
+(null,'2022-12-08 13:00:00','Have fun',2,2),
+(null,'2022-12-08 13:00:00','Have fun',2,1),
+(null,'2022-12-08 15:00:00','I''m buying bitcoin on btccheap.spam',3,2),
+(null,'2022-12-08 15:00:00','I''m buying bitcoin on btccheap.spam',3,1),
+(null,'2022-12-08 15:00:00','I''m buying bitcoin on btccheap.spam',3,3);
 
 # SAMPLE INSERT INTO svidamise
 

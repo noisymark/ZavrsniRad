@@ -57,18 +57,28 @@ class Post
         return $query->fetchAll();
     }
 
-    public static function delete($sifra)
+    public static function delete($id)
     {
         $connection = DB::getInstance();
         $query = $connection->prepare('
-            delete *
+            delete
             from objava
-            where sifra=:sifra
+            where sifra=:id
         ');
         $query->execute([
-            'sifra'=>$sifra
+            'id'=>$id
         ]);
-        $query->execute();
+    }
+
+    public static function create($parameters)
+    {
+        $connection=DB::getInstance();
+        $query=$connection->prepare('
+        insert into objava (naslov,upis,vrijemeizrade,osoba)
+        values(:title,:description,now(),:id)
+        ');
+        $query->execute($parameters);
+        return $connection->lastInsertId();
     }
 
 //

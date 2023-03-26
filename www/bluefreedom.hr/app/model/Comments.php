@@ -55,4 +55,14 @@ class Comments
 
         return $query->fetchColumn();
     }
+    public static function delete($id)
+    {
+        $connection=DB::getInstance();
+        $query=$connection->prepare('
+        delete from komentar
+        where sifra=:id
+        ');
+        $query->bindParam('id',$id);
+        $query->execute();
+    }
 }

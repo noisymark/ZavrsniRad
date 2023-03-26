@@ -9,6 +9,7 @@
 
             <div class="row">
               <div class="col">
+                <a href="<?=App::config('url')?>post/new" class="btn btn-lg d-block btn-primary text-white">ADD NEW POST</a>
                 
               <!-- POST TEMPLATE BEGIN -->
               <?php foreach($info as $row): ?>
@@ -23,6 +24,10 @@
                       <div class="d-flex justify-content-between align-items-center">
                         <p class="mb-1 d-inline-block align-text-center h4">
                          <?=$row->posttitle?>
+                         <?php if($row->authorid == $_SESSION['auth']->sifra):?>
+                          <a href="<?=App::config('url')?>post/edit/<?=$row->postid?>" class="ms-3 btn btn-square btn-primary text-white m-1"><i class="fa-solid fa-pen"></i></a>
+                          <a onclick="return confirm('Are you sure you want to delete this post?');" href="<?=App::config('url')?>post/delete/<?=$row->postid?>" class="ms-1 btn btn-square btn-primary text-white m-1"><i class="fa-solid fa-trash"></i></a>
+                          <?php endif;?>
                         </p>
                       </div>
                       <p class="small mb-0">
