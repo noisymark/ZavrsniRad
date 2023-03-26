@@ -3,8 +3,8 @@
 class PostController extends UserAuthorisationController
 {
     private $viewPath='public' . DIRECTORY_SEPARATOR . 'post' . DIRECTORY_SEPARATOR;
-    private $toastView='includes' . DIRECTORY_SEPARATOR . 'toast.phtml';
-    private $e='';
+    private $e;
+    private $message='';
     public function __construct()
     {
         parent::__construct();
@@ -90,10 +90,47 @@ class PostController extends UserAuthorisationController
         }
         else
         {
-            $this->e=(object)$_POST;
+            $this->e = (object)$_POST;
             $this->e->id=$id;
+            if(!$this->controlInput())
+            {
+                $this->view->render($this->viewPath . 'edit',[
+                    'info'=>Post::readOne($id),
+                    'message'=>$this->message
+                ]);
+                return;
+            }
+            else
+            {
             $lastId=Post::update((array)$this->e);
             header('location: '.App::config('url').'post/index/'.$lastId);
+            }
         }
+    }
+    private function controlInput()
+    {
+        $title=$this->e->title;
+        $description=$this->e->description;
+        if(strlen(trim($title))<=0)
+        {
+            $this->message='Title cannot be empty!';
+            return false;
+        }
+        if(strlen(trim($description))<=0)
+        {
+            $this->message='Description cannot be empty!';
+            return false;
+        }
+        if(strlen(trim($title))>50)
+        {
+            $this->message='Description cannot be longer than 50 chars!';
+            return false;
+        }
+        if(strlen(trim($description))>250)
+        {
+            $this->message='Description cannot be longer than 250 chars!';
+            return false;
+        }
+        return true;
     }
 }
