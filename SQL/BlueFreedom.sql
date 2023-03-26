@@ -79,29 +79,20 @@ create table osoba(
     stanje boolean not null
 );
 
-create table prijateljstvo(
-	sifra int not null primary key auto_increment,
-	osoba1 int,
-	osoba2 int,
-	prijatelji boolean
-);
 
 # ADDING ENTITY RELATIONSHIPS
 
-alter table objava add foreign key (osoba) references osoba(sifra);
+alter table objava add foreign key (osoba) references osoba(sifra) on delete cascade;
 
-alter table komentar add foreign key (objava) references objava(sifra);
-alter table komentar add foreign key (osoba) references osoba(sifra);
+alter table komentar add foreign key (objava) references objava(sifra) on delete cascade;
+alter table komentar add foreign key (osoba) references osoba(sifra) on delete cascade;
 
-alter table svidamise_komentar add foreign key (komentar) references komentar(sifra);
+alter table svidamise_komentar add foreign key (komentar) references komentar(sifra) on delete cascade;
 
-alter table svidamise add foreign key (objava) references objava(sifra);
-alter table svidamise add foreign key (osoba) references osoba(sifra);
+alter table svidamise add foreign key (objava) references objava(sifra) on delete cascade;
+alter table svidamise add foreign key (osoba) references osoba(sifra) on delete cascade;
 
-alter table svidamise_komentar add foreign key (osoba) references osoba(sifra);
-
-alter table prijateljstvo add foreign key (osoba1) references osoba(sifra);
-alter table prijateljstvo add foreign key (osoba2) references osoba(sifra);
+alter table svidamise_komentar add foreign key (osoba) references osoba(sifra) on delete cascade;
 
 # SAMPLE INSERT INTO osoba
 
@@ -111,18 +102,6 @@ values
 (null,'Rebeka','Ivanković','2002-04-08','rebeka.ivankovic33@gmail.com','$2y$10$raIEitAaxTkfaZT4ZGONqOTXlx/bmtT/Du6XOc0TcNRU1rW93bYJO',False,True),
 (null,'Test','Test','2000-01-01','test@test.hr','$2y$10$raIEitAaxTkfaZT4ZGONqOTXlx/bmtT/Du6XOc0TcNRU1rW93bYJO',False,True),
 (null,'Valentin','Mijatović','2000-02-07','valentin.mijau22@gmail.com','$2y$10$raIEitAaxTkfaZT4ZGONqOTXlx/bmtT/Du6XOc0TcNRU1rW93bYJO',False,True);
-
-# SAMPLE INSERT INTO prijateljstvo
-
-insert into prijateljstvo(sifra,osoba1,osoba2,prijatelji)
-values
-(null,1,2,True),
-(null,3,1,False),
-(null,3,2,True);
-
-# THIS IS A COMMAND TO SHOW "FRIEND LIST" OF THE PERSON WITH THE ID(SIFRA) THAT IS 1 (IN THIS EXAMPLE ME, MARKO)
-
-# select * from prijateljstvo where (osoba1 = 1 or osoba2 = 1) and prijatelji = 1;
 
 # SAMPLE INSERT INTO objava
 
