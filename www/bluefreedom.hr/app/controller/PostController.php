@@ -23,9 +23,31 @@ class PostController extends UserAuthorisationController
         {
         $info=Post::readOne($postID);
         $comments=Comment::read($postID);
+        $info[0]->totalLikes=Like::countLikes($postID);
+        $likes=Like::likedBy($postID);
+        foreach($likes as $li)
+        {
+            if($li->likerid==$_SESSION['auth']->sifra)
+            {
+                $liked=true;
+                $likeid=$li->likeid;
+                break;
+            }
+            else
+            {
+                $liked=false;
+            }
+        }
+        if(!isset($likeid))
+        {
+            $likeid='';
+        }
         $this->view->render($this->viewPath . 'index', [
             'info'=>$info,
-            'comments'=>$comments
+            'comments'=>$comments,
+            'likes'=>$likes,
+            'liked'=>$liked,
+            'likeid'=>$likeid
         ]);
         }
     }

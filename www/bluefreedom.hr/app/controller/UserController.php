@@ -16,6 +16,10 @@ class UserController extends UserAuthorisationController
     public function index()
     {
         $info = Post::read();
+        foreach($info as $i)
+        {
+            $i->totalLikes=Like::countLikes($i->postid);
+        }
         $this->view->render($this->viewPath . 'index',[
             'info'=>$info
         ]);

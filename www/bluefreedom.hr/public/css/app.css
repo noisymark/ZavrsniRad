@@ -93,3 +93,6 @@ div#fgtpw:focus{
     text-decoration: underline;
 }
 
+.popover {
+    white-space: pre-wrap;    
+}

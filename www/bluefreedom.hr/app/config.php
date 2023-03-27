@@ -17,13 +17,13 @@ if($dev){
 }else{
     return [
         'dev'=>$dev,
-        'url'=>'https://polaznik27.edunova.hr/',
+        'url'=>'https://www.marko-pavlovic.net/',
         'appName'=>'BlueFreedom',
         'resultsPerPage'=>10,
         'database'=>[
-            'dsn'=>'mysql:host=localhost;dbname=selena_BlueFreedom;charset=utf8mb4',
-            'user'=>'selena_admin',
-            'password'=>'selenaadmin'
+            'dsn'=>'mysql:host=localhost;dbname=markopav_BlueFreedom;charset=utf8mb4',
+            'user'=>'markopav_admin',
+            'password'=>'Savannnah1'
         ]
     ];
 }
