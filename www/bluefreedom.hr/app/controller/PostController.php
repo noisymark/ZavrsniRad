@@ -5,6 +5,7 @@ class PostController extends UserAuthorisationController
     private $viewPath='public' . DIRECTORY_SEPARATOR . 'post' . DIRECTORY_SEPARATOR;
     private $e;
     private $message='';
+    private $info;
     public function __construct()
     {
         parent::__construct();
@@ -38,9 +39,64 @@ class PostController extends UserAuthorisationController
         {
             $this->e=(object)$_POST;
             $this->e->id=(int)$_SESSION['auth']->sifra;
+            if(!$this->controlInput())
+            {
+                $this->view->render($this->viewPath . 'new',[
+                    'info'=>(object)$_POST,
+                    'message'=>$this->message
+                ]);
+                return;
+            }
+            else
+            {
             $lastId=Post::create((array)$this->e);
             header('location: '. App::config('url') . 'post/index/'.$lastId);
+            }
         }
+    }
+
+    public function comment($postID)
+    {
+        if($_SERVER['REQUEST_METHOD']==='POST')
+        {
+            $postID=(int)$postID;
+            if($postID<=0)
+            {
+                header('location: '.App::config('url').'index/logout');
+                return;
+            }
+            $info=(object)$_POST;
+            $info->authorID=$_SESSION['auth']->sifra;
+            $info->postID=$postID;
+            $this->info=(object)$_POST;
+            Log::info($this->info);
+            if(!$this->controlNewComment())
+            {
+                echo '<script>alert("'.$this->message.'");window.location.href="'.App::config('url').'post/index/'. $postID .'";</script>';
+                return;
+            }
+            else
+            {
+            Comment::new((array)$info);
+            header('location: '.App::config('url').'post/index/'.$postID);
+            }
+        }
+    }
+
+    private function controlNewComment()
+    {
+        $comment=$this->info->NewComment;
+
+        if(strlen(trim($comment))<=0)
+        {
+            $this->message='Comment cannot be empty!';
+            return false;
+        }
+        if(strlen(trim($comment))>250){
+            $this->message='Comment cannot be longer than 250 chars!';
+            return false;
+        }
+        return true;
     }
 
     public function delete($id)

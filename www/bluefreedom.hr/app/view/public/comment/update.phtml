@@ -1,0 +1,15 @@
+<div class="container m-auto">
+    <div class="col-10 m-auto text-center shadow">
+        <form method="post" class="form-control p-4" action="">
+        <div class="col-md-6 mx-auto m-4">
+            <label for="comment">Your comment:</label>
+            <textarea class="form-control" type="text" name="comment" id="comment"><?=$info[0]->commentdescription?></textarea>
+        </div>
+        <div>
+            <a href="<?=isset($info[0]->postid) ? App::config('url').'post/index/'.$info[0]->postid : App::config('url')?>" class="btn btn-lg d-inline-block btn-danger text-white my-4 mx-2 px-4">CANCEL</a>
+        <button class="btn btn-lg d-inline-block btn-primary text-white my-4 mx-2 px-4" type="submit">UPDATE</button>
+        </div>
+        <h4><?=$message?></h4>
+    </form>
+</div>
+</div>
