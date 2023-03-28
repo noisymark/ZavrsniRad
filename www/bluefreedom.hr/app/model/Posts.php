@@ -58,14 +58,13 @@ class Posts
     {
         $connection = DB::getInstance();
         $query = $connection->prepare('
-            delete *
+            delete
             from objava
             where sifra=:sifra
         ');
         $query->execute([
             'sifra'=>$sifra
         ]);
-        $query->execute();
     }
 
 //

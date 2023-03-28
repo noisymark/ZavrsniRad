@@ -94,20 +94,19 @@ class Post
         return $parameters['id'];
     }
 
-//
-//// LIKES SELECTOR
-//
-//select 
-//concat(c.ime, ' ', c.prezime) as liker,
-//b.sifra as likeID
-//from objava a
-//inner join svidamise b 
-//on b.objava = a.sifra 
-//inner join osoba c
-//on b.osoba = c.sifra 
-//inner join osoba d 
-//on a.osoba = d.sifra 
-//where a.sifra = :sifra
+    public static function postExists($postID)
+    {
+        $connection=DB::getInstance();
+        $query=$connection->prepare('
+        select sifra from objava
+        where sifra=:postID;
+        ');
+        $query->execute([
+            'postID'=>$postID
+        ]);
+        $result=$query->fetchColumn();
+        return $result>0;
+    }
 
 }
 
