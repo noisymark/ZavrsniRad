@@ -3,11 +3,11 @@
     <form class="form-control p-4" action="" method="post">
         <div class="col-md-6 mx-auto m-4">
             <label for="title">Post title:</label>
-            <input class="form-control" type="text" name="title" id="title">
+            <input class="form-control" type="text" name="title" id="title" value="<?=$info->title?>">
         </div>
         <div class="col-md-6 mx-auto m-4">
         <label for="description">Post description:</label>
-        <textarea class="form-control" type="text" name="description" id="description"></textarea>
+        <textarea class="form-control" type="text" name="description" id="description"><?=$info->description?></textarea>
         </div>
         <div>
         <a href="<?=App::config('url')?>user/index" class="btn btn-lg d-inline-block btn-danger text-white my-4 mx-2 px-4">CANCEL</a>

@@ -46,7 +46,7 @@ class PostController extends UserAuthorisationController
             'info'=>$info,
             'comments'=>$comments,
             'likes'=>$likes,
-            'liked'=>$liked,
+            'liked'=>isset($liked) ? $liked : '',
             'likeid'=>$likeid
         ]);
         }
@@ -55,7 +55,10 @@ class PostController extends UserAuthorisationController
     {
         if($_SERVER['REQUEST_METHOD']==='GET')
         {
-            $this->view->render($this->viewPath . 'new');
+            $this->view->render($this->viewPath . 'new',[
+                'message'=>'',
+                'info'=>$this->emptyInfo()
+            ]);
         }
         else
         {
@@ -162,7 +165,8 @@ class PostController extends UserAuthorisationController
             }
 
             $this->view->render($this->viewPath.'edit',[
-                'info'=>$info
+                'info'=>$info,
+                'message'=>''
             ]);
         }
         }
@@ -210,5 +214,14 @@ class PostController extends UserAuthorisationController
             return false;
         }
         return true;
+    }
+
+    private function emptyInfo()
+    {
+        $info = new stdClass();
+        $info->title='';
+        $info->description='';
+
+        return $info;
     }
 }

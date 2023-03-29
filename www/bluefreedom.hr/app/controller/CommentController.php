@@ -18,7 +18,8 @@ class CommentController extends UserAuthorisationController
             }
             $info=Comment::readOne($commentID);
             $this->view->render($this->viewPath.'update',[
-                'info'=>$info
+                'info'=>$info,
+                'message'=>''
             ]);
         }
         else

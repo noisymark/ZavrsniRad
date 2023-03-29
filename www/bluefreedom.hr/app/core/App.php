@@ -83,12 +83,20 @@ class App
 
     public static function admin()
     {
-        return $_SESSION['auth']->uloga==='admin';
+        if(isset($_SESSION['auth']->uloga))
+        {
+            return $_SESSION['auth']->uloga==='admin';
+        }
+        return '';
     }
 
     public static function oper()
     {
-        return $_SESSION['auth']->uloga==='oper';
+        if(isset($_SESSION['auth']->uloga))
+        {
+            return $_SESSION['auth']->uloga==='oper';
+        }
+        return '';
     }
 
     public static function dev()
