@@ -94,7 +94,6 @@ class PostController extends UserAuthorisationController
             $info->authorID=$_SESSION['auth']->sifra;
             $info->postID=$postID;
             $this->info=(object)$_POST;
-            Log::info($this->info);
             if(!$this->controlNewComment())
             {
                 echo '<script>alert("'.$this->message.'");window.location.href="'.App::config('url').'post/index/'. $postID .'";</script>';
@@ -201,6 +200,16 @@ class PostController extends UserAuthorisationController
         if(strlen(trim($description))<=0)
         {
             $this->message='Description cannot be empty!';
+            return false;
+        }
+        if(strlen(trim($title))<5)
+        {
+            $this->message='Title cannot be shorter than 5 characters!';
+            return false;
+        }
+        if(strlen(trim($description))<10)
+        {
+            $this->message='Description cannot be shorter than 10 characters!';
             return false;
         }
         if(strlen(trim($title))>50)
