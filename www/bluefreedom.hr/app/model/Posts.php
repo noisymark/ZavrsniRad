@@ -53,6 +53,19 @@ class Posts
         ]);
         return $query->fetchColumn();
     }
+    
+    public static function update($parameters)
+    {
+        $connection=DB::getInstance();
+        $query=$connection->prepare('
+        update objava
+        set naslov=:title,
+        upis=:description
+        where sifra=:id
+        ');
+        $query->execute($parameters);
+        return $parameters['id'];
+    }
 
     public static function delete($sifra)
     {
@@ -67,20 +80,26 @@ class Posts
         ]);
     }
 
-//
-//// LIKES SELECTOR
-//
-//select 
-//concat(c.ime, ' ', c.prezime) as liker,
-//b.sifra as likeID
-//from objava a
-//inner join svidamise b 
-//on b.objava = a.sifra 
-//inner join osoba c
-//on b.osoba = c.sifra 
-//inner join osoba d 
-//on a.osoba = d.sifra 
-//where a.sifra = :sifra
+    public static function readOne($postID)
+    {
+        $connection=DB::getInstance();
+        $query=$connection->prepare('
+        select
+        concat(a.ime, \' \', a.prezime) as postauthor,
+        a.sifra as authorid,
+        b.sifra as postid,
+        b.naslov as posttitle,
+        b.upis as postdescription,
+        b.vrijemeizrade as postcreated
+        from osoba a
+        inner join objava b on b.osoba = a.sifra
+        where b.sifra=:postID
+        ');
+
+        $query->bindParam('postID',$postID);
+        $query->execute();
+        return $query->fetchAll();
+    }
 
 }
 

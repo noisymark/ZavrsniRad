@@ -60,16 +60,12 @@ body {
     padding-right: 10px;
 }
 
-.nav-item:last-child{
-    border-right: none;
-}
 li.nav-item{
     transition: all 0.5s ease;
     padding-left: 10px;
     padding-right: 10px;
 }
 li.nav-item:hover{
-    background-color: rgba(255, 255, 255, 0.4);
     border-radius: 10%;
 }
 

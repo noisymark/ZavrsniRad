@@ -29,7 +29,7 @@ class IndexController extends Controller
 
     public function register()
     {
-        $this->view->render('register');
+        $u = new RegisterController; $u->new();
     }
 
     public function logout()
