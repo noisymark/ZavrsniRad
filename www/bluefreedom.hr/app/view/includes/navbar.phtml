@@ -5,7 +5,7 @@
     <a class="navbar-brand text-white" href="<?=App::config('url')?>"><img style="margin-right: 3%;"class="d-inline-block align-text-top rounded rounded-circle border border-1 border-primary p-2 btn btn-primary bg-gradient" src="<?=App::config('url')?>public/components/icons/png.png" height="50" width="50"></a>
     <?php if(!App::admin() && !App::oper()): ?>
     <form class="d-flex flex-grow-1 w-50" method="post" action="">
-                    <input name="search" class="form-control me-2 bg-light border border-1 border-primary" type="search" placeholder="Search" aria-label="Search">
+                    <input name="search" id="search" class="form-control me-2 bg-light border border-1 border-primary" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-primary rounded-circle m-1" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
     </form>
       <?php endif; ?>

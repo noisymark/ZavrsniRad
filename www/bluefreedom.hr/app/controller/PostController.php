@@ -6,9 +6,20 @@ class PostController extends UserAuthorisationController
     private $e;
     private $message='';
     private $info;
-    public function __construct()
+    public function __construct($sifra='')
     {
         parent::__construct();
+        parent::setCSSdependency([
+            '<link rel="stylesheet" href="' . App::config('url') . 'public/css/dependency/jquery-ui.css">'
+        ]);
+        parent::setJSdependency([
+            '<script src="' . App::config('url') . 'public/js/dependency/jquery-ui.js"></script>',
+            '<script src="' . App::config('url') . 'public/js/dependency/search.js"></script>',
+            '<script>
+                let url=\'' . App::config('url') . '\';
+                let grupasifra=' . $sifra . ';
+            </script>'
+        ]);
     }
 
     public function index($postID)
@@ -232,5 +243,10 @@ class PostController extends UserAuthorisationController
         $info->description='';
 
         return $info;
+    }
+
+    public function ajaxSearch($search)
+    {
+        $this->view->api(Posts::read($search));
     }
 }

@@ -41,10 +41,24 @@ class LoginController extends Controller
             }
             else
             {
-                $_SESSION['auth']=$user;
-                setcookie('email',$_POST['email']);
-                header('location:'.App::config('url') . 'user/index');
-                return;
+
+                // PROVJERI DA LI JE STANJE KORISNIKA 1 (PROVJERI E-MAIL POTVRDU KORISNIKA)
+
+                if(!User::controlVerified($_POST['email']))
+                {
+                    $this->view->render('login',[
+                        'message'=>'Your account has not been verified',
+                        'email'=>$_POST['email']
+                    ]);
+                    return;
+                }
+                else
+                {
+                    $_SESSION['auth']=$user;
+                    setcookie('email',$_POST['email']);
+                    header('location:'.App::config('url') . 'user/index');
+                    return;
+                }
             }
         }
         else

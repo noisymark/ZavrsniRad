@@ -8,6 +8,7 @@ if($dev){
         'url'=>'https://bluefreedom.hr/',
         'appName'=>'BlueFreedom',
         'resultsPerPage'=>10,
+        'resultsPerPageUser'=>5,
         'database'=>[
             'dsn'=>'mysql:host=localhost;dbname=BlueFreedom;charset=utf8mb4',
             'user'=>'root',
@@ -20,6 +21,7 @@ if($dev){
         'url'=>'https://www.marko-pavlovic.net/',
         'appName'=>'BlueFreedom',
         'resultsPerPage'=>10,
+        'resultsPerPageUser'=>5,
         'database'=>[
             'dsn'=>'mysql:host=localhost;dbname=markopav_BlueFreedom;charset=utf8mb4',
             'user'=>'markopav_admin',

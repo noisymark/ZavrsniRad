@@ -53,6 +53,12 @@ class View
     {
         $this->JSdependency=$dep;
     }
+
+    public function api($parameters)
+    {
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode($parameters,JSON_NUMERIC_CHECK);
+    }
 }
 
 ?>

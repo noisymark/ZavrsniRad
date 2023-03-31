@@ -35,7 +35,7 @@ class RegisterController extends Controller
         }
         //$this->prepareForDB();
         //unset($this->e->confirmpw);
-        Users::create((array)$this->e);
+        User::create((array)$this->e);
         echo ("<script>window.alert('Registered successfully!');window.location.href='" . App::config('url') . "';</script>");
     }
 
