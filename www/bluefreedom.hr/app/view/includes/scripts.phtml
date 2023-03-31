@@ -2,4 +2,18 @@
 <script src="<?=App::config('url')?>public/js/bootstrap.bundle.js"></script>
 <script src="<?=App::config('url')?>public/js/jquery.js"></script>
 <script src="<?=App::config('url')?>public/js/popper.js"></script>
+
+<?php if(isset($jsdependency))
+{
+    foreach ($jsdependency as $p)
+    {
+        echo $p;
+    }
+}
+?>
+
+<?php if(isset($js)): ?>
+<link rel="stylesheet" href="<?=App::config('url')?>public/js/<?=$js?>">
+<?php endif; ?>
+
 <script src="<?=App::config('url')?>public/js/app.js"></script>

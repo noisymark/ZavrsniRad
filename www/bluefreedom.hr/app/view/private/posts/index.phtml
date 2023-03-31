@@ -4,13 +4,6 @@
     <?php include 'searchbar.phtml'?>
     <?php include 'pagination.phtml'?>
 
-    <div class="col-md-6 col-lg-4 text-center m-auto">
-            <div style="cursor: pointer;" onclick="window.location='<?php echo (App::config('url') . 'posts/new')?>'"
-                class="callout p-4 m-2 border border-1 border-primary rounded rounded-6 bg-light bg-gradient shadow">
-                <i height="100px" width="100px" class="m-4 bg-primary text-white p-3 rounded rounded-circle fa-solid fa-plus"></i>
-                <h3>Add new post</h3>  
-            </div>
-    </div>
 <?php foreach($info as $red) : ?>
         <div class="col-md-6 col-lg-4 text-center ">
             <div class="callout p-4 m-2 border border-1 border-primary rounded rounded-6 bg-light bg-gradient shadow">

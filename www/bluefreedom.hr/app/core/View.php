@@ -4,6 +4,9 @@ class View
 {
     private $template;
 
+    private $CSSdependency=null;
+    private $JSdependency=null;
+
     public function __construct($template='template')
     {
         $this->template=$template;
@@ -15,6 +18,15 @@ class View
         if(file_exists($cssFile))
         {
             $css=str_replace('\\','/',$phtmlPage).'.css';
+        }
+
+        if($this->CSSdependency!=null)
+        {
+            $cssdependency= $this->CSSdependency;
+        }
+        if($this->JSdependency!=null)
+        {
+            $jsdependency= $this->JSdependency;
         }
 
         $viewFile = BP_APP . 'view' . DIRECTORY_SEPARATOR . $phtmlPage . '.phtml';
@@ -31,6 +43,15 @@ class View
 
         $contents = ob_get_clean();
         include_once BP_APP . 'view' . DIRECTORY_SEPARATOR .  $this->template . '.phtml';
+    }
+
+    public function setCSSdependency($dep)
+    {
+        $this->CSSdependency=$dep;
+    }
+    public function setJSdependency($dep)
+    {
+        $this->JSdependency=$dep;
     }
 }
 

@@ -8,6 +8,14 @@ abstract class Controller
     {
         $this->view = new View();
     }
+
+    protected function setCSSdependency($dependency){
+        $this->view->setCSSdependency($dependency);
+    }
+
+    protected function setJSdependency($dependency){
+        $this->view->setJSdependency($dependency);
+    }
 }
 
 ?>
