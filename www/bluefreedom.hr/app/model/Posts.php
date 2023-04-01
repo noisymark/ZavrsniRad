@@ -12,6 +12,7 @@ class Posts
         select
         a.ime as imekorisnika,
         a.prezime as prezimekorisnika,
+        concat(a.ime, \' \', a.prezime) as punoimekorisnika,
         a.sifra as sifrakorisnika,
         b.sifra as sifraobjave,
         b.naslov as naslovobjave,

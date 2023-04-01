@@ -6,7 +6,7 @@ class PostController extends UserAuthorisationController
     private $e;
     private $message='';
     private $info;
-    public function __construct($sifra='')
+    public function __construct()
     {
         parent::__construct();
         parent::setCSSdependency([
@@ -17,7 +17,6 @@ class PostController extends UserAuthorisationController
             '<script src="' . App::config('url') . 'public/js/dependency/search.js"></script>',
             '<script>
                 let url=\'' . App::config('url') . '\';
-                let grupasifra=' . $sifra . ';
             </script>'
         ]);
     }
