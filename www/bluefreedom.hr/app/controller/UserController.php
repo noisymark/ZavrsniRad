@@ -29,6 +29,20 @@ class UserController extends UserAuthorisationController
         $this->view->api(Users::read($search));
     }
 
+    public function myProfile()
+    {
+        $id=$_SESSION['auth']->sifra;
+        header('location: '. App::config('url') . 'user/profile/' . $id);
+    }
+
+    public function profile($id)
+    {
+        $info=Users::readOne($id);
+        $this->view->render($this->viewPath . 'profile',[
+            'info'=>$info
+        ]);
+    }
+
     public function index()
     {
         $info = Post::read();

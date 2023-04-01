@@ -14,6 +14,6 @@ $( '#search' ).autocomplete({
     }
 }).autocomplete( 'instance' )._renderItem = function( ul, item ) {
     return $( '<li>' )
-      .append( '<div onClick="window.open(\'' + url + 'post/index/' + item.sifraobjave + '\');" class="pt-4 m-auto border border-1 border-primary">' + '<p class="text-decoration-none text-break text-center">POST: ' + item.naslovobjave + '<br>FROM: '+ item.punoimekorisnika + '</p><div>')
+      .append( '<div onClick="location=\'' + url + 'post/index/' + item.sifraobjave + '\';" class="pt-4 m-auto border border-1 border-primary">' + '<p class="text-decoration-none text-break text-center">POST: ' + item.naslovobjave + '<br>FROM: '+ item.punoimekorisnika + '</p><div>')
       .appendTo( ul );
   };

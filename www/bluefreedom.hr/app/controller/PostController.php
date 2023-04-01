@@ -130,6 +130,11 @@ class PostController extends UserAuthorisationController
             $this->message='Comment cannot be longer than 250 chars!';
             return false;
         }
+        if(strlen(trim($comment))<8)
+        {
+            $this->message='Comment cannot be shorter than 8 chars!';
+            return false;
+        }
         return true;
     }
 
@@ -207,24 +212,24 @@ class PostController extends UserAuthorisationController
             $this->message='Title cannot be empty!';
             return false;
         }
-        if(strlen(trim($description))<=0)
-        {
-            $this->message='Description cannot be empty!';
-            return false;
-        }
         if(strlen(trim($title))<5)
         {
             $this->message='Title cannot be shorter than 5 characters!';
             return false;
         }
+        if(strlen(trim($title))>50)
+        {
+            $this->message='Title cannot be longer than 50 chars!';
+            return false;
+        }
+        if(strlen(trim($description))<=0)
+        {
+            $this->message='Description cannot be empty!';
+            return false;
+        }
         if(strlen(trim($description))<10)
         {
             $this->message='Description cannot be shorter than 10 characters!';
-            return false;
-        }
-        if(strlen(trim($title))>50)
-        {
-            $this->message='Description cannot be longer than 50 chars!';
             return false;
         }
         if(strlen(trim($description))>250)
