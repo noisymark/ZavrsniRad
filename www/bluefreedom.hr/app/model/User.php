@@ -58,4 +58,59 @@ class User
             echo $e->getMessage();
         }
     }
+
+    public static function readPostsOfUser($id)
+    {
+        $connection=DB::getInstance();
+        $query=$connection->prepare('
+        select
+        concat(a.ime, \' \', a.prezime) as postauthor,
+        a.sifra as authorid,
+        b.sifra as postid,
+        b.naslov as posttitle,
+        b.upis as postdescription
+        from osoba a
+        inner join objava b on b.osoba = a.sifra
+        where a.sifra = :id
+        ');
+        $query->execute(['id'=>$id]);
+        return $query->fetchAll();
+    }
+
+    public static function searchPostsOfUser($id,$search='',$page=1)
+    {
+        $search='%' . $search . '%';
+        $resultsPerPage=App::config('resultsPerPage');
+        $start=($page*$resultsPerPage)-$resultsPerPage;
+        $connection=DB::getInstance();
+        $query=$connection->prepare('
+        select
+        concat(a.ime, \' \', a.prezime) as postauthor,
+        a.sifra as authorid,
+        b.sifra as postid,
+        b.naslov as posttitle,
+        b.upis as postdescription
+        from osoba a
+        inner join objava b on b.osoba = a.sifra
+        where concat(b.naslov, \' \' , b.upis, \' \', b.sifra)
+        like :search
+        and a.sifra=:id
+        order by
+        a.ime,
+        a.prezime,
+        a.sifra,
+        b.sifra,
+        b.naslov,
+        b.upis
+        limit :start, :resultsPerPage
+        ');
+
+        $query->bindValue('start',$start,PDO::PARAM_INT);
+        $query->bindValue('resultsPerPage',$resultsPerPage,PDO::PARAM_INT);
+        $query->bindParam('search',$search);
+        $query->bindParam('id',$id);
+
+        $query->execute();
+        return $query->fetchAll();
+    }
 }

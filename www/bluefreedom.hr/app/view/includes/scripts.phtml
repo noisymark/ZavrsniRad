@@ -13,7 +13,7 @@
 ?>
 
 <?php if(isset($js)): ?>
-<link rel="stylesheet" href="<?=App::config('url')?>public/js/<?=$js?>">
+    <script src="<?php echo App::config('url') . 'public/js/' . $js?>"></script>
 <?php endif; ?>
 
 <script src="<?=App::config('url')?>public/js/app.js"></script>

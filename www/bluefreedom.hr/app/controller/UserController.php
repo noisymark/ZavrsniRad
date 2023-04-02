@@ -24,9 +24,17 @@ class UserController extends UserAuthorisationController
         ]);
     }
 
-    public function ajaxSearch($search)
+    public function ajaxSearch($id)
     {
-        $this->view->api(Users::read($search));
+        if(isset($_GET['search']) && $_GET['search']!='')
+        {
+            $search=$_GET['search'];
+        }
+        else
+        {
+            $search='';
+        }
+        $this->view->api(User::searchPostsOfUser($id,$search));
     }
 
     public function myProfile()
@@ -38,8 +46,23 @@ class UserController extends UserAuthorisationController
     public function profile($id)
     {
         $info=Users::readOne($id);
+        $posts=User::readPostsOfUser($id);
+        foreach($posts as $i)
+        {
+            $i->totalLikes=Like::countLikes($i->postid);
+        }
+        parent::setJSdependency([
+            '<script src="' . App::config('url') . 'public/js/dependency/jquery-ui.js"></script>',
+            '<script src="' . App::config('url') . 'public/js/dependency/search.js"></script>',
+            '<script>
+                let url=\'' . App::config('url') . '\';
+                let id=\'' . $id . '\';
+            </script>'
+        ]); 
         $this->view->render($this->viewPath . 'profile',[
-            'info'=>$info
+            'info'=>$info,
+            'posts'=>$posts,
+            'id'=>$id
         ]);
     }
 
@@ -54,4 +77,5 @@ class UserController extends UserAuthorisationController
             'info'=>$info
         ]);
     }
+    
 }

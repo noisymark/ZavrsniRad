@@ -14,10 +14,15 @@ class View
 
     public function render($phtmlPage,$parameters=[])
     {
-        $cssFile= BP. 'public' . DIRECTORY_SEPARATOR . 'css' . DIRECTORY_SEPARATOR . $phtmlPage . '.css';
+        $cssFile='public' . DIRECTORY_SEPARATOR . 'css' . DIRECTORY_SEPARATOR . $phtmlPage . '.css';
         if(file_exists($cssFile))
         {
             $css=str_replace('\\','/',$phtmlPage).'.css';
+        }
+        $jsFile='public' . DIRECTORY_SEPARATOR . 'js' . DIRECTORY_SEPARATOR . $phtmlPage . '.js';
+        if(file_exists($jsFile))
+        {
+            $js=str_replace('\\','/',$phtmlPage).'.js';
         }
 
         if($this->CSSdependency!=null)

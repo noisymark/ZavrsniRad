@@ -41,6 +41,7 @@ class App
             echo 'NON EXISTANCE OF ' . $controller . '-&gt' . $method;
             //$v = new View();
             //$v->render('notFound');
+            return;
         }
 
         $instance = new $controller();
