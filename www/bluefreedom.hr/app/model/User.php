@@ -80,7 +80,7 @@ class User
     public static function searchPostsOfUser($id,$search='',$page=1)
     {
         $search='%' . $search . '%';
-        $resultsPerPage=App::config('resultsPerPage');
+        $resultsPerPage=App::config('resultsPerPageUser');
         $start=($page*$resultsPerPage)-$resultsPerPage;
         $connection=DB::getInstance();
         $query=$connection->prepare('
