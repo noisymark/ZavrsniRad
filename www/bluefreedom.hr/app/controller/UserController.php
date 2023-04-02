@@ -46,6 +46,11 @@ class UserController extends UserAuthorisationController
     public function profile($id)
     {
         $info=Users::readOne($id);
+        if($info==null)
+        {
+            header('location: ' . App::config('url') . 'user/notFound');
+            return;
+        }
         $posts=User::readPostsOfUser($id);
         foreach($posts as $i)
         {
@@ -76,6 +81,11 @@ class UserController extends UserAuthorisationController
         $this->view->render($this->viewPath . 'index',[
             'info'=>$info
         ]);
+    }
+
+    public function notFound()
+    {
+        $this->view->render($this->viewPath . 'notFound');
     }
     
 }

@@ -36,6 +36,34 @@ class Post
         $query->execute();
         return $query->fetchAll();
     }
+    public static function readAjax($search='',$page=1)
+    {
+        $search='%' . $search . '%';
+        $resultsPerPage=App::config('resultsPerPageUser');
+        $start=($page*$resultsPerPage)-$resultsPerPage;
+        $connection=DB::getInstance();
+        $query=$connection->prepare('
+        select sifra as \'id\',
+        \'post\' as \'type\',
+        naslov as \'text\'
+        from objava
+        where naslov like :search
+        union 
+        select sifra as \'id\',
+        \'user\' as \'type\',
+        concat(ime, \' \', prezime) as \'text\'
+        from osoba
+        where concat(ime, \' \', prezime) like :search
+        limit :start, :resultsPerPage
+        ');
+
+        $query->bindValue('start',$start,PDO::PARAM_INT);
+        $query->bindValue('resultsPerPage',$resultsPerPage,PDO::PARAM_INT);
+        $query->bindParam('search',$search);
+
+        $query->execute();
+        return $query->fetchAll();
+    }
     public static function readOne($postID)
     {
         $connection=DB::getInstance();

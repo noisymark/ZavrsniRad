@@ -251,6 +251,6 @@ class PostController extends UserAuthorisationController
 
     public function ajaxSearch($search)
     {
-        $this->view->api(Posts::read($search));
+        $this->view->api(Post::readAjax($search));
     }
 }
