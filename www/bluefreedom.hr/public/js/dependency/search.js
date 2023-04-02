@@ -1,5 +1,4 @@
 let search='';
-let forward='';
 $( '#search' ).autocomplete({
     source: function(req,res){
         search=req.term;
@@ -12,22 +11,18 @@ $( '#search' ).autocomplete({
        }); 
     },
     minLength: 2,
-    select:function(dogadaj,ui){
-        switch (ui.item.type) {
-            case 'user':
-                forward='user/profile/';
-                window.location.href=url + forward + item.id;
-                break;
-            case 'post':
-                forward='post/index/';
-                window.location.href=url + forward + item.id;
-                break;
-            default:
-                break;
-        }
-    }
 }).autocomplete( 'instance' )._renderItem = function( ul, item ) {
+    switch (item.type) {
+        case 'user':
+            var forward='user/profile/';
+            break;
+        case 'post':
+            var forward='post/index/';
+            break;
+        default:
+            break;
+    }
     return $( '<li>' )
-      .append( '<div class="pt-4 m-auto border border-1 border-primary">' + '<p class="text-decoration-none text-break text-center">' + item.type+ ': ' + item.text + '</p><div>')
+      .append( '<div onClick="window.location.href=\''+ url + forward + item.id +'\'") class="pt-4 m-auto border border-1 border-primary">' + '<p class="text-decoration-none text-break text-center">' + item.type+ ': ' + item.text + '</p><div>')
       .appendTo( ul );
   };
