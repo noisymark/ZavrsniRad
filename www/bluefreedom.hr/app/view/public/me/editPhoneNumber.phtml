@@ -1,0 +1,22 @@
+<div class="m-auto text-center rounded-3">
+    <form action="" method="post" class="form-control p-4 bg-info">
+        <div class="my-3 input-group">
+        <span class="input-group-text" id="basic-addon1"><i class="fa fa-phone"></i></span>
+        <input type="number" aria-describedby="basic-addon1" name="phoneNumber" id="phoneNumber" class="form-control text-center" value="<?php
+        if(!isset($info->brojtel))
+        {
+            echo $info->phoneNumber;
+        }
+        else
+        {
+            echo $info->brojtel;
+        } 
+        ?>">
+        </div>
+        <div class="my-3">
+            <a href="<?=App::config('url')?>user/myProfile" class="btn rounded-pill btn-danger"><i class="me-3 fa fa-x"></i> CANCEL</a>
+            <button type="submit" class="btn rounded-pill btn-primary"><i class="me-3 fa fa-check"></i> SAVE CHANGES</button>
+        </div>
+        <h4 class="text-danger"><?=$message?></h4>
+    </form>
+</div>

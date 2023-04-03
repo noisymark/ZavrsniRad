@@ -1,0 +1,36 @@
+<?php Log::info($info) ?>
+<div class="m-auto text-center rounded-3">
+    <form action="" method="post" class="form-control p-4 bg-info">
+        <div class="my-3">
+            <label for="fname">First name</label>
+            <input type="text" name="fname" id="fname" class="form-control rounded-pill text-center" value="<?php
+            if(!isset($info->ime))
+            {
+                echo $info->fname;
+            }
+            else
+            {
+                echo $info->ime;
+            }
+            ?>">
+        </div>
+        <div class="my-3">
+            <label for="lname">Last name</label>
+            <input type="text" name="lname" id="lname" class="form-control rounded-pill text-center" value="<?php
+            if(!isset($info->prezime))
+            {
+                echo $info->lname;
+            }
+            else
+            {
+                echo $info->prezime;
+            }
+            ?>">
+        </div>
+        <div class="my-3">
+            <a href="<?=App::config('url')?>user/myProfile" class="btn rounded-pill btn-danger"><i class="me-3 fa fa-x"></i> CANCEL</a>
+            <button type="submit" class="btn rounded-pill btn-primary"><i class="me-3 fa fa-check"></i> SAVE CHANGES</button>
+        </div>
+        <h4 class="text-danger"><?=$message?></h4>
+    </form>
+</div>
