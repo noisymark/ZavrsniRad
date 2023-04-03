@@ -45,13 +45,25 @@ class UserController extends UserAuthorisationController
 
     public function profile($id)
     {
+        $id=(int)$id;
         $info=Users::readOne($id);
         if($info==null)
         {
             header('location: ' . App::config('url') . 'user/notFound');
             return;
         }
-        $posts=User::readPostsOfUser($id);
+        if(isset($_GET['page']))
+        {
+            $page=(int)$_GET['page'];
+        }
+        else
+        {
+            $page=1;
+        }
+
+        $totalPosts=Post::totalPostsOfUser($id);
+        $lastPage=(int)ceil($totalPosts/App::config('resultsPerPageUser'));
+        $posts=User::readPostsOfUser($id,$page);
         foreach($posts as $i)
         {
             $i->totalLikes=Like::countLikes($i->postid);
@@ -64,22 +76,37 @@ class UserController extends UserAuthorisationController
                 let id=\'' . $id . '\';
             </script>'
         ]); 
+        
         $this->view->render($this->viewPath . 'profile',[
             'info'=>$info,
             'posts'=>$posts,
-            'id'=>$id
+            'id'=>$id,
+            'page'=>$page,
+            'lastPage'=>$lastPage
         ]);
     }
 
-    public function index()
+    public function index($page=1)
     {
-        $info = Post::read();
+        $page=(int)$page;
+        if($page==0)
+        {
+            header('location: ' .  App::config('url') . 'index/logout');
+            return;
+        }
+
+        $totalPosts=Post::totalPosts();
+        $lastPage=(int)ceil($totalPosts/App::config('resultsPerPageUser'));
+
+        $info = Post::read('',$page);
         foreach($info as $i)
         {
             $i->totalLikes=Like::countLikes($i->postid);
         }
         $this->view->render($this->viewPath . 'index',[
-            'info'=>$info
+            'info'=>$info,
+            'page'=>$page,
+            'lastPage'=>$lastPage
         ]);
     }
 

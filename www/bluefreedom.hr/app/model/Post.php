@@ -5,7 +5,7 @@ class Post
     public static function read($search='',$page=1)
     {
         $search='%' . $search . '%';
-        $resultsPerPage=App::config('resultsPerPage');
+        $resultsPerPage=App::config('resultsPerPageUser');
         $start=($page*$resultsPerPage)-$resultsPerPage;
         $connection=DB::getInstance();
         $query=$connection->prepare('
@@ -36,6 +36,19 @@ class Post
         $query->execute();
         return $query->fetchAll();
     }
+
+    public static function totalPostsOfUser($id)
+    {
+        $connection=DB::getInstance();
+        $query=$connection->prepare('
+        select count(*)
+        from objava 
+        where osoba=:id
+        ');
+        $query->execute(['id'=>$id]);
+        return $query->fetchColumn();
+    }
+
     public static function readAjax($search='',$page=1)
     {
         $search='%' . $search . '%';
@@ -134,6 +147,17 @@ class Post
         ]);
         $result=$query->fetchColumn();
         return $result>0;
+    }
+
+    public static function totalPosts($page=1)
+    {
+        $connection=DB::getInstance();
+        $query=$connection->prepare('
+        select count(*)
+        from objava 
+        ');
+        $query->execute();
+        return $query->fetchColumn();
     }
 
 }

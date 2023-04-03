@@ -10,7 +10,7 @@
             <div class="row">
               <div class="col">
                 <a href="<?=App::config('url')?>post/new" class="btn btn-lg d-block btn-primary text-white shadow">ADD NEW POST</a>
-                
+                <?php include 'pagination.phtml';?>
               <!-- POST TEMPLATE BEGIN -->
               <?php foreach($info as $row): ?>
               <div class="d-flex flex-top my-3 border border-1 border-primary px-2 py-4 rounded rounded-3 shadow bg-white">
@@ -43,6 +43,7 @@
                       </div>
                       </div>
                       <?php endforeach; ?>
+                      <?php include 'pagination.phtml';?>
                 <!-- POST TEMPLATE END -->
               </div>
             </div>

@@ -5,7 +5,7 @@
     <a class="navbar-brand text-white" href="<?=App::config('url')?>"><img style="margin-right: 3%;" class="d-inline-block align-text-top rounded rounded-circle border border-1 border-primary p-2 btn btn-primary bg-gradient" src="<?=App::config('url')?>public/components/icons/png.png" height="50" width="50"></a>
     <?php if(!App::admin() && !App::oper()): ?>
     <form class="d-flex flex-grow-1 w-50" method="post" action="">
-                    <input name="search" id="search" class="form-control me-2 bg-light border border-1 border-primary shadow" type="search" placeholder="Search" aria-label="Search">
+                    <input name="search" id="search" class="form-control me-2 bg-light border border-1 border-primary shadow" type="search" placeholder="Search for users or posts" aria-label="Search for friends or posts">
                     <button class="btn btn-outline-primary rounded-circle m-1 shadow" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
     </form>
       <?php endif; ?>
@@ -18,7 +18,8 @@
                 <li class="nav-item dropdown shadow btn btn-primary rounded rounded-3 bg-gradient mx-2">
                     <a class="nav-link text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i id="navbaricon" class="fa-solid fa-screwdriver-wrench"></i>Advanced</a>
                     <ul class="dropdown-menu bg-transparent text-white border-0" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item shadow btn btn-primary bg-primary text-white rounded rounded-3 bg-gradient m-1 p-3" href="<?=App::config('url')?>operater/index"><i id="navbaricon" class="fa-solid fa-users"></i>Operaters</a>
+                        <li>
+                          <a class="dropdown-item shadow btn btn-primary bg-primary text-white rounded rounded-3 bg-gradient m-1 p-3" href="<?=App::config('url')?>operater/index"><i id="navbaricon" class="fa-solid fa-users"></i>Operaters</a>
                             </ul>
                         </li>
             <?php elseif (App::oper()): ?>
@@ -40,7 +41,6 @@
                               <i id="navbaricon" class="fa-solid fa-user"></i>Me
                               </a>
                               <ul class="dropdown-menu bg-transparent text-white border-0" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item shadow btn btn-primary bg-primary text-white rounded rounded-3 bg-gradient m-1 p-3" href="<?=App::config('url')?>">My posts</a></li>
                                 <li><a class="dropdown-item shadow btn btn-primary bg-primary text-white rounded rounded-3 bg-gradient m-1 p-3" href="<?=App::config('url')?>user/myProfile">My profile</a></li>
                                 <li><a class="dropdown-item shadow btn btn-primary bg-primary text-white rounded rounded-3 bg-gradient m-1 p-3" href="<?=App::config('url')?>">Edit my profile</a></li>
                               </ul>

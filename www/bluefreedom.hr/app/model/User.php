@@ -59,8 +59,10 @@ class User
         }
     }
 
-    public static function readPostsOfUser($id)
+    public static function readPostsOfUser($id,$page=1)
     {
+        $resultsPerPage=App::config('resultsPerPageUser');
+        $start=($page*$resultsPerPage)-$resultsPerPage;
         $connection=DB::getInstance();
         $query=$connection->prepare('
         select
@@ -72,8 +74,13 @@ class User
         from osoba a
         inner join objava b on b.osoba = a.sifra
         where a.sifra = :id
+        limit :start, :resultsPerPage
         ');
-        $query->execute(['id'=>$id]);
+
+        $query->bindValue('start',$start,PDO::PARAM_INT);
+        $query->bindValue('resultsPerPage',$resultsPerPage,PDO::PARAM_INT);
+        $query->bindParam('id',$id);
+        $query->execute();
         return $query->fetchAll();
     }
 
