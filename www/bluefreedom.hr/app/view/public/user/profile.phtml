@@ -1,10 +1,36 @@
 <div class="container">
     <div class="row mt-4">
-        <div class="col-md-5 col-lg-4 col-xl-4">
+        <div class="col-md-6 col-lg-4 col-xl-4">
             <div class="container border border-1 border-primary rounded-3 shadow-lg mx-auto text-center p-4 my-3 bg-info">
                 <div class="col-12 d-inline-flex justify-content-center">
-                    <img src="https://picsum.photos/80/80"
-                    alt="profilePhoto" height="80px" width="80px" class="rounded-circle shadow">
+                   <!-- Button trigger modal -->
+                   <img src="<?=$info->profilePhoto?>" alt="" class="profilePhoto rounded-circle shadow" id="user_<?=$info->sifra?>" />
+                   <span>
+                    <button class="btn btn-outline-primary rounded-circle" data-bs-toggle="modal" data-bs-target="#profilePhotoModal"><i class="fa fa-pen"></i></button>
+                   </span>
+                  <?php if($info->sifra==$_SESSION['auth']->sifra): ?>
+                  <!-- Modal -->
+                  <div class="modal fade" id="profilePhotoModal" tabindex="-1" aria-labelledby="profilePhotoModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="profilePhotoModalLabel">Change profile photo</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body m-auto my-4">
+                          <img id="image" src="" alt="" />
+                        </div>
+                        <div class="modal-footer">
+                          <div class="d-block col-12">
+                            <input type="file" id="inputImage" name="file" accept=".jpg,.jpeg,.png,.gif,.bmp,.tiff">
+                          </div>
+                          <button type="button" class="close-button btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                          <a href="#" id="savePhoto" class="btn btn-primary">Save changes</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <?php endif; ?>
                     <h4 class="ms-4 my-auto"><?=$info->ime?> <?=$info->prezime?>
                     <?php if($info->sifra==$_SESSION['auth']->sifra): ?>
                 <a class="btn btn-primary ms-1 border border-1 border-primary p-2 shadow" href="<?=App::config('url')?>me/changeName/<?=$info->sifra?>"><i class="fa-solid fa-pen text-break"></i></a>
@@ -41,7 +67,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-7 col-lg-8 col-xl-8">
+        <div class="col-md-6 col-lg-8 col-xl-8">
         <form class="d-flex flex-grow-1" method="post" action="">
                     <input name="searchpostofusers" id="searchpostofusers" class="form-control me-2 border border-1 border-primary shadow bg-white" type="search" placeholder="Search for posts (post titles)" aria-label="Search for posts (post titles)">
                     <button class="btn btn-outline-primary rounded-circle m-1 shadow" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
@@ -49,9 +75,7 @@
         <?php foreach($posts as $row): ?>
               <div class="d-flex flex-top my-3 border border-1 border-primary px-2 py-4 rounded rounded-3 shadow bg-white">
                 <div>
-                  <img class="d-flexbox rounded-circle shadow-1-strong mx-2 text-center shadow"
-                    src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(10).webp" alt="<?=$row->postauthor?>" width="65"
-                    height="65" />
+                    <img src="<?=$info->profilePhoto?>" alt="" class="profilePhoto d-flexbox rounded-circle shadow-1-strong mx-3 text-center shadow" id="user_<?=$info->sifra?>" style="height:50px;width:50px;"/>
                     <br>
                     <div class="text-center my-2">
                     <?php if($row->authorid == $_SESSION['auth']->sifra):?>

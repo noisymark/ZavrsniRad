@@ -68,7 +68,11 @@ class UserController extends UserAuthorisationController
         {
             $i->totalLikes=Like::countLikes($i->postid);
         }
+        parent::setCSSdependency([
+            '<link rel="stylesheet" href="' . App::config('url') . 'public/css/dependency/cropper.css">'
+        ]);
         parent::setJSdependency([
+            '<script src="' . App::config('url') . 'public/js/dependency/cropper.js"></script>',
             '<script src="' . App::config('url') . 'public/js/dependency/jquery-ui.js"></script>',
             '<script src="' . App::config('url') . 'public/js/dependency/search.js"></script>',
             '<script>
@@ -76,6 +80,15 @@ class UserController extends UserAuthorisationController
                 let id=\'' . $id . '\';
             </script>'
         ]); 
+
+        if(file_exists(BP . 'public' . DIRECTORY_SEPARATOR . 'photos' . DIRECTORY_SEPARATOR . 'userProfilePhotos' . DIRECTORY_SEPARATOR . $info->sifra . '.png'))
+        {
+            $info->profilePhoto=App::config('url') . 'public/photos/userProfilePhotos/' . $info->sifra . '.png';
+        }
+        else
+        {
+            $info->profilePhoto=App::config('url') . 'public/photos/userProfilePhotos/unknown.png';
+        }
         
         $this->view->render($this->viewPath . 'profile',[
             'info'=>$info,
