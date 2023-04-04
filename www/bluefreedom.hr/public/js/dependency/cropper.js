@@ -1198,8 +1198,8 @@
       removeClass(element, CLASS_HIDDEN);
 
       var containerData = {
-        width: Math.max(container.offsetWidth, Number(options.minContainerWidth) || 200),
-        height: Math.max(container.offsetHeight, Number(options.minContainerHeight) || 100)
+        width: Math.max(container.offsetWidth, Number(options.minContainerWidth) || 400),
+        height: Math.max(container.offsetHeight, Number(options.minContainerHeight) || 200)
       };
 
       this.containerData = containerData;

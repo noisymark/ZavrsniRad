@@ -115,6 +115,14 @@ class UserController extends UserAuthorisationController
         foreach($info as $i)
         {
             $i->totalLikes=Like::countLikes($i->postid);
+            if(file_exists(BP . 'public' . DIRECTORY_SEPARATOR . 'photos' . DIRECTORY_SEPARATOR . 'userProfilePhotos' . DIRECTORY_SEPARATOR . $i->authorid . '.png'))
+        {
+            $i->photo=App::config('url') . 'public/photos/userProfilePhotos/' . $i->authorid . '.png';
+        }
+        else
+        {
+            $i->photo=App::config('url') . 'public/photos/userProfilePhotos/unknown.png';
+        }
         }
         $this->view->render($this->viewPath . 'index',[
             'info'=>$info,
@@ -126,6 +134,26 @@ class UserController extends UserAuthorisationController
     public function notFound()
     {
         $this->view->render($this->viewPath . 'notFound');
+    }
+
+    public function saveImage()
+    {
+        $profilePhoto = $_POST['profilePhoto'];
+        $profilePhoto=str_replace('data:image/png;base64,','',$profilePhoto);
+        $profilePhoto=str_replace(' ','+',$profilePhoto);
+        $data=base64_decode($profilePhoto);
+
+        file_put_contents(BP . 'public' . DIRECTORY_SEPARATOR
+        . 'photos' . DIRECTORY_SEPARATOR . 
+        'userProfilePhotos' . DIRECTORY_SEPARATOR 
+        . $_POST['id'] . '.png', $data);
+
+
+        $res = new stdClass();
+        $res->error=false;
+        $res->description='Uspješno spremljeno';
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode($res);
     }
     
 }

@@ -34,15 +34,15 @@ $('#searchpostofusers').autocomplete({
       //console.log(result.toDataURL());
   
       //ako želimo jpg https://github.com/fengyuanchen/cropperjs
-  
+      var Modal = bootstrap.Modal.getInstance(profilePhotoModal);
       $.ajax({
           type: "POST",
-          url:  url + "/user/saveImage",
+          url:  url + "/user/saveImage/",
           data: "id=" + userId + "&profilePhoto=" + result.toDataURL(),
           success: function(vratioServer){
             if(!vratioServer.error){
-              $("#p_"+userId).attr("src",result.toDataURL());
-              $("#profilePhotoModal").foundation("close");
+              $("#user_"+userId).attr("src",result.toDataURL());
+              Modal.hide();
             }else{
               alert(vratioServer.description);
             }
