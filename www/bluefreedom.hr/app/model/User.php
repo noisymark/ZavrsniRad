@@ -49,8 +49,8 @@ class User
         try
         {$connection=DB::getInstance();
         $query=$connection->prepare('
-        insert into osoba(ime,prezime,datumrodenja,email,lozinka,stanje,administrator)
-        values(:fname,:lname,:dob,:email,:password,false,false)
+        insert into osoba(ime,prezime,datumrodenja,email,lozinka,stanje,administrator,aktivan)
+        values(:fname,:lname,:dob,:email,:password,false,false,true)
         ');
         $query->execute($parameters);}
         catch(Exception $e)
@@ -74,6 +74,7 @@ class User
         from osoba a
         inner join objava b on b.osoba = a.sifra
         where a.sifra = :id
+        and a.aktivan!=false
         limit :start, :resultsPerPage
         ');
 
@@ -101,6 +102,7 @@ class User
         inner join objava b on b.osoba = a.sifra
         where concat(b.naslov, \' \' , b.upis, \' \', b.sifra)
         like :search
+        and a.aktivan!=false
         and a.sifra=:id
         order by
         a.ime,
@@ -119,5 +121,20 @@ class User
 
         $query->execute();
         return $query->fetchAll();
+    }
+
+    public static function checkDisabled($email)
+    {
+        $connection=DB::getInstance();
+        $query=$connection->prepare('
+        select aktivan
+        from osoba
+        where email=:email
+        ');
+        $query->execute([
+            'email'=>$email
+        ]);
+        $end=$query->fetchColumn();
+        return $end==1;
     }
 }

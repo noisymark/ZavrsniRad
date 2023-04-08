@@ -30,6 +30,11 @@
                 <p class="px-2 float-start">ACTIVE: <i class="fa fa-solid fa-<?=$red->stanje?>"></i></p>
                 <p class="px-2 float-end">ADMIN: <i class="fa fa-solid fa-<?=$red->administrator?>"></i></p>
                 <div class="d-inline-flex">
+                    <?php if($red->aktivan==true): ?>
+                        <a class="px-2" href="disable/<?=$red->sifra?>"><i class="border border-primary border-2 bg-body rounded-circle p-3 fa-solid fa-ban"></i></a>    
+                        <?php else:?>
+                            <a class="px-2" href="enable/<?=$red->sifra?>"><i class="border border-primary border-2 bg-body rounded-circle p-3 fa-solid fa-play"></i></a>    
+                    <?php endif; ?>
                     <a class="px-2" href="update/<?=$red->sifra?>"><i class="border border-primary border-2 bg-body rounded-circle p-3 fa-solid fa-pencil"></i></a>    
                     <a class="px-2" onclick="return confirm('Are you sure you want to delete user <?=$red->ime?> <?=$red->prezime?>?');" href="delete/<?=$red->sifra?>"><i class="border border-primary border-2 bg-body rounded-circle p-3 fa-solid fa-trash"></i></a>
                 </div>

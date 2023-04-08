@@ -22,6 +22,7 @@ class Comments
         on b.osoba = e.sifra 
         where concat(e.ime, \' \' , e.prezime, \' \', b.opis, \' \', b.sifra)
         like :search
+        and aktivan!=false
         order by
         e.ime,
         e.prezime,

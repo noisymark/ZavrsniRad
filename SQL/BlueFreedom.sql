@@ -76,7 +76,8 @@ create table osoba(
     brojtel int(15),
     slika varchar(100),
     administrator boolean not null,
-    stanje boolean not null
+    stanje boolean not null,
+    aktivan boolean not null
 );
 
 
@@ -96,13 +97,13 @@ alter table svidamise_komentar add foreign key (osoba) references osoba(sifra) o
 
 # SAMPLE INSERT INTO osoba
 
-insert into osoba(sifra,ime,prezime,datumrodenja,email,lozinka,administrator,stanje)
+insert into osoba(sifra,ime,prezime,datumrodenja,email,lozinka,administrator,stanje,aktivan)
 values
-(null,'Marko','Pavlović','2001-02-09','markopavlovic316@gmail.com','$2y$10$raIEitAaxTkfaZT4ZGONqOTXlx/bmtT/Du6XOc0TcNRU1rW93bYJO',True,True),
-(null,'Rebeka','Ivanković','2002-04-08','rebeka.ivankovic33@gmail.com','$2y$10$raIEitAaxTkfaZT4ZGONqOTXlx/bmtT/Du6XOc0TcNRU1rW93bYJO',False,True),
-(null,'Test','Test','2000-01-01','test@test.hr','$2y$10$raIEitAaxTkfaZT4ZGONqOTXlx/bmtT/Du6XOc0TcNRU1rW93bYJO',False,True),
-(null,'Edunova','Test','2000-01-01','test@edunova.hr','$2y$10$2njMqvJiJiWAwUAvLrpJj.MSpW3SIHBWmE0k3X.F3LjRY/ff2p06m',False,True),
-(null,'Valentin','Mijatović','2000-02-07','valentin.mijau22@gmail.com','$2y$10$raIEitAaxTkfaZT4ZGONqOTXlx/bmtT/Du6XOc0TcNRU1rW93bYJO',False,True);
+(null,'Marko','Pavlović','2001-02-09','markopavlovic316@gmail.com','$2y$10$raIEitAaxTkfaZT4ZGONqOTXlx/bmtT/Du6XOc0TcNRU1rW93bYJO',True,True,True),
+(null,'Rebeka','Ivanković','2002-04-08','rebeka.ivankovic33@gmail.com','$2y$10$raIEitAaxTkfaZT4ZGONqOTXlx/bmtT/Du6XOc0TcNRU1rW93bYJO',False,True,True),
+(null,'Test','Test','2000-01-01','test@test.hr','$2y$10$raIEitAaxTkfaZT4ZGONqOTXlx/bmtT/Du6XOc0TcNRU1rW93bYJO',False,True,True),
+(null,'Edunova','Test','2000-01-01','test@edunova.hr','$2y$10$2njMqvJiJiWAwUAvLrpJj.MSpW3SIHBWmE0k3X.F3LjRY/ff2p06m',False,True,True),
+(null,'Valentin','Mijatović','2000-02-07','valentin.mijau22@gmail.com','$2y$10$raIEitAaxTkfaZT4ZGONqOTXlx/bmtT/Du6XOc0TcNRU1rW93bYJO',False,True,True);
 
 # SAMPLE INSERT INTO objava
 

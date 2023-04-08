@@ -31,6 +31,7 @@ class Users
         select count(*) from osoba
         where concat(ime, \' \' , prezime, \' \', email)
         like :search
+        and aktivan!=false
         ');
         $query->execute([
             'search'=>$search
@@ -57,8 +58,8 @@ class Users
         try
         {$connection=DB::getInstance();
         $query=$connection->prepare('
-        insert into osoba(ime,prezime,datumrodenja,email,lozinka,stanje,administrator)
-        values(:fname,:lname,:dob,:email,:password,true,false)
+        insert into osoba(ime,prezime,datumrodenja,email,lozinka,stanje,administrator,aktivan)
+        values(:fname,:lname,:dob,:email,:password,true,false,true)
         ');
         $query->execute($parameters);}
         catch(Exception $e)

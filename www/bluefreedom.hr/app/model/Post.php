@@ -19,6 +19,7 @@ class Post
         inner join objava b on b.osoba = a.sifra
         where concat(b.naslov, \' \' , b.upis, \' \', b.sifra)
         like :search
+        and a.aktivan!=false
         order by
         a.ime,
         a.prezime,
@@ -56,17 +57,20 @@ class Post
         $start=($page*$resultsPerPage)-$resultsPerPage;
         $connection=DB::getInstance();
         $query=$connection->prepare('
-        select sifra as \'id\',
+        select a.sifra as \'id\',
         \'post\' as \'type\',
-        naslov as \'text\'
-        from objava
+        a.naslov as \'text\'
+        from objava a
+        inner join osoba b on a.osoba=b.sifra
         where naslov like :search
+        and aktivan!=false
         union 
         select sifra as \'id\',
         \'user\' as \'type\',
         concat(ime, \' \', prezime) as \'text\'
         from osoba
         where concat(ime, \' \', prezime) like :search
+        and aktivan!=false
         limit :start, :resultsPerPage
         ');
 

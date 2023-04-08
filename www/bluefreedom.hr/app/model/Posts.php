@@ -21,6 +21,7 @@ class Posts
         inner join objava b on b.osoba = a.sifra
         where concat(b.naslov, \' \' , b.upis, \' \', b.sifra)
         like :search
+        and a.aktivan!=false
         order by
         a.ime,
         a.prezime,

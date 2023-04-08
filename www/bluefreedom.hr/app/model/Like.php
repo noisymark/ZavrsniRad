@@ -13,6 +13,7 @@ class Like
         from svidamise a
         inner join osoba b on a.osoba = b.sifra 
         where a.objava=:postID 
+        and b.aktivan!=false
         group by a.sifra, b.ime, b.prezime
         ;
         ');

@@ -47,13 +47,22 @@ class LoginController extends Controller
                 if(!User::controlVerified($_POST['email']))
                 {
                     $this->view->render('login',[
-                        'message'=>'Your account has not been verified',
+                        'message'=>'Your e-mail has not been verified',
                         'email'=>$_POST['email']
                     ]);
                     return;
                 }
                 else
                 {
+                    if(!User::checkDisabled($_POST['email']))
+                    {
+                        $this->view->render('login',[
+                            'message'=>'Your account has been suspended!',
+                            'email'=>$_POST['email']
+                        ]);
+                        return;
+                    }
+
                     $_SESSION['auth']=$user;
                     setcookie('email',$_POST['email']);
                     header('location:'.App::config('url') . 'user/index');

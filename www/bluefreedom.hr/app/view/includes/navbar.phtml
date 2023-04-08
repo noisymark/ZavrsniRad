@@ -15,22 +15,11 @@
     <div class="collapse navbar-collapse " id="navbarSupportedContent">
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
             <?php if(App::admin()): ?>
-                <li class="nav-item dropdown shadow btn btn-primary rounded rounded-3 bg-gradient mx-2">
-                    <a class="nav-link text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i id="navbaricon" class="fa-solid fa-screwdriver-wrench"></i>Advanced</a>
-                    <ul class="dropdown-menu bg-transparent text-white border-0" aria-labelledby="navbarDropdown">
-                        <li>
-                          <a class="dropdown-item shadow btn btn-primary bg-primary text-white rounded rounded-3 bg-gradient m-1 p-3" href="<?=App::config('url')?>operater/index"><i id="navbaricon" class="fa-solid fa-users"></i>Operaters</a>
-                            </ul>
-                        </li>
+                        <li class="nav-item shadow btn btn-primary rounded rounded-3 bg-gradient mx-2"><a class="nav-link text-white" href="<?=App::config('url')?>operater/index"><i id="navbaricon" class="fa-solid fa-users"></i>Operaters</a></li>
             <?php elseif (App::oper()): ?>
-                            <li class="nav-item dropdown shadow btn btn-primary rounded rounded-3 bg-gradient mx-2">
-                                <a class="nav-link text-white" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i id="navbaricon" class="fa-solid fa-wrench"></i>Tools</a>
-                                <ul class="dropdown-menu bg-transparent border-0 text-white" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item shadow btn btn-primary bg-primary text-white rounded rounded-3 bg-gradient m-1 p-3" href="<?=App::config('url')?>users/index"><i id="navbaricon" class="fa-solid fa-users"></i>Users</a></li>
-                                    <li><a class="dropdown-item shadow btn btn-primary bg-primary text-white rounded rounded-3 bg-gradient m-1 p-3" href="<?=App::config('url')?>posts/index"><i id="navbaricon" class="fa-solid fa-note-sticky"></i>Posts</a></li>
-                                    <li><a class="dropdown-item shadow btn btn-primary bg-primary text-white rounded rounded-3 bg-gradient m-1 p-3" href="<?=App::config('url')?>comments/index"><i id="navbaricon" class="fa-solid fa-comment"></i>Comments</a></li>
-                                </ul>
-                            </li>
+                                    <li class="nav-item shadow btn btn-primary rounded rounded-3 bg-gradient mx-2"><a class="nav-link text-white" href="<?=App::config('url')?>users/index"><i id="navbaricon" class="fa-solid fa-users"></i>Users</a></li>
+                                    <li class="nav-item shadow btn btn-primary rounded rounded-3 bg-gradient mx-2"><a class="nav-link text-white" href="<?=App::config('url')?>posts/index"><i id="navbaricon" class="fa-solid fa-note-sticky"></i>Posts</a></li>
+                                    <li class="nav-item shadow btn btn-primary rounded rounded-3 bg-gradient mx-2"><a class="nav-link text-white" href="<?=App::config('url')?>comments/index"><i id="navbaricon" class="fa-solid fa-comment"></i>Comments</a></li>
             <?php else : ?>
                             <? // OVDJE ĆE IĆI SVE OD OBIČNO PRIJAVLJENIH KORISNIKA ... NAKON OVIH IF-OVA?>
                             <li class="nav-item shadow btn btn-primary rounded rounded-3 bg-gradient mx-2">
