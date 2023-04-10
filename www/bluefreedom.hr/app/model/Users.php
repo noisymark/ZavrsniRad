@@ -150,6 +150,32 @@ class Users
         $sifra=$query->fetchColumn();
         return $sifra>0;
     }
+
+    public static function disable($id)
+    {
+        $connection=DB::getInstance();
+        $query=$connection->prepare('
+        update osoba set
+        aktivan=0
+        where sifra=:id
+        ');
+        $query->execute([
+            'id'=>$id
+        ]);
+    }
+
+    public static function enable($id)
+    {
+        $connection=DB::getInstance();
+        $query=$connection->prepare('
+        update osoba set
+        aktivan=1
+        where sifra=:id
+        ');
+        $query->execute([
+            'id'=>$id
+        ]);
+    }
 }
 
 ?>

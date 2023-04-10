@@ -210,6 +210,32 @@ class UsersController extends AuthorisationController
         header('location:'.App::config('url').'users/index');
     }
 
+    public function disable($id)
+    {
+        $id=(int)$id;
+        $info=Users::readOne($id);
+        if($info==null)
+        {
+            header('location: ' . App::config('url') . 'users/index');
+            return;
+        }
+        Users::disable($id);
+        header('location: ' . App::config('url') . 'users/index');
+    }
+
+    public function enable($id)
+    {
+        $id=(int)$id;
+        $info=Users::readOne($id);
+        if($info==null)
+        {
+            header('location: ' . App::config('url') . 'users/index');
+            return;
+        }
+        Users::enable($id);
+        header('location: ' . App::config('url') . 'users/index');
+    }
+
     private function controlChange()
     {
         return $this->controlUpdateName() && $this->controlUpdateEmail() && $this->controlSameEmail($this->e->sifra) && $this->controlUpdatePhone() && $this->controlUpdateDob() && $this->controlUpdateActiveAdmin();
