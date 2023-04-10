@@ -23,6 +23,6 @@ $( '#search' ).autocomplete({
             break;
     }
     return $( '<li>' )
-      .append( '<div onClick="window.location.href=\''+ url + forward + item.id +'\'") class="pt-4 m-auto border border-1 border-primary">' + '<p class="text-decoration-none text-break text-center">' + item.type+ ': ' + item.text + '</p><div>')
+      .append( '<div onClick="window.location.href=\''+ url + forward + item.id +'\'") class="pt-4 m-auto border border-1 border-primary bg-white text-primary">' + '<p class="text-decoration-none text-break text-center">' + item.type+ ': ' + item.text + '</p><div></li>')
       .appendTo( ul );
   };

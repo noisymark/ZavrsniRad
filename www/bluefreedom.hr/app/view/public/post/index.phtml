@@ -41,12 +41,6 @@
                 <a href="<?=App::config('url')?>like/delete/<?=$likeid?>" class="mb-0 mx-3 btn btn-primary text-white shadow"><i class="far fa-thumbs-down me-2"></i>unLike</a>
                 <?php endif;?>
               </a>
-              <a href="#comment" class="d-flex align-items-center me-3">
-                <p class="mb-0 btn btn-primary text-white shadow"><i class="far fa-comment-dots me-2"></i>Comment</p>
-              </a>
-              <a href="#" class="d-flex align-items-center me-3">
-                <p class="mb-0 btn btn-primary text-white shadow"><i class="fas fa-share me-2"></i>Share</p>
-              </a>
             </div>
           </div>
           <form action="<?=App::config('url')?>post/comment/<?=$info[0]->postid?>" method="post">

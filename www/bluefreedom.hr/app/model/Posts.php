@@ -96,6 +96,7 @@ class Posts
         from osoba a
         inner join objava b on b.osoba = a.sifra
         where b.sifra=:postID
+        and a.aktivan!=false
         ');
 
         $query->bindParam('postID',$postID);

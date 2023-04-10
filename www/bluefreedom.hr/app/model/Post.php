@@ -62,8 +62,8 @@ class Post
         a.naslov as \'text\'
         from objava a
         inner join osoba b on a.osoba=b.sifra
-        where naslov like :search
-        and aktivan!=false
+        where a.naslov like :search
+        and b.aktivan!=false
         union 
         select sifra as \'id\',
         \'user\' as \'type\',
@@ -157,8 +157,10 @@ class Post
     {
         $connection=DB::getInstance();
         $query=$connection->prepare('
-        select count(*)
-        from objava 
+        select count(a.sifra)
+        from objava a
+        inner join osoba b on a.osoba=b.sifra
+        where b.aktivan!=false
         ');
         $query->execute();
         return $query->fetchColumn();

@@ -44,6 +44,7 @@ class Users
         $connection=DB::getInstance();
         $query=$connection->prepare('
         select * from osoba where sifra=:id
+        and aktivan!=false
         ');
         $query->execute([
             'id'=>$id

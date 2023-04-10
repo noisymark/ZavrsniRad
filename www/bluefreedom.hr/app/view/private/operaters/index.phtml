@@ -1,34 +1,16 @@
-<div class="container p-2">
-    <div class="row">
-        <div class="col-12 col-lg-12">
-            <a href="<?=App::config('url')?>operater/new" class="bg-success btn btn-lg d-grid">Add new operater</a>
-            <table class="table table-dark">
-    <thead class="text-center font-weight-bold">
-        <tr>
-            <th>Name</th>
-            <th>E-mail</th>
-            <th>Role</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody class="text-center">
-    <?php foreach($info as $i):?>
-        <?php if($i->uloga==='oper'):?>
-            <tr>
-                <td><?=$i->ime?> <?=$i->prezime?></td>
-                <td><?=$i->email?></td>
-                <td><?=$i->uloga?></td>
-                <td>
-                <a href="update?id=<?=$i->sifra?>"><i class="fa fa-pencil"></i></a>    
-                <a href="delete?id=<?=$i->sifra?>"><i class="fa fa-trash"></i></a>
-                </td>
-            </tr>
-            <?php else: ?>
-            <?php continue;?>
-        <?php endif; ?>
-        <?php endforeach; ?>
-    </tbody>
-</table>
+<div class="container">
+    <div class="row mt-3">
+        <div class="col-11">
+            <ul>
+                <div>
+                    <a href="<?=App::config('url')?>operater/new" class="btn btn-success d-block">ADD NEW OPERATER</a>
+                </div>
+            <?php foreach($info as $i): ?>
+                <div class="text-center">
+                <p class="bg-info text-dark rounded-pill my-1 p-3">Name: <?=$i->ime?> <?=$i->prezime?> | E-mail: <?=$i->email?> <a class="btn btn-primary ms-3" href="<?=App::config('url')?>operater/edit/<?=$i->sifra?>"><i class="fa fa-pen"></i></a><a class="btn btn-primary ms-3" onclick="return confirm('Are you sure you want to delete this operater?');" href="<?=App::config('url')?>operater/delete/<?=$i->sifra?>"><i class="fa fa-trash"></i></a></p>
+                </div>
+            <?php endforeach; ?>
+            </ul>
         </div>
     </div>
 </div>

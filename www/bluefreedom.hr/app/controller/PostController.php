@@ -24,9 +24,10 @@ class PostController extends UserAuthorisationController
     public function index($postID)
     {
         $postID=(int)$postID;
-        if($postID===0)
+        $post=Posts::readOne($postID);
+        if($post==null)
         {
-            header('location: '.App::config('url').'index/logout');
+            $this->view->render($this->viewPath . 'notFound');
             return;
         }
         else

@@ -12,16 +12,6 @@ class UserController extends UserAuthorisationController
         parent::__construct();
         $this->nf = new NumberFormatter('hr-HR',NumberFormatter::DECIMAL);
         $this->nf->setPattern('###-###-0000');
-        parent::setCSSdependency([
-            '<link rel="stylesheet" href="' . App::config('url') . 'public/css/dependency/jquery-ui.css">'
-        ]);
-        parent::setJSdependency([
-            '<script src="' . App::config('url') . 'public/js/dependency/jquery-ui.js"></script>',
-            '<script src="' . App::config('url') . 'public/js/dependency/search.js"></script>',
-            '<script>
-                let url=\'' . App::config('url') . '\';
-            </script>'
-        ]);
     }
 
     public function ajaxSearch($id)
@@ -69,7 +59,8 @@ class UserController extends UserAuthorisationController
             $i->totalLikes=Like::countLikes($i->postid);
         }
         parent::setCSSdependency([
-            '<link rel="stylesheet" href="' . App::config('url') . 'public/css/dependency/cropper.css">'
+            '<link rel="stylesheet" href="' . App::config('url') . 'public/css/dependency/cropper.css">',
+            '<link rel="stylesheet" href="' . App::config('url') . 'public/css/dependency/jquery-ui.css">'
         ]);
         parent::setJSdependency([
             '<script src="' . App::config('url') . 'public/js/dependency/cropper.js"></script>',
@@ -101,6 +92,16 @@ class UserController extends UserAuthorisationController
 
     public function index($page=1)
     {
+        parent::setCSSdependency([
+            '<link rel="stylesheet" href="' . App::config('url') . 'public/css/dependency/jquery-ui.css">'
+        ]);
+        parent::setJSdependency([
+            '<script src="' . App::config('url') . 'public/js/dependency/jquery-ui.js"></script>',
+            '<script src="' . App::config('url') . 'public/js/dependency/search.js"></script>',
+            '<script>
+                let url=\'' . App::config('url') . '\';
+            </script>'
+        ]);
         $page=(int)$page;
         if($page==0)
         {

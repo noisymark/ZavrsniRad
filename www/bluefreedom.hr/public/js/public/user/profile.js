@@ -11,7 +11,7 @@ $('#searchpostofusers').autocomplete({
     minLength: 2
 }).autocomplete( 'instance' )._renderItem = function( ul, item ) {
     return $( '<li>' )
-      .append( '<div onClick="location=\'' + url + 'post/index/' + item.postid + '\';" class="pt-4 m-auto border border-1 border-primary">' + '<p class="text-decoration-none text-break text-center">POST: ' + item.posttitle + '<br>FROM: '+ item.postauthor + '</p><div>')
+      .append( '<div onClick="location=\'' + url + 'post/index/' + item.postid + '\';" class="pt-4 m-auto border border-1 border-primary bg-white text-primary">' + '<p class="text-decoration-none text-break text-center">POST: ' + item.posttitle + '<br>FROM: '+ item.postauthor + '</p><div></li>')
       .appendTo( ul );
   };
 
