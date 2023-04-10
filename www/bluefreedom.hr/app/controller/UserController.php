@@ -3,7 +3,7 @@ class UserController extends UserAuthorisationController
 {
     private $viewPath = 'public' . DIRECTORY_SEPARATOR . 'user' . DIRECTORY_SEPARATOR;
 
-    private $e;
+    private $info;
     private $nf;
     private $message='';
 
@@ -90,6 +90,41 @@ class UserController extends UserAuthorisationController
         ]);
     }
 
+    public function changePassword($id)
+    {
+        $id=(int)$id;
+        $this->info=User::readOneForEdit($id);
+        if($this->info->sifra==$_SESSION['auth']->sifra)
+        {
+            if($_SERVER['REQUEST_METHOD']==='GET')
+            {
+                $this->view->render($this->viewPath . 'changePassword',[
+                    'info'=>$this->newPassword(),
+                    'message'=>$this->message
+                ]);
+                return;
+            }
+            $this->preparePost();
+            if(!$this->controlPassword())
+            {
+                $this->view->render($this->viewPath . 'changePassword',[
+                    'info'=>$this->info,
+                    'message'=>$this->message
+                ]);
+                return;
+            }
+            unset($this->info->confirmpw);
+            $this->info->id=$id;
+            User::updatePassword((array)$this->info);
+            header('location: ' . App::config('url') . 'user/myProfile');
+        }
+        else
+        {
+            header('location: ' . App::config('url') . 'user/index');
+            return;
+        }
+    }
+
     public function index($page=1)
     {
         parent::setCSSdependency([
@@ -137,6 +172,40 @@ class UserController extends UserAuthorisationController
         $this->view->render($this->viewPath . 'notFound');
     }
 
+    public function editMyProfile($id)
+    {
+        $id=(int)$id;
+        $this->info=User::readOneForEdit($id);
+        if($this->info->sifra==$_SESSION['auth']->sifra)
+        {
+            if($_SERVER['REQUEST_METHOD']==='GET')
+            {
+                $this->view->render($this->viewPath . 'edit',[
+                    'info'=>$this->info,
+                    'message'=>$this->message
+                ]);
+                return;
+            }
+            $this->preparePost();
+            if(!$this->controlEdit())
+            {
+                $this->view->render($this->viewPath . 'edit',[
+                    'info'=>$this->info,
+                    'message'=>$this->message
+                ]);
+                return;
+            }
+            $this->info->id=$id;
+            User::update((array)$this->info);
+            header('location: ' . App::config('url') . 'user/myProfile');
+        }
+        else
+        {
+            header('location: ' . App::config('url') . 'user/index');
+            return;
+        }
+    }
+
     public function saveImage()
     {
         $profilePhoto = $_POST['profilePhoto'];
@@ -156,5 +225,96 @@ class UserController extends UserAuthorisationController
         header('Content-Type: application/json; charset=utf-8');
         echo json_encode($res);
     }
-    
+
+    private function preparePost()
+    {
+        $this->info=(object)$_POST;
+    }
+
+    private function controlEdit()
+    {
+        $fname=$this->info->fname;
+        $lname=$this->info->lname;
+        $email=$this->info->email;
+
+        if(strlen(trim($fname))==0)
+        {
+            $this->message='First name cannot be empty!';
+            return false;
+        }
+        if(strlen(trim($fname))>50){
+            $this->message='First name cannot be longer than 50 chars!';
+            return false;
+        }
+        if(strlen(trim($lname))==0)
+        {
+            $this->message='Last name cannot be empty!';
+            return false;
+        }
+        if(strlen(trim($lname))>50){
+            $this->message='Last name cannot be longer than 50 chars!';
+            return false;
+        }
+        if(strlen(trim($email))==0)
+        {
+            $this->message='E-mail cannot be empty!';
+            return false;
+        }
+        if(strlen(trim($email))>50){
+            $this->message='E-mail cannot be longer than 50 chars!';
+            return false;
+        }
+        return true;
+    }
+
+    private function newPassword()
+    {
+        $p = new stdClass;
+        $p->password='';
+        $p->confirmpw='';
+        return $p;
+    }
+
+    private function controlPassword()
+    {
+        $password=$this->info->password;
+        $confirmpw=$this->info->confirmpw;
+
+        if(strlen(trim($password))==0)
+        {
+            $this->message='Password cannot be empty';
+            return false;
+        }
+        if(strlen(trim($password))<8)
+        {
+            $this->message='Password cannot be less than 8 characters long';
+            return false;
+        }
+        if(strlen(trim($password))>60)
+        {
+            $this->message='Password cannot be longer than 60 characters';
+            return false;
+        }
+        if(strlen(trim($confirmpw))==0)
+        {
+            $this->message='Confirm password cannot be empty';
+            return false;
+        }
+        if(strlen(trim($confirmpw))<8)
+        {
+            $this->message='Confirm password cannot be less than 8 characters long';
+            return false;
+        }
+        if(strlen(trim($confirmpw))>60)
+        {
+            $this->message='Confirm password cannot be longer than 60 characters';
+            return false;
+        }
+        if($password!=$confirmpw)
+        {
+            $this->message='Both passwords must match!';
+            return false;
+        }
+        return true;
+    }
 }

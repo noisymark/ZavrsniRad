@@ -137,4 +137,46 @@ class User
         $end=$query->fetchColumn();
         return $end==1;
     }
+
+    public static function readOneForEdit($id)
+    {
+        $connection=DB::getInstance();
+        $query=$connection->prepare('
+        select ime as fname,
+        prezime as lname,
+        email as email,
+        sifra
+        from osoba
+        where sifra=:id
+        ');
+        $query->execute([
+            'id'=>$id
+        ]);
+        return $query->fetch();
+    }
+
+    public static function update($parameters)
+    {
+        $connection=DB::getInstance();
+        $query=$connection->prepare('
+        update osoba
+        set ime=:fname,
+        prezime=:lname,
+        email=:email
+        where sifra=:id
+        ');
+        $query->execute($parameters);
+    }
+
+    public static function updatePassword($parameters)
+    {
+        $parameters['password']=password_hash($parameters['password'],PASSWORD_BCRYPT);
+        $connection=DB::getInstance();
+        $query=$connection->prepare('
+        update osoba
+        set lozinka=:password
+        where sifra=:id
+        ');
+        $query->execute($parameters);
+    }
 }
