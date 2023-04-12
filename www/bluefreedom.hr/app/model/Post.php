@@ -99,7 +99,7 @@ class Post
 
         $query->bindParam('postID',$postID);
         $query->execute();
-        return $query->fetchAll();
+        return $query->fetch();
     }
 
     public static function delete($id)
@@ -137,6 +137,17 @@ class Post
         ');
         $query->execute($parameters);
         return $parameters['id'];
+    }
+    public static function updated($parameters)
+    {
+        $connection=DB::getInstance();
+        $query=$connection->prepare('
+        update objava
+        set naslov=:posttitle,
+        upis=:postdescription
+        where sifra=:id
+        ');
+        $query->execute($parameters);
     }
 
     public static function postExists($postID)

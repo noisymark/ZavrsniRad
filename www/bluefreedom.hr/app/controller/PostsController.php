@@ -67,6 +67,75 @@ class PostsController extends AuthorisationController
         Posts::delete($sifra);
         header('location: ' . App::config('url') . 'posts/index');
     }
+
+    public function update($id)
+    {
+        $id=(int)$id;
+        $this->e=Post::readOne($id);
+        if($this->e==null)
+        {
+            header('location: ' . App::config('url'));
+            return;
+        }
+
+        if($_SERVER['REQUEST_METHOD']==='GET')
+        {
+            $this->view->render($this->viewPath . 'update',[
+                'info'=>$this->e,
+                'message'=>$this->message
+            ]);
+            return;
+        }
+        else
+        {
+            $this->preparePost();
+            if(!$this->controlUpdate())
+            {
+                $this->view->render($this->viewPath . 'update',[
+                    'info'=>$this->e,
+                    'message'=>$this->message
+                ]);
+                return;
+            }
+            $this->e->id=$id;
+            Post::updated((array)$this->e);
+            header('location: ' . App::config('url') . 'posts/index');
+        }
+    }
+
+    private function preparePost()
+    {
+        $this->e=(object)$_POST;
+    }
+
+    private function controlUpdate()
+    {
+        $title=$this->e->posttitle;
+        $description=$this->e->postdescription;
+
+        if(strlen(trim($title))==0)
+        {
+            $this->message='Title cannot be empty!';
+            return false;
+        }
+        if(strlen(trim($title))>50)
+        {
+            $this->message='Title cannot be longer than 50 chars!';
+            return false;
+        }
+        if(strlen(trim($description))==0)
+        {
+            $this->message='Description cannot be empty!';
+            return false;
+        }
+        if(strlen(trim($description))>50)
+        {
+            $this->message='Description cannot be longer than 250 chars!';
+            return false;
+        }
+
+        return true;
+    }
 }
 
 ?>

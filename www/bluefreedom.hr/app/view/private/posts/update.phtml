@@ -1,0 +1,20 @@
+<div class="container m-auto">
+    <div class="row m-auto">
+        <div class="col-11 col-lg-6 m-auto text-center">
+            <form action="" method="post" class="border border-primary rounded p-4">
+                <div class="mb-3">
+                    <label for="posttitle" class="form-label">Title</label>
+                    <input type="text" name="posttitle" id="posttitle" class="form-control text-center rounded-pill" value="<?=$info->posttitle?>">
+                </div>
+                <div class="mb-3">
+                    <label for="postdescription" class="form-label">Description</label>
+                    <textarea name="postdescription" id="postdescription" cols="30" rows="10" class="form-control text-center rounded"><?=$info->postdescription?></textarea>
+                </div>
+                <div class="mb-3">
+                    <a href="" class="btn btn-outline-danger mx-2"><i class="me-2 fa fa-x"></i> CANCEL</a>
+                    <button type="submit" class="btn btn-outline-success mx-2"><i class="me-2 fa fa-check"></i> UPDATE</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
