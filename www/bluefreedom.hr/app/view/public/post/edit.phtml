@@ -3,14 +3,14 @@
         <form method="post" class="form-control p-4" action="">
         <div class="col-md-6 mx-auto m-4">
             <label for="title">Post title:</label>
-            <input class="form-control" type="text" name="title" id="title" value="<?=$info[0]->posttitle?>">
+            <input class="form-control" type="text" name="title" id="title" value="<?=$info->posttitle?>">
         </div>
         <div class="col-md-6 mx-auto m-4">
             <label for="description">Post description:</label>
-            <textarea class="form-control" type="text" name="description" id="description"><?=$info[0]->postdescription?></textarea>
+            <textarea class="form-control" type="text" name="description" id="description"><?=$info->postdescription?></textarea>
         </div>
         <div>
-            <a href="<?=App::config('url')?>post/index/<?=$info[0]->postid?>" class="btn btn-lg d-inline-block btn-danger text-white my-4 mx-2 px-4">CANCEL</a>
+            <a href="<?=App::config('url')?>post/index/<?=$info->postid?>" class="btn btn-lg d-inline-block btn-danger text-white my-4 mx-2 px-4">CANCEL</a>
         <button class="btn btn-lg d-inline-block btn-primary text-white my-4 mx-2 px-4" type="submit">UPDATE</button>
         </div>
         <h4><?=$message?></h4>

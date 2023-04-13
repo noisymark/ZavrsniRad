@@ -49,6 +49,41 @@ class CommentsController extends AuthorisationController
         ]);
     }
 
+    public function update($sifra)
+    {
+        $sifra=(int)$sifra;
+        $this->e=Comments::readOne($sifra);
+        if($this->e==null)
+        {
+            header('location: ' . App::config('url') . 'comments/index');
+            return;
+        }
+
+        if($_SERVER['REQUEST_METHOD']==='GET')
+        {
+            $this->view->render($this->viewPath . 'update',[
+                'info'=>$this->e,
+                'message'=>$this->message
+            ]);
+            return;
+        }
+        else
+       {
+        $this->preparePost();
+        if(!$this->controlUpdate())
+        {
+            $this->view->render($this->viewPath . 'update',[
+                'info'=>$this->e,
+                'message'=>$this->message
+            ]);
+            return;
+        }
+        $this->e->sifra=$sifra;
+        Comments::update((array)$this->e);
+        header('location: ' . App::config('url') . 'comments/index');
+       } 
+    }
+
     public function delete($sifra=0)
     {
         $sifra=(int)$sifra;
@@ -58,6 +93,28 @@ class CommentsController extends AuthorisationController
         }
         Comments::delete($sifra);
         header('location: ' . App::config('url') . 'comments/index');
+    }
+
+    private function preparePost()
+    {
+        $this->e=(object)$_POST;
+    }
+
+    private function controlUpdate()
+    {
+        $opis=$this->e->opis;
+
+        if(strlen(trim($opis))===0)
+        {
+            $this->message='Comment cannot be empty!';
+            return false;
+        }
+        if(strlen(trim($opis))>250)
+        {
+            $this->message='Comment cannot be longer than 250 chars';
+            return false;
+        }
+        return true;
     }
 }
 

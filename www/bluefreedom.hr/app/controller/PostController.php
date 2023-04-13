@@ -33,8 +33,27 @@ class PostController extends UserAuthorisationController
         else
         {
         $info=Post::readOne($postID);
+        if(file_exists(BP . 'public' . DIRECTORY_SEPARATOR . 'photos' . DIRECTORY_SEPARATOR . 'userProfilePhotos' . DIRECTORY_SEPARATOR . $info->authorid . '.png'))
+        {
+            $info->photo=App::config('url') . 'public/photos/userProfilePhotos/' . $info->authorid . '.png';
+        }
+        else
+        {
+            $info->photo=App::config('url') . 'public/photos/userProfilePhotos/unknown.png';
+        }
         $comments=Comment::read($postID);
-        $info[0]->totalLikes=Like::countLikes($postID);
+        foreach($comments as $c)
+        {
+            if(file_exists(BP . 'public' . DIRECTORY_SEPARATOR . 'photos' . DIRECTORY_SEPARATOR . 'userProfilePhotos' . DIRECTORY_SEPARATOR . $c->authorid . '.png'))
+        {
+            $c->photo=App::config('url') . 'public/photos/userProfilePhotos/' . $c->authorid . '.png';
+        }
+        else
+        {
+            $c->photo=App::config('url') . 'public/photos/userProfilePhotos/unknown.png';
+        }
+        }
+        $info->totalLikes=Like::countLikes($postID);
         $likes=Like::likedBy($postID);
         foreach($likes as $li)
         {
@@ -150,7 +169,7 @@ class PostController extends UserAuthorisationController
         else
         {
             $info=Post::readOne($id);
-            if($info[0]->authorid!==$_SESSION['auth']->sifra)
+            if($info->authorid!==$_SESSION['auth']->sifra)
             {
                 header('location: '.App::config('url').'index/logout');
                 return;
@@ -173,7 +192,7 @@ class PostController extends UserAuthorisationController
         else
         {
             $info=Post::readOne($id);
-            if($info[0]->authorid!==$_SESSION['auth']->sifra)
+            if($info->authorid!==$_SESSION['auth']->sifra)
             {
                 header('location: '.App::config('url').'index/logout');
                 return;

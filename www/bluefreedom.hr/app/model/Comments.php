@@ -22,7 +22,7 @@ class Comments
         on b.osoba = e.sifra 
         where concat(e.ime, \' \' , e.prezime, \' \', b.opis, \' \', b.sifra)
         like :search
-        and aktivan!=false
+        and e.aktivan!=false
         order by
         e.ime,
         e.prezime,
@@ -35,6 +35,30 @@ class Comments
         $query->bindParam('search',$search);
         $query->execute();
         return $query->fetchAll();
+    }
+
+    public static function readOne($sifra)
+    {
+        $connection=DB::getInstance();
+        $query=$connection->prepare('
+        select opis from komentar
+        where sifra=:sifra
+        ');
+        $query->execute([
+            'sifra'=>$sifra
+        ]);
+        return $query->fetch();
+    }
+
+    public static function update($parameters)
+    {
+        $connection=DB::getInstance();
+        $query=$connection->prepare('
+        update komentar
+        set opis=:opis
+        where sifra=:sifra
+        ');
+        $query->execute($parameters);
     }
 
     public static function totalComments($search='')

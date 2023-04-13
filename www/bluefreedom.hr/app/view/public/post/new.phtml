@@ -1,6 +1,6 @@
 <div class="container m-auto">
     <div class="col-10 m-auto text-center shadow">
-    <form class="form-control p-4" action="" method="post">
+    <form class="form-control p-4 bg-info" action="" method="post">
         <div class="col-md-6 mx-auto m-4">
             <label for="title">Post title:</label>
             <input class="form-control" type="text" name="title" id="title" value="<?=$info->title?>">
@@ -10,8 +10,8 @@
         <textarea class="form-control" type="text" name="description" id="description"><?=$info->description?></textarea>
         </div>
         <div>
-        <a href="<?=App::config('url')?>user/index" class="btn btn-lg d-inline-block btn-danger text-white my-4 mx-2 px-4">CANCEL</a>
-        <button class="btn btn-lg d-inline-block btn-primary text-white my-4 mx-2 px-4" type="submit">CREATE</button>
+        <a href="<?=App::config('url')?>user/index" class="btn btn-lg d-inline-block btn-danger text-white my-4 mx-2 px-4"><i class="me-2 fa fa-x"></i> CANCEL</a>
+        <button class="btn btn-lg d-inline-block btn-primary text-white my-4 mx-2 px-4" type="submit"><i class="me-2 fa fa-check"></i> CREATE</button>
         </div>
         <h4><?=$message?></h4>
     </form>

@@ -11,7 +11,8 @@ class Comment
         a.vrijemekomentiranja as commenttime,
         a.opis as commentdescription,
         a.osoba as commenterid,
-        concat (b.ime, \' \', b.prezime) as commenter
+        concat (b.ime, \' \', b.prezime) as commenter,
+        b.sifra as authorid
         from komentar a
         inner join osoba b on a.osoba = b.sifra 
         inner join objava c on a.objava = c.sifra 
