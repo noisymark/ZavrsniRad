@@ -12,19 +12,33 @@ class SendMail extends UserAuthorisationController
     {
         $this->mail = new PHPMailer(false);
         $this->setPHPMailer();
-            //Recipients
-            $this->mail->setFrom('info@marko-pavlovic.net', 'Blue Freedom');
-            $this->mail->addAddress('info@marko-pavlovic.net', 'Blue Freedom');     //Add a recipient
-
-            //Content
-            $this->mail->isHTML(true);                                  //Set email format to HTML
-            $this->mail->Subject = 'Spam/abuse report';
-            ob_start();
-            include ($this->viewPath . 'spam.phtml');
-            $body=ob_get_clean();
-            $this->mail->Body = $body;
-        
-            $this->mail->send();
+        //Recipients
+        $this->mail->setFrom('info@marko-pavlovic.net', 'Blue Freedom');
+        $this->mail->addAddress('info@marko-pavlovic.net', 'Blue Freedom');     //Add a recipient
+        //Content
+        $this->mail->isHTML(true);                                  //Set email format to HTML
+        $this->mail->Subject = 'Spam/abuse report';
+        ob_start();
+        include ($this->viewPath . 'spam.phtml');
+        $body=ob_get_clean();
+        $this->mail->Body = $body;
+        $this->mail->send();
+    }
+    public function bug($parameters)
+    {
+        $this->mail = new PHPMailer(false);
+        $this->setPHPMailer();
+        //Recipients
+        $this->mail->setFrom('info@marko-pavlovic.net', 'Blue Freedom');
+        $this->mail->addAddress('info@marko-pavlovic.net', 'Blue Freedom');     //Add a recipient
+        //Content
+        $this->mail->isHTML(true);                                  //Set email format to HTML
+        $this->mail->Subject = 'Bug report';
+        ob_start();
+        include ($this->viewPath . 'bug.phtml');
+        $body=ob_get_clean();
+        $this->mail->Body = $body;
+        $this->mail->send();
     }
 
     private function setPHPMailer()

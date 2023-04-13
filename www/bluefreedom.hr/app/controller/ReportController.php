@@ -9,7 +9,33 @@ class ReportController extends UserAuthorisationController
 
     public function bug()
     {
-        
+        if($_SERVER['REQUEST_METHOD']==='GET')
+            {
+                $this->view->render($this->viewPath . 'bug',[
+                    'info'=>$this->emptyEntrySpam(),
+                    'message'=>$this->message
+                ]);
+            }
+            else
+            {
+                $this->preparePost();
+                if(!$this->controlInputSpam())
+                {
+                    $this->view->render($this->viewPath . 'bug',[
+                        'info'=>$this->info,
+                        'message'=>$this->message
+                    ]);
+                    return;
+                }
+                $this->info->userid=$_SESSION['auth']->sifra;
+                $this->info->time=Log::time();
+                $sendmail = new SendMail;
+                $sendmail->bug($this->info);
+                $this->view->render($this->viewPath . 'bug',[
+                    'info'=>$this->emptyEntrySpam(),
+                    'message'=>'REPORT HAS BEEN SUCCESSFULLY SENT!'
+                ]);
+            }
     }
     public function spam()
     {
@@ -42,6 +68,11 @@ class ReportController extends UserAuthorisationController
                     'message'=>'REPORT HAS BEEN SUCCESSFULLY SENT!'
                 ]);
             }
+        }
+        else
+        {
+            header('location: ' . App::config('url'));
+            return;
         }
     }
     public function adminapplication()
