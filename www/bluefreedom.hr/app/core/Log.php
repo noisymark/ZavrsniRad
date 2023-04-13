@@ -10,6 +10,12 @@ class Log
         echo '</pre>';
     }
 
+    public static function time()
+    {
+        $now = new DateTime();
+        return $now->format('Y-m-d H:i:s'); 
+    }
+
 }
 
 ?>

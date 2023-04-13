@@ -30,8 +30,8 @@
                               <i id="navbaricon" class="fa-solid fa-user"></i>Me
                               </a>
                               <ul class="dropdown-menu bg-transparent text-white border-0" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item shadow btn btn-primary bg-primary text-white rounded rounded-3 bg-gradient m-1 p-3" href="<?=App::config('url')?>user/myProfile">My profile</a></li>
-                                <li><a class="dropdown-item shadow btn btn-primary bg-primary text-white rounded rounded-3 bg-gradient m-1 p-3" href="<?=App::config('url')?>user/editMyProfile/<?=$_SESSION['auth']->sifra?>">Edit my profile</a></li>
+                                <li><a class="dropdown-item shadow btn btn-primary bg-primary text-white rounded rounded-3 bg-gradient m-1 p-3" href="<?=App::config('url')?>user/myProfile"><i class="me-2 fa fa-user"></i> My profile</a></li>
+                                <li><a class="dropdown-item shadow btn btn-primary bg-primary text-white rounded rounded-3 bg-gradient m-1 p-3" href="<?=App::config('url')?>user/editMyProfile/<?=$_SESSION['auth']->sifra?>"><i class="me-2 fa fa-pen"></i> Edit my profile</a></li>
                               </ul>
                             </li>
                             <li class="nav-item dropdown shadow btn btn-primary bg-gradient rounded rounded-3 mx-2">
@@ -39,8 +39,12 @@
                               <i id="navbaricon" class="fa-solid fa-gear"></i>Settings
                               </a>
                               <ul class="dropdown-menu bg-transparent rounded rounded-3 mx-2 border-0" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item shadow btn btn-primary bg-primary text-white rounded rounded-3 bg-gradient m-1 p-3" href="<?=App::config('url')?>">Page theme</a></li>
-                                <li><a class="dropdown-item shadow btn btn-primary bg-primary text-white rounded rounded-3 bg-gradient m-1 p-3" href="<?=App::config('url')?>">Report an error</a></li>
+                                <?php if($_SESSION['auth']->administrator): ?>
+                                  <li><a class="dropdown-item shadow btn btn-primary bg-primary text-white rounded rounded-3 bg-gradient m-1 p-3" href="<?=App::config('url')?>report/spam"><i class="me-2 fa fa-bullhorn"></i> Report spam/abuse</a></li>
+                                <?php else: ?>
+                                  <li><a class="dropdown-item shadow btn btn-primary bg-primary text-white rounded rounded-3 bg-gradient m-1 p-3" href="<?=App::config('url')?>report/adminapplication"><i class="me-2 fa fa-star"></i> Apply for admin</a></li>
+                                <?php endif; ?>
+                                <li><a class="dropdown-item shadow btn btn-primary bg-primary text-white rounded rounded-3 bg-gradient m-1 p-3" href="<?=App::config('url')?>report/bug"><i class="me-2 fa fa-bug"></i> Report a bug</a></li>
                               </ul>
                             </li>
               <?php endif; ?>

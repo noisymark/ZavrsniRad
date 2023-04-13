@@ -4,7 +4,7 @@
             <div class="container border border-1 border-primary rounded-3 shadow-lg mx-auto text-center p-4 my-3 bg-info">
                 <div class="col-12 d-inline-flex justify-content-center">
                    <!-- Button trigger modal -->
-                   <div title="Click to change profile photo">
+                   <div title="Click to change profile photo" style="cursor:pointer;">
                      <img src="<?=$info->profilePhoto?>" alt="" class="profilePhoto rounded-circle shadow" id="user_<?=$info->sifra?>" style="max-height:100px; max-width:100px" />
                    </div>
                   <?php if($info->sifra==$_SESSION['auth']->sifra): ?>
@@ -37,6 +37,9 @@
             </h4>
                 </div>
                 <hr class="text-primary">
+                <?php if($info->administrator): ?>
+                  <p class="btn bg-warning" style="cursor:default;"><i class="me-2 fa fa-star"></i> ADMINISTRATOR</p>
+                <?php endif; ?>
                 <div class="col-12 align-items-center mx-auto d-inline">
                 <p class="text-break"><i class="fa-solid fa-envelope text-break"></i>: <?=$info->email?>
                 <?php if($info->sifra==$_SESSION['auth']->sifra): ?>
