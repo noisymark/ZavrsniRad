@@ -213,19 +213,12 @@ class UserController extends UserAuthorisationController
         $profilePhoto=str_replace(' ','+',$profilePhoto);
         $data=base64_decode($profilePhoto);
 
-        if(file_exists(BP . 'public' . DIRECTORY_SEPARATOR
-        . 'photos' . DIRECTORY_SEPARATOR . 
-        'userProfilePhotos' . DIRECTORY_SEPARATOR 
-        . $_POST['id'] . '.png'))
-        {
-            clearstatcache(true, BP . 'public' . DIRECTORY_SEPARATOR
-            . 'photos' . DIRECTORY_SEPARATOR . 
-            'userProfilePhotos' . DIRECTORY_SEPARATOR . $_POST['id'] . '.png');
-        }
         file_put_contents(BP . 'public' . DIRECTORY_SEPARATOR
         . 'photos' . DIRECTORY_SEPARATOR . 
         'userProfilePhotos' . DIRECTORY_SEPARATOR 
         . $_POST['id'] . '.png', $data);
+        
+        clearstatcache(true, BP . 'public' . DIRECTORY_SEPARATOR . 'photos' . DIRECTORY_SEPARATOR . 'userProfilePhotos' . DIRECTORY_SEPARATOR . $_POST['id'] . '.png');
 
 
         $res = new stdClass();
