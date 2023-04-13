@@ -176,6 +176,16 @@ class Users
             'id'=>$id
         ]);
     }
+
+    public static function confirmMail($id)
+    {
+        $connection=DB::getInstance();
+        $query=$connection->prepare('
+        update osoba set stanje=true
+        where uniqueid=:id
+        ');
+        return $query->execute(['id'=>$id]);
+    }
 }
 
 ?>

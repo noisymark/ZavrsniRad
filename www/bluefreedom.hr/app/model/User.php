@@ -49,8 +49,8 @@ class User
         try
         {$connection=DB::getInstance();
         $query=$connection->prepare('
-        insert into osoba(ime,prezime,datumrodenja,email,lozinka,stanje,administrator,aktivan)
-        values(:fname,:lname,:dob,:email,:password,false,false,true)
+        insert into osoba(ime,prezime,datumrodenja,email,lozinka,stanje,administrator,aktivan,uniqueid)
+        values(:fname,:lname,:dob,:email,:password,false,false,true,:uniqueid)
         ');
         $query->execute($parameters);}
         catch(Exception $e)

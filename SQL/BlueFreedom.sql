@@ -77,7 +77,8 @@ create table osoba(
     slika varchar(100),
     administrator boolean not null,
     stanje boolean not null,
-    aktivan boolean not null
+    aktivan boolean not null,
+    uniqueid varchar(255)
 );
 
 

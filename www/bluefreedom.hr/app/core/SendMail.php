@@ -57,6 +57,22 @@ class SendMail extends UserAuthorisationController
         $this->mail->Body = $body;
         $this->mail->send();
     }
+    public function confirmMail($id,$email,$fullname)
+    {
+        $this->mail = new PHPMailer(false);
+        $this->setPHPMailer();
+        //Recipients
+        $this->mail->setFrom('info@marko-pavlovic.net', 'BlueFreedom');
+        $this->mail->addAddress($email, $fullname);     //Add a recipient
+        //Content
+        $this->mail->isHTML(true);                                  //Set email format to HTML
+        $this->mail->Subject = 'Confirm your e-mail address';
+        ob_start();
+        include ($this->viewPath . 'confirmmail.phtml');
+        $body=ob_get_clean();
+        $this->mail->Body = $body;
+        $this->mail->send();
+    }
 
     private function setPHPMailer()
     {

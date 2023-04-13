@@ -2,12 +2,12 @@
           <ul class="justify-content-center pagination">
             <!-- PREVIOUS BUTTON -->
             <li class="page-item
-            <?php if(($page<=1)): ?>
+            <?php if(($page<=1) || $lastPage==0): ?>
             disabled
             <?php endif; ?>
             ">
               <a class="page-link" href="<?=App::config('url')?>user/index/<?=$page-1?>"
-              <?php if(($page<=1)): ?>
+              <?php if(($page<=1) || $lastPage==0): ?>
                 tabindex="-1"
               aria-disabled="true"
               <?php endif; ?>
@@ -21,12 +21,12 @@
             
             <!-- NEXT BUTTON -->
             <li class="page-item
-            <?php if(($page>=$lastPage)): ?>
+            <?php if(($page>=$lastPage) || $lastPage==0): ?>
             disabled
             <?php endif; ?>
             ">
               <a class="page-link" href="<?=App::config('url')?>user/index/<?=$page+1?>"
-              <?php if(($page>=$lastPage)): ?>
+              <?php if(($page>=$lastPage) || $lastPage==0): ?>
                 tabindex="-1"
               aria-disabled="true"
               <?php endif; ?>

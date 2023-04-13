@@ -2,6 +2,35 @@
 
 class LoginController extends Controller
 {
+    private $viewPath = 'public' . DIRECTORY_SEPARATOR;
+
+    public function mailconfirm()
+    {
+
+        $id=$_GET['id'];
+        if(strlen(trim($id))===0)
+        {
+            header('location: ' . App::config('url') . 'index/logout');
+            return;
+        }
+        if(Users::confirmMail($id))
+        {
+            $this->view->render($this->viewPath . 'confirmed',[
+                'message'=>'You have successfully confirmed your account!',
+                'url'=>App::config('url') . 'index/login',
+                'text'=>'Login now'
+            ]);
+        }
+        else
+        {
+            $this->view->render($this->viewPath . 'confirmed',[
+                'message'=>'Something went wrong, please try again from home page!',
+                'url'=>App::config('url'),
+                'text'=>'Return to home page'
+            ]);
+        }
+    }
+
     public function authorisation()
     {
         if(!isset($_POST['email']) || strlen(trim($_POST['email']))===0)
