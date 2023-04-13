@@ -1,0 +1,18 @@
+<div class="container m-auto">
+    <div class="row m-auto">
+        <div class="col-11 col-lg-6 m-auto">
+            <form action="" method="post" class="text-center bg-info p-4 rounded shadow">
+                <h2 class="text-warning text-center"><i class="me-2 fa fa-star"></i>ADMIN APPLICATION</h2>
+                <div class="mb-3">
+                    <label for="entry" class="form-label">Tell us more about why should we include you in our admin sector:</label>
+                    <textarea name="entry" id="entry" cols="30" rows="10" class="form-control p-2 text-center rounded"><?=$info->entry?></textarea>
+                </div>
+                <h5 class="text-danger"><?=$message?></h5>
+                <div class="mb-3">
+                    <a href="<?=App::config('url')?>user/index" class="btn btn-outline-primary mx-2"><i class="me-2 fa fa-x"></i>CANCEL</a>
+                    <button type="submit" class="btn btn-outline-danger mx-2"><i class="me-2 fa fa-check"></i>SEND</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

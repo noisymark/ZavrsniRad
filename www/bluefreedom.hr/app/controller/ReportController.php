@@ -77,7 +77,41 @@ class ReportController extends UserAuthorisationController
     }
     public function adminapplication()
     {
-        
+        if(!$this->checkPrivilages())
+        {
+            if($_SERVER['REQUEST_METHOD']==='GET')
+            {
+                $this->view->render($this->viewPath . 'adminapplication',[
+                    'info'=>$this->emptyEntrySpam(),
+                    'message'=>$this->message
+                ]);
+            }
+            else
+            {
+                $this->preparePost();
+                if(!$this->controlInputSpam())
+                {
+                    $this->view->render($this->viewPath . 'adminapplication',[
+                        'info'=>$this->info,
+                        'message'=>$this->message
+                    ]);
+                    return;
+                }
+                $this->info->userid=$_SESSION['auth']->sifra;
+                $this->info->time=Log::time();
+                $sendmail = new SendMail;
+                $sendmail->adminapplication($this->info);
+                $this->view->render($this->viewPath . 'adminapplication',[
+                    'info'=>$this->emptyEntrySpam(),
+                    'message'=>'APPLICATION FOR ADMIN HAS BEEN SUCCESSFULLY SENT!'
+                ]);
+            }
+        }
+        else
+        {
+            header('location: ' . App::config('url'));
+            return;
+        }
     }
 
     private function checkPrivilages()

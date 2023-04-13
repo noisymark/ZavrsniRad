@@ -13,8 +13,8 @@ class SendMail extends UserAuthorisationController
         $this->mail = new PHPMailer(false);
         $this->setPHPMailer();
         //Recipients
-        $this->mail->setFrom('info@marko-pavlovic.net', 'Blue Freedom');
-        $this->mail->addAddress('info@marko-pavlovic.net', 'Blue Freedom');     //Add a recipient
+        $this->mail->setFrom('info@marko-pavlovic.net', 'BlueFreedom');
+        $this->mail->addAddress('info@marko-pavlovic.net', 'BlueFreedom');     //Add a recipient
         //Content
         $this->mail->isHTML(true);                                  //Set email format to HTML
         $this->mail->Subject = 'Spam/abuse report';
@@ -29,13 +29,30 @@ class SendMail extends UserAuthorisationController
         $this->mail = new PHPMailer(false);
         $this->setPHPMailer();
         //Recipients
-        $this->mail->setFrom('info@marko-pavlovic.net', 'Blue Freedom');
-        $this->mail->addAddress('info@marko-pavlovic.net', 'Blue Freedom');     //Add a recipient
+        $this->mail->setFrom('info@marko-pavlovic.net', 'BlueFreedom');
+        $this->mail->addAddress('info@marko-pavlovic.net', 'BlueFreedom');     //Add a recipient
         //Content
         $this->mail->isHTML(true);                                  //Set email format to HTML
         $this->mail->Subject = 'Bug report';
         ob_start();
         include ($this->viewPath . 'bug.phtml');
+        $body=ob_get_clean();
+        $this->mail->Body = $body;
+        $this->mail->send();
+    }
+
+    public function adminapplication($parameters)
+    {
+        $this->mail = new PHPMailer(false);
+        $this->setPHPMailer();
+        //Recipients
+        $this->mail->setFrom('info@marko-pavlovic.net', 'BlueFreedom');
+        $this->mail->addAddress('info@marko-pavlovic.net', 'BlueFreedom');     //Add a recipient
+        //Content
+        $this->mail->isHTML(true);                                  //Set email format to HTML
+        $this->mail->Subject = 'New admin application';
+        ob_start();
+        include ($this->viewPath . 'admin.phtml');
         $body=ob_get_clean();
         $this->mail->Body = $body;
         $this->mail->send();
