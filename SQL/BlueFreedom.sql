@@ -39,7 +39,6 @@ create table objava(
     upis varchar(250) not null,
     vrijemeizrade datetime not null,
     ipadresa varchar(20),
-    slika varchar(100),
     osoba int
 );
 
@@ -104,15 +103,15 @@ values
 (null,'Rebeka','Ivanković','2002-04-08','rebeka.ivankovic33@gmail.com','$2y$10$raIEitAaxTkfaZT4ZGONqOTXlx/bmtT/Du6XOc0TcNRU1rW93bYJO',False,True,True),
 (null,'Test','Test','2000-01-01','test@test.hr','$2y$10$raIEitAaxTkfaZT4ZGONqOTXlx/bmtT/Du6XOc0TcNRU1rW93bYJO',False,True,True),
 (null,'Edunova','Test','2000-01-01','test@edunova.hr','$2y$10$2njMqvJiJiWAwUAvLrpJj.MSpW3SIHBWmE0k3X.F3LjRY/ff2p06m',False,True,True),
-(null,'Valentin','Mijatović','2000-02-07','valentin.mijau22@gmail.com','$2y$10$raIEitAaxTkfaZT4ZGONqOTXlx/bmtT/Du6XOc0TcNRU1rW93bYJO',False,True,True);
+(null,'Valentin','Grbić','2000-02-01','valentin.mijau22@gmail.com','$2y$10$raIEitAaxTkfaZT4ZGONqOTXlx/bmtT/Du6XOc0TcNRU1rW93bYJO',False,True,True);
 
 # SAMPLE INSERT INTO objava
 
-insert into objava(sifra,naslov,upis,vrijemeizrade,ipadresa,slika,osoba)
+insert into objava(sifra,naslov,upis,vrijemeizrade,ipadresa,osoba)
 values
-(null,'Hello','This is Test Test user.','2022-12-01 18:45:22','192.168.1.1','/Users/3/postimg/001.png',3),
-(null,'Hello','This is user Rebeka.','2022-12-02 12:42:11','192.168.2.5','/Users/2/postimg/001.png',2),
-(null,'Hello','This is user Marko.','2022-12-04 12:33:33','192.168.3.4','/Users/1/postimg/001.png',1);
+(null,'Hello','This is Test Test user.','2022-12-01 18:45:22','192.168.1.1',3),
+(null,'Hello','This is user Rebeka.','2022-12-02 12:42:11','192.168.2.5',2),
+(null,'Hello','This is user Marko.','2022-12-04 12:33:33','192.168.3.4',1);
 
 # SAMPLE INSERT INTO komentar
 

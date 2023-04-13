@@ -94,7 +94,7 @@ class LoginController extends Controller
 
                     $_SESSION['auth']=$user;
                     setcookie('email',$_POST['email']);
-                    header('location:'.App::config('url') . 'user/index');
+                    header('location: '.App::config('url') . 'user/index');
                     return;
                 }
             }
