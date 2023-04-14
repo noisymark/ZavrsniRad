@@ -186,6 +186,31 @@ class Users
         ');
         return $query->execute(['id'=>$id]);
     }
+
+    public static function disableadmin($id)
+    {
+        $connection=DB::getInstance();
+        $query=$connection->prepare('
+        update osoba
+        set administrator=false
+        where sifra=:id
+        ');
+        $query->execute([
+            'id'=>$id
+        ]);
+    }
+    public static function enableadmin($id)
+    {
+        $connection=DB::getInstance();
+        $query=$connection->prepare('
+        update osoba
+        set administrator=true
+        where sifra=:id
+        ');
+        $query->execute([
+            'id'=>$id
+        ]);
+    }
 }
 
 ?>

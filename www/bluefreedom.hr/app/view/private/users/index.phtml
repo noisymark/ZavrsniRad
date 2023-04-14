@@ -35,6 +35,11 @@
                         <?php else:?>
                             <a class="px-2" href="enable/<?=$red->sifra?>"><i class="border border-primary border-2 bg-body rounded-circle p-3 fa-solid fa-play"></i></a>    
                     <?php endif; ?>
+                    <?php if($red->administrator==="check"): ?>
+                        <a class="px-2" href="disableadmin/<?=$red->sifra?>"><i class="border border-primary border-2 bg-body rounded-circle p-3 fa-regular fa-star"></i></a>    
+                        <?php else:?>
+                            <a class="px-2" href="enableadmin/<?=$red->sifra?>"><i class="border border-primary border-2 bg-body rounded-circle p-3 fa-solid fa-star"></i></a>    
+                    <?php endif; ?>
                     <a class="px-2" href="update/<?=$red->sifra?>"><i class="border border-primary border-2 bg-body rounded-circle p-3 fa-solid fa-pencil"></i></a>    
                     <a class="px-2" onclick="return confirm('Are you sure you want to delete user <?=$red->ime?> <?=$red->prezime?>?');" href="delete/<?=$red->sifra?>"><i class="border border-primary border-2 bg-body rounded-circle p-3 fa-solid fa-trash"></i></a>
                 </div>
