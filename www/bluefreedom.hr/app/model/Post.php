@@ -14,19 +14,14 @@ class Post
         a.sifra as authorid,
         b.sifra as postid,
         b.naslov as posttitle,
-        b.upis as postdescription
+        b.upis as postdescription,
+        b.vrijemeizrade
         from osoba a
         inner join objava b on b.osoba = a.sifra
         where concat(b.naslov, \' \' , b.upis, \' \', b.sifra)
         like :search
         and a.aktivan!=false
-        order by
-        a.ime,
-        a.prezime,
-        a.sifra,
-        b.sifra,
-        b.naslov,
-        b.upis
+        order by b.vrijemeizrade desc
         limit :start, :resultsPerPage
         ');
 

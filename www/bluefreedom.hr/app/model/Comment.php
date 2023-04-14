@@ -11,12 +11,14 @@ class Comment
         a.vrijemekomentiranja as commenttime,
         a.opis as commentdescription,
         a.osoba as commenterid,
+        a.vrijemekomentiranja,
         concat (b.ime, \' \', b.prezime) as commenter,
         b.sifra as authorid
         from komentar a
         inner join osoba b on a.osoba = b.sifra 
         inner join objava c on a.objava = c.sifra 
         where c.sifra = :postID
+        order by a.vrijemekomentiranja desc
         ');
         $query->bindParam('postID',$postID);
         $query->execute();
