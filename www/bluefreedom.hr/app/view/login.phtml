@@ -15,18 +15,17 @@ if(!isset($_POST['email'])){$_POST['email']='';}
         <div>
           <div class="form-group">
             <label for="email" class="text-uppercase small">Email :</label>
-            <input name="email" id="email" type="email" class="form-control bg-info border-primary border border-2" placeholder="Enter email" value="<?='markopavlovic316@gmail.com'?>">
+            <input name="email" id="email" type="email" class="form-control bg-info border-primary border border-2" placeholder="Enter email" value="">
           </div>
           <div class="form-group">
             <label for="password" class="text-uppercase small">Password :</label>
-            <input name="password" id="password" type="password" class="form-control bg-info border-primary border border-2" placeholder="Password" value="testuser">
+            <input name="password" id="password" type="password" class="form-control bg-info border-primary border border-2" placeholder="Password" value="">
           </div>
         </div>
     </div>
     <div class="text-danger pt-2 text-center h5 text-uppercase">
       <span><?=$message?></span>
     </div>
-    <h6 class="text-center">OPERATER LOGIN: <br> E-mail: oper@edunova.hr <br> Password: edunova</h6>
       <div class="auth__form_actions">
         <button id="logintext" class="btn btn-primary btn-lg btn-block">
         <i id="fingerprinticon" class="fa-solid fa-fingerprint"></i>LOGIN
