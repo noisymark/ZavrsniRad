@@ -120,7 +120,14 @@ class UsersController extends AuthorisationController
             $this->e->stanje = $this->e->stanje ? 'check':'x';
             $this->e->administrator = $this->e->administrator ? 'check':'x';
             $this->e->datumrodenja = date('d.m.Y',strtotime($this->e->datumrodenja));
-            
+            if(file_exists(BP . 'public' . DIRECTORY_SEPARATOR . 'photos' . DIRECTORY_SEPARATOR . 'userProfilePhotos' . DIRECTORY_SEPARATOR . $this->e->sifra . '.png'))
+            {
+                $this->e->profilePhoto=App::config('url') . 'public/photos/userProfilePhotos/' . $this->e->sifra . '.png';
+            }
+            else
+            {
+                $this->e->profilePhoto=App::config('url') . 'public/photos/userProfilePhotos/unknown.png';
+            }
             $this->view->render($this->viewPath . 'changePassword',[
                 'e'=>$this->e,
                 'message'=>'Change password to a new one'
@@ -145,6 +152,17 @@ class UsersController extends AuthorisationController
             $this->e=(array)$this->e;
             Users::updatePassword($this->e);
             $this->e=Users::readOneToDisable($id);
+            if(file_exists(BP . 'public' . DIRECTORY_SEPARATOR . 'photos' . DIRECTORY_SEPARATOR . 'userProfilePhotos' . DIRECTORY_SEPARATOR . $this->e->sifra . '.png'))
+            {
+                $this->e->profilePhoto=App::config('url') . 'public/photos/userProfilePhotos/' . $this->e->sifra . '.png';
+            }
+            else
+            {
+                $this->e->profilePhoto=App::config('url') . 'public/photos/userProfilePhotos/unknown.png';
+            }
+            $this->e->stanje = $this->e->stanje ? 'check':'x';
+            $this->e->administrator = $this->e->administrator ? 'check':'x';
+            $this->e->datumrodenja = date('d.m.Y',strtotime($this->e->datumrodenja));
             $this->view->render($this->viewPath . 'changePassword',[
                 'e'=>$this->e,
                 'message'=>'Password updated successfully!'
