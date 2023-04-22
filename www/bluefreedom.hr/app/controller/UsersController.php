@@ -51,6 +51,15 @@ class UsersController extends AuthorisationController
             $u->administrator = $u->administrator ? 'check':'x';
             //$u->brojtel = $this->nf->parse($u->brojtel);
             $u->datumrodenja = date('d.m.Y',strtotime($u->datumrodenja));
+            $u->profilePhoto=new stdClass;
+            if(file_exists(BP . 'public' . DIRECTORY_SEPARATOR . 'photos' . DIRECTORY_SEPARATOR . 'userProfilePhotos' . DIRECTORY_SEPARATOR . $u->sifra . '.png'))
+            {
+                $u->profilePhoto=App::config('url') . 'public/photos/userProfilePhotos/' . $u->sifra . '.png';
+            }
+            else
+            {
+                $u->profilePhoto=App::config('url') . 'public/photos/userProfilePhotos/unknown.png';
+            }
         }
 
         $this->view->render($this->viewPath . 'index',[
@@ -106,7 +115,7 @@ class UsersController extends AuthorisationController
                 header('location:'.App::config('url').'index/logout');
                 return;
             }
-            $this->e=Users::readOne($id);
+            $this->e=Users::readOneToDisable($id);
             unset($this->e->lozinka);
             $this->e->stanje = $this->e->stanje ? 'check':'x';
             $this->e->administrator = $this->e->administrator ? 'check':'x';
@@ -122,7 +131,7 @@ class UsersController extends AuthorisationController
             $this->e=(object)$_POST;
             if(!$this->checkChangePassword())
             {
-                $this->e=Users::readOne($id);
+                $this->e=Users::readOneToDisable($id);
                 $this->e->stanje = $this->e->stanje ? 'check':'x';
                 $this->e->administrator = $this->e->administrator ? 'check':'x';
                 $this->e->datumrodenja = date('d.m.Y',strtotime($this->e->datumrodenja));
@@ -135,7 +144,7 @@ class UsersController extends AuthorisationController
             $this->e->sifra=$id;
             $this->e=(array)$this->e;
             Users::updatePassword($this->e);
-            $this->e=Users::readOne($id);
+            $this->e=Users::readOneToDisable($id);
             $this->view->render($this->viewPath . 'changePassword',[
                 'e'=>$this->e,
                 'message'=>'Password updated successfully!'
@@ -160,7 +169,7 @@ class UsersController extends AuthorisationController
                 return;
             }
 
-            $this->e=Users::readOne($id);
+            $this->e=Users::readOneToDisable($id);
 
             if($this->e==null)
             {
@@ -213,7 +222,7 @@ class UsersController extends AuthorisationController
     public function disable($id)
     {
         $id=(int)$id;
-        $info=Users::readOne($id);
+        $info=Users::readOneToDisable($id);
         if($info==null)
         {
             header('location: ' . App::config('url') . 'users/index');
@@ -226,7 +235,7 @@ class UsersController extends AuthorisationController
     public function enable($id)
     {
         $id=(int)$id;
-        $info=Users::readOne($id);
+        $info=Users::readOneToDisable($id);
         if($info==null)
         {
             header('location: ' . App::config('url') . 'users/index');

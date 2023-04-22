@@ -51,6 +51,17 @@ class Users
         ]);
         return $query->fetch();
     }
+    public static function readOneToDisable($id)
+    {
+        $connection=DB::getInstance();
+        $query=$connection->prepare('
+        select * from osoba where sifra=:id
+        ');
+        $query->execute([
+            'id'=>$id
+        ]);
+        return $query->fetch();
+    }
 
     public static function create($parameters)
     {

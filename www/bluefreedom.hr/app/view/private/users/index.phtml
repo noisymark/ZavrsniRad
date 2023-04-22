@@ -17,7 +17,7 @@
         <?php foreach($info as $red) : ?>
         <div class="col-md-6 col-lg-4 text-center">
             <div class="callout p-4 m-2 border border-1 border-primary rounded rounded-6 bg-white bg-gradient shadow">
-                <img class="mt-2 rounded-circle border border-3 border-primary" src="https://picsum.photos/400?random=<?=$red->sifra?>" alt="" height="100" width="100">
+                <img class="mt-2 rounded-circle border border-3 border-primary" src="<?=$red->profilePhoto?>" alt="" height="100" width="100">
                 <h3><?=$red->ime?> <?=$red->prezime?></h3>
                 <?php if(!($red->brojtel=='' || $red->brojtel<=0)): ?>
                 <h5 class="d-inline-flex"><i class="d-inline-flex me-3 fa-solid fa-phone"></i> <?=$red->brojtel?></h5>
@@ -31,14 +31,14 @@
                 <p class="px-2 float-end">ADMIN: <i class="fa fa-solid fa-<?=$red->administrator?>"></i></p>
                 <div class="d-inline-flex">
                     <?php if($red->aktivan==true): ?>
-                        <a class="px-2" href="disable/<?=$red->sifra?>"><i class="border border-primary border-2 bg-body rounded-circle p-3 fa-solid fa-ban"></i></a>    
+                        <a class="px-2" href="<?=App::config('url')?>users/disable/<?=$red->sifra?>"><i class="border border-primary border-2 bg-body rounded-circle p-3 fa-solid fa-ban"></i></a>    
                         <?php else:?>
-                            <a class="px-2" href="enable/<?=$red->sifra?>"><i class="border border-primary border-2 bg-body rounded-circle p-3 fa-solid fa-play"></i></a>    
+                            <a class="px-2" href="<?=App::config('url')?>users/enable/<?=$red->sifra?>"><i class="border border-primary border-2 bg-body rounded-circle p-3 fa-solid fa-play"></i></a>    
                     <?php endif; ?>
                     <?php if($red->administrator==="check"): ?>
-                        <a class="px-2" href="disableadmin/<?=$red->sifra?>"><i class="border border-primary border-2 bg-body rounded-circle p-3 fa-regular fa-star"></i></a>    
+                        <a class="px-2" href="<?=App::config('url')?>users/disableadmin/<?=$red->sifra?>"><i class="border border-primary border-2 bg-body rounded-circle p-3 fa-regular fa-star"></i></a>    
                         <?php else:?>
-                            <a class="px-2" href="enableadmin/<?=$red->sifra?>"><i class="border border-primary border-2 bg-body rounded-circle p-3 fa-solid fa-star"></i></a>    
+                            <a class="px-2" href="<?=App::config('url')?>users/enableadmin/<?=$red->sifra?>"><i class="border border-primary border-2 bg-body rounded-circle p-3 fa-solid fa-star"></i></a>    
                     <?php endif; ?>
                     <a class="px-2" href="update/<?=$red->sifra?>"><i class="border border-primary border-2 bg-body rounded-circle p-3 fa-solid fa-pencil"></i></a>    
                     <a class="px-2" onclick="return confirm('Are you sure you want to delete user <?=$red->ime?> <?=$red->prezime?>?');" href="delete/<?=$red->sifra?>"><i class="border border-primary border-2 bg-body rounded-circle p-3 fa-solid fa-trash"></i></a>
