@@ -1,12 +1,4 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto");
-@keyframes slideInFromLeft {
-    0% {
-      transform: translateY(-100%);
-    }
-    100% {
-      transform: translateY(0%);
-    }
-  }
 html{
     scroll-behavior: smooth !important;
     animation-duration: 1s; /* the duration of the animation */
