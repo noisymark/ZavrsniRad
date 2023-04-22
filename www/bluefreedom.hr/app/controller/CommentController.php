@@ -86,4 +86,47 @@ class CommentController extends UserAuthorisationController
         header('location: '.App::config('url').'post/index/'.$postID);
         }
     }
+
+    public function like($commentID=0)
+    {
+        $commentID=(int)$commentID;
+        $test=Comment::read($commentID);
+        if($test===null)
+        {
+            header('location: ' . App::config('url') . 'index/logout');
+            return;
+        }
+        if(!CommentLike::isLiked($commentID))
+        {
+            $postID=Comment::findPostOfComment($commentID);
+            CommentLike::like($commentID);
+            header('location: ' . App::config('url') . 'post/index/' . $postID);
+        }
+        else
+        {
+            $postID=Comment::findPostOfComment($commentID);
+            header('location: ' . App::config('url') . 'post/index/' . $postID);
+        }
+    }
+    public function unlike($commentID)
+    {
+        $commentID=(int)$commentID;
+        $test=Comment::read($commentID);
+        if($test===null)
+        {
+            header('location: ' . App::config('url') . 'index/logout');
+            return;
+        }
+        if(CommentLike::isLiked($commentID))
+        {
+            $postID=Comment::findPostOfComment($commentID);
+            CommentLike::unlike($commentID);
+            header('location: ' . App::config('url') . 'post/index/' . $postID);
+        }
+        else
+        {
+            $postID=Comment::findPostOfComment($commentID);
+            header('location: ' . App::config('url') . 'post/index/' . $postID);
+        }
+    }
 }

@@ -77,4 +77,17 @@ class Comment
         ');
         $query->execute($parameters);
     }
+
+    public static function findPostOfComment($commentID)
+    {
+        $connection=DB::getInstance();
+        $query=$connection->prepare('
+        select objava from komentar
+        where sifra=:commentID
+        ');
+        $query->execute([
+            'commentID'=>$commentID
+        ]);
+        return $query->fetchColumn();
+    }
 }

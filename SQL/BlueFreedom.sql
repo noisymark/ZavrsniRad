@@ -59,8 +59,6 @@ create table komentar(
 
 create table svidamise_komentar(
     sifra int not null primary key auto_increment,
-    vrijemesvidanja datetime,
-    svidanje boolean not null,
     osoba int,
     komentar int
 );
@@ -99,52 +97,4 @@ alter table svidamise_komentar add foreign key (osoba) references osoba(sifra) o
 
 insert into osoba(sifra,ime,prezime,datumrodenja,email,lozinka,administrator,stanje,aktivan)
 values
-(null,'Marko','Pavlović','2001-02-09','markopavlovic316@gmail.com','$2y$10$raIEitAaxTkfaZT4ZGONqOTXlx/bmtT/Du6XOc0TcNRU1rW93bYJO',True,True,True),
-(null,'Rebeka','Ivanković','2002-04-08','rebeka.ivankovic33@gmail.com','$2y$10$raIEitAaxTkfaZT4ZGONqOTXlx/bmtT/Du6XOc0TcNRU1rW93bYJO',False,True,True),
-(null,'Test','Test','2000-01-01','test@test.hr','$2y$10$raIEitAaxTkfaZT4ZGONqOTXlx/bmtT/Du6XOc0TcNRU1rW93bYJO',False,True,True),
-(null,'Edunova','Test','2000-01-01','test@edunova.hr','$2y$10$2njMqvJiJiWAwUAvLrpJj.MSpW3SIHBWmE0k3X.F3LjRY/ff2p06m',False,True,True),
-(null,'Valentin','Grbić','2000-02-01','valentin.mijau22@gmail.com','$2y$10$raIEitAaxTkfaZT4ZGONqOTXlx/bmtT/Du6XOc0TcNRU1rW93bYJO',False,True,True);
-
-# SAMPLE INSERT INTO objava
-
-insert into objava(sifra,naslov,upis,vrijemeizrade,ipadresa,osoba)
-values
-(null,'Hello','This is Test Test user.','2022-12-01 18:45:22','192.168.1.1',3),
-(null,'Hello','This is user Rebeka.','2022-12-02 12:42:11','192.168.2.5',2),
-(null,'Hello','This is user Marko.','2022-12-04 12:33:33','192.168.3.4',1);
-
-# SAMPLE INSERT INTO komentar
-
-insert into komentar (sifra,vrijemekomentiranja,opis,objava,osoba)
-values
-(null,'2022-12-07 14:00:00','Welcome to the community',1,1),
-(null,'2022-12-07 14:00:00','Welcome to the community',1,2),
-(null,'2022-12-07 14:00:00','Welcome to the community',1,3),
-(null,'2022-12-08 13:00:00','Have fun',2,3),
-(null,'2022-12-08 13:00:00','Have fun',2,2),
-(null,'2022-12-08 13:00:00','Have fun',2,1),
-(null,'2022-12-08 15:00:00','I''m buying bitcoin on btccheap.spam',3,2),
-(null,'2022-12-08 15:00:00','I''m buying bitcoin on btccheap.spam',3,1),
-(null,'2022-12-08 15:00:00','I''m buying bitcoin on btccheap.spam',3,3);
-
-# SAMPLE INSERT INTO svidamise
-
-insert into svidamise (sifra,vrijemesvidanja,objava,osoba)
-values
-(null,'2022-12-08 18:29:00',1,1),
-(null,'2022-12-08 18:29:00',1,2),
-(null,'2022-12-08 18:29:00',1,3),
-(null,'2022-12-08 18:29:00',2,1),
-(null,'2022-12-08 18:29:00',2,2),
-(null,'2022-12-08 18:29:00',2,3),
-(null,'2022-12-08 18:29:00',3,1),
-(null,'2022-12-08 18:29:00',3,2),
-(null,'2022-12-08 18:29:00',3,3);
-
-# SAMPLE INSERT INTO svidamise_komentar 
-
-insert into svidamise_komentar (sifra,vrijemesvidanja,svidanje,osoba,komentar)
-values
-(null,'2022-12-08 21:00:00',1,1,1),
-(null,'2022-12-08 21:00:00',1,3,2),
-(null,'2022-12-08 21:00:00',1,2,3);
+(null,'Marko','Pavlović','2001-02-09','markopavlovic316@gmail.com','$2y$10$raIEitAaxTkfaZT4ZGONqOTXlx/bmtT/Du6XOc0TcNRU1rW93bYJO',True,True,True);

@@ -36,9 +36,9 @@
               <p class="small m-1"><i class="fa-solid fa-thumbs-up"></i> <?=$info->totalLikes?></p></button>
               <a href="#" class="d-flex align-items-center">
                 <?php if(!$liked): ?>
-                <a href="<?=App::config('url')?>like/new/<?=$info->postid?>" class="mb-0 mx-3 btn btn-primary text-white shadow"><i class="far fa-thumbs-up me-2"></i>Like</a>
+                <a href="<?=App::config('url')?>like/new/<?=$info->postid?>" class="mb-0 mx-3 btn btn-primary text-white shadow"><i class="fa fa-thumbs-up me-2"></i>Like</a>
                 <?php else: ?>
-                <a href="<?=App::config('url')?>like/delete/<?=$likeid?>" class="mb-0 mx-3 btn btn-primary text-white shadow"><i class="far fa-thumbs-down me-2"></i>unLike</a>
+                <a href="<?=App::config('url')?>like/delete/<?=$likeid?>" class="mb-0 mx-3 btn btn-primary text-white shadow"><i class="fa fa-thumbs-down me-2"></i>unLike</a>
                 <?php endif;?>
               </a>
             </div>
@@ -90,8 +90,16 @@
                 <?php endif; ?>
                 </div>
                 <div class="form-control p-2" id="textAreaExample" rows="4"
-                  style="background: #fff;" placeholder="Message">
+                  style="background: #fff;">
                   <h6 class="text-break"><?=$comm->commentdescription?></h6>
+                </div>
+                <div class="d-flex justify-content-end my-2">
+                  <p style="cursor:default;" class="btn btn-primary bg-primary text-white mx-2 m-auto"><i class="me-2 fa fa-thumbs-up"></i><?=$comm->totalLikes?></p>
+                  <?php if(!CommentLike::isLiked($comm->commentid)): ?>
+                  <a href="<?=App::config('url')?>comment/like/<?=$comm->commentid?>" class="btn btn-outline-primary mx-2"><i class="me-2 fa fa-thumbs-up"></i>LIKE</a>
+                  <?php else: ?>
+                  <a href="<?=App::config('url')?>comment/unlike/<?=$comm->commentid?>" class="btn btn-outline-primary mx-2"><i class="me-2 fa fa-thumbs-down"></i>UNLIKE</a>
+                  <?php endif; ?>
                 </div>
               </div>
             </div>

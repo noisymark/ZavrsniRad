@@ -1,4 +1,7 @@
 <div class="footer-end mt-auto">
+<a target="_blank" class="m-1 btn btn-sm btn-outline-primary" href="https://github.com/noisymark">
+    <img src="<?=App::config('url')?>public/images/github.png" alt="" style="max-width:25px;max-height:25px;">
+</a>
 &copy; <?php echo date('Y'); ?> BlueFreedom
 <?php if(App::dev()): ?>
 <span style="color: red">LOCAL (DEV) INSTANCE</span>
@@ -8,4 +11,5 @@
     <h5 class="d-inline-flex m-auto bg-primary text-center p-2">LOGGED IN AS: <?php echo $_SESSION['auth']->uloga?></h5>
     <?php endif; ?>
 <?php endif; ?>
+<a target="_blank" class="btn btn-sm btn-outline-primary m-1" href="<?=App::config('url')?>public/images/ER.png">ER DIAGRAM</a>
 </div>

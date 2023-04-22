@@ -21,9 +21,14 @@ class PostController extends UserAuthorisationController
         ]);
     }
 
-    public function index($postID)
+    public function index($postID=0)
     {
         $postID=(int)$postID;
+        if($postID===0)
+        {
+            $this->view->render($this->viewPath . 'notFound');
+            return;
+        }
         $post=Posts::readOne($postID);
         if($post==null)
         {
@@ -52,6 +57,8 @@ class PostController extends UserAuthorisationController
         {
             $c->photo=App::config('url') . 'public/photos/userProfilePhotos/unknown.png';
         }
+        $c->likedby=CommentLike::read($c->commentid);
+        $c->totalLikes=CommentLike::totalLikes($c->commentid);
         }
         $info->totalLikes=Like::countLikes($postID);
         $likes=Like::likedBy($postID);
