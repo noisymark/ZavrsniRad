@@ -15,6 +15,9 @@
                     <h5 class="mx-3">User ID: <?=$red->sifrakorisnika?></h5>
                 </div>
                 <h5>User: <?=$red->imekorisnika?> <?=$red->prezimekorisnika?></h5>
+                <?php if(isset($red->ip) && $red->ip!==null): ?>
+                    <h5>IP: <?=$red->ip?></h5>
+                <?php endif; ?>
                 <div class="mt-4">
                     <a class="px-2" href="update/<?=$red->sifraobjave?>"><i class="border border-primary border-2 bg-body rounded-circle p-3 fa-solid fa-pencil"></i></a>    
                     <a class="px-2" onclick="return confirm('Are you sure you want to delete post <?=$red->naslovobjave?>?');" href="delete/<?=$red->sifraobjave?>"><i class="border border-primary border-2 bg-body rounded-circle p-3 fa-solid fa-trash"></i></a>

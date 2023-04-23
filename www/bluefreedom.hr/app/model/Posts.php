@@ -16,7 +16,8 @@ class Posts
         a.sifra as sifrakorisnika,
         b.sifra as sifraobjave,
         b.naslov as naslovobjave,
-        b.upis as upisobjave
+        b.upis as upisobjave,
+        b.ipadresa as ip
         from osoba a
         inner join objava b on b.osoba = a.sifra
         where concat(b.naslov, \' \' , b.upis, \' \', b.sifra)

@@ -36,11 +36,12 @@ class RegisterController extends Controller
         //$this->prepareForDB();
         //unset($this->e->confirmpw);
         $this->e->uniqueid=uniqid();
-        User::create((array)$this->e);
-        $mail = new SendMail;
-        $this->e->fullname=$this->e->fname . ' ' . $this->e->lname;
-        $mail->confirmMail($this->e->uniqueid,$this->e->email,$this->e->fullname);
-        echo ("<script>window.alert('Registered successfully!');window.location.href='" . App::config('url') . "';</script>");
+        Log::info($this->e);
+        //User::create((array)$this->e);
+        //$mail = new SendMail;
+        //$this->e->fullname=$this->e->fname . ' ' . $this->e->lname;
+        //$mail->confirmMail($this->e->uniqueid,$this->e->email,$this->e->fullname);
+        //echo ("<script>window.alert('Registered successfully!');window.location.href='" . App::config('url') . "';</script>");
     }
 
     private function callView($parameters)
@@ -79,6 +80,19 @@ class RegisterController extends Controller
         if((int)$dob===0)
         {
             $this->message='Date of birth cannot be empty';
+            return false;
+        }
+        $year=(int)explode('-',$dob)[0];
+        $month=(int)explode('-',$dob)[1];
+        $day=(int)explode('-',$dob)[2];
+        if($dob>date('Y-m-d'))
+        {
+            $this->message='Are you a person that is not yet born? Please input correct date of birth!';
+            return false;
+        }
+        if(!checkdate($month,$day,$year))
+        {
+            $this->message='Invalid date!';
             return false;
         }
         return true;

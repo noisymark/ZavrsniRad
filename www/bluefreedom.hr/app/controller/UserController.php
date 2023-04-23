@@ -238,6 +238,7 @@ class UserController extends UserAuthorisationController
         $fname=$this->info->fname;
         $lname=$this->info->lname;
         $email=$this->info->email;
+        $dob=$this->info->dob;
 
         if(strlen(trim($fname))==0)
         {
@@ -264,6 +265,19 @@ class UserController extends UserAuthorisationController
         }
         if(strlen(trim($email))>50){
             $this->message='E-mail cannot be longer than 50 chars!';
+            return false;
+        }
+        $year=(int)explode('-',$dob)[0];
+        $month=(int)explode('-',$dob)[1];
+        $day=(int)explode('-',$dob)[2];
+        if($dob>date('Y-m-d'))
+        {
+            $this->message='Are you a person that is not yet born? Please input correct date of birth!';
+            return false;
+        }
+        if(!checkdate($month,$day,$year))
+        {
+            $this->message='Invalid date!';
             return false;
         }
         return true;

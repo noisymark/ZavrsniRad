@@ -112,10 +112,17 @@ class Post
 
     public static function create($parameters)
     {
+        if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+            $parameters['ip'] = $_SERVER['HTTP_CLIENT_IP'];
+        } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+            $parameters['ip'] = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        } else {
+            $parameters['ip'] = $_SERVER['REMOTE_ADDR'];
+        }
         $connection=DB::getInstance();
         $query=$connection->prepare('
-        insert into objava (naslov,upis,vrijemeizrade,osoba)
-        values(:title,:description,now(),:id)
+        insert into objava (naslov,upis,vrijemeizrade,osoba,ipadresa)
+        values(:title,:description,now(),:id,:ip)
         ');
         $query->execute($parameters);
         return $connection->lastInsertId();
