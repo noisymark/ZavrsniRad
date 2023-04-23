@@ -36,12 +36,11 @@ class RegisterController extends Controller
         //$this->prepareForDB();
         //unset($this->e->confirmpw);
         $this->e->uniqueid=uniqid();
-        Log::info($this->e);
-        //User::create((array)$this->e);
-        //$mail = new SendMail;
-        //$this->e->fullname=$this->e->fname . ' ' . $this->e->lname;
-        //$mail->confirmMail($this->e->uniqueid,$this->e->email,$this->e->fullname);
-        //echo ("<script>window.alert('Registered successfully!');window.location.href='" . App::config('url') . "';</script>");
+        User::create((array)$this->e);
+        $mail = new SendMail;
+        $this->e->fullname=$this->e->fname . ' ' . $this->e->lname;
+        $mail->confirmMail($this->e->uniqueid,$this->e->email,$this->e->fullname);
+        echo ("<script>window.alert('Registered successfully!');window.location.href='" . App::config('url') . "';</script>");
     }
 
     private function callView($parameters)
